@@ -33,7 +33,7 @@ export CXXFLAGS=$(cflags)
 version	:= $(shell dpkg-parsechangelog | \
 			sed -ne 's/^Version: *\([0-9]\+:\)*//p')
 
-get_misc_file		= ln -s /usr/share/misc/$(1) . || true
+get_misc_file		= ln -sf /usr/share/misc/$(1) . || true
 update_config_sub       := $(call get_misc_file,config.sub)
 update_config_guess     := $(call get_misc_file,config.guess)
 
