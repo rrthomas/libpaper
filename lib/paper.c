@@ -20,6 +20,9 @@
 
 #include <unistd.h>
 
+#include <locale.h>
+#include <langinfo.h>
+
 #include "paper.h"
 
 struct paper {
@@ -108,6 +111,27 @@ in PAPERCONFVAR, fall-back to the old behaviour.
 }
 
 const char* defaultpapername(void) {
+#if defined(LC_PAPER) && defined(_GNU_SOURCE)
+
+#define NL_PAPER_GET(x)         \
+  ((union { char *string; unsigned int word; })nl_langinfo(x)).word
+
+#define PT_TO_MM(v) (unsigned int)((v * 2.54 * 10 / 72) + 0.5)
+
+    const struct paper* pp;
+
+    unsigned int w = NL_PAPER_GET(_NL_PAPER_WIDTH);
+    unsigned int h = NL_PAPER_GET(_NL_PAPER_HEIGHT);
+
+    for (pp = paperfirst(); pp; pp = papernext(pp)) {
+	if (
+             PT_TO_MM(pp->pswidth) == w &&
+             PT_TO_MM(pp->psheight) == h
+           ) {
+	    return pp->name;
+	}
+    }
+#endif
     return PAPERSIZE;
 }
 

@@ -13,6 +13,7 @@
 #include <errno.h>
 
 #include <paper.h>
+#include <locale.h>
 
 
 /* needed for GNU/Hurd */
@@ -98,6 +99,8 @@ int main(int argc, char** argv)
     unsigned options = 0;
 
     const char* progname;
+
+    setlocale(LC_ALL, "");
 
     progname = strrchr(*argv, '/');
     if (progname) {
