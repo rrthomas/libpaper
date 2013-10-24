@@ -16,8 +16,12 @@ config_flags	:= --prefix=/usr \
 	--mandir=$(share)/man \
 	--infodir=$(share)/info \
 	--build=$(DEB_BUILD_GNU_TYPE)
-ifneq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
-config_flags	+= --host=$(DEB_HOST_GNU_TYPE)
+ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
+cross_config_flags	:=
+native_paperconf	:= debian/build/src/paperconf
+else
+cross_config_flags	:= --host=$(DEB_HOST_GNU_TYPE)
+native_paperconf	:= debian/build-native/src/paperconf
 endif
 
 cflags	:= -g -Wall
@@ -49,24 +53,34 @@ config-stamp:
 	autoconf
 	$(update_config_sub)
 	$(update_config_guess)
-	$(SHELL) ./configure $(config_flags)
+	mkdir -p debian/build
+	cd debian/build && \
+		$(SHELL) ../../configure $(config_flags) $(cross_config_flags)
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	mkdir -p debian/build-native
+	cd debian/build-native && $(SHELL) ../../configure $(config_flags)
+endif
 	touch $@
 
 build:	config build-stamp debian/libpaper1.config
 build-stamp:
-	$(MAKE)
+	$(MAKE) -C debian/build
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	$(MAKE) -C debian/build-native
+endif
 	touch $@
 
 debian/libpaper1.config: build-stamp
 	exec > $@.new \
 		&& sed -n '1,/^__BEGIN_PAPERSPECS__/p' $@ \
-		&& src/paperconf -amns \
+		&& $(native_paperconf) -amns \
 		&& sed -n '/^__END_PAPERSPECS__/,$$p' $@
 	mv $@.new $@
 
 clean:	checkroot
 	rm -f *-stamp
 	[ ! -f Makefile ] || $(MAKE) distclean
+	rm -rf debian/build debian/build-native
 	dh_clean
 	exec > /tmp/libpaper1.new \
 		&& sed -n '1,/^__BEGIN_PAPERSPECS__/p' debian/libpaper1.config \
@@ -90,7 +104,7 @@ binary-arch:	checkroot build
 	dh_prep
 	dh_installdirs
 
-	$(MAKE) install DESTDIR=$(prefix)
+	$(MAKE) -C debian/build install DESTDIR=$(prefix)
 
 	dh_install
 
