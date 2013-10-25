@@ -2,7 +2,7 @@
 lib_LTLIBRARIES = libpaper.la
 libpaper_la_SOURCES = dimen.c paper.c dimen.h paperspecs.h
 libpaper_la_LDFLAGS = -version-info 2:2:1
-libpaper_la_CPPFLAGS = -D_REENTRANT
+libpaper_la_CPPFLAGS = -D_REENTRANT -DPAPERCONF='"$(PAPERCONF)"' -DRUNPARTSDIR='"$(RUNPARTSDIR)"'
 
 BUILT_SOURCES = paperspecs.h
 

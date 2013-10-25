@@ -2,7 +2,8 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT([libpaper], [1.1.9])
 AC_CONFIG_SRCDIR([configure.ac])
-AM_INIT_AUTOMAKE([no-define])
+AC_CONFIG_MACRO_DIR([m4])
+AM_INIT_AUTOMAKE([no-define foreign])
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
@@ -23,7 +24,6 @@ dnl =========================
 PAPERCONF="${sysconfdir}/papersize"
 AC_SUBST(PAPERCONF)
 AH_TEMPLATE(PAPERCONF, [Default configuration file location])
-AC_DEFINE_UNQUOTED(PAPERCONF, "$PAPERCONF")
 
 PAPERCONFVAR=PAPERCONF
 AC_SUBST(PAPERCONFVAR)
@@ -38,7 +38,6 @@ AC_DEFINE_UNQUOTED(PAPERSIZE, "$PAPERSIZE")
 RUNPARTSDIR="${sysconfdir}/libpaper.d"
 AC_SUBST(RUNPARTSDIR)
 AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])
-AC_DEFINE_UNQUOTED(RUNPARTSDIR, "$RUNPARTSDIR")
 
 RUNPARTSDIRVAR=PAPERDIR
 AC_SUBST(RUNPARTSDIRVAR)

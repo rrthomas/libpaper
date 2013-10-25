@@ -50,7 +50,7 @@ endif
 config:	config-stamp
 config-stamp:
 	dh_testdir
-	autoconf
+	dh_autoreconf
 	$(update_config_sub)
 	$(update_config_guess)
 	mkdir -p debian/build
