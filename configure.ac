@@ -59,7 +59,7 @@ AC_OUTPUT([
 	man/Makefile
 	man/paperconf.1
 	man/paperconfig.8
-	man/papersize.5
+	man/papersize.5.in
 	man/systempapername.3
 ])
 
