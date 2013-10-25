@@ -1,0 +1,16 @@
+/autoreconf.after
+/autoreconf.before
+/build
+/files
+/libpaper-dev.debhelper.log
+/libpaper-dev.substvars
+/libpaper-dev/
+/libpaper-utils.debhelper.log
+/libpaper-utils.substvars
+/libpaper-utils/
+/libpaper1.debhelper.log
+/libpaper1.postinst.debhelper
+/libpaper1.postrm.debhelper
+/libpaper1.substvars
+/libpaper1/
+/tmp/
