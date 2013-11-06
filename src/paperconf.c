@@ -12,6 +12,7 @@
 #include <paper.h>
 #include <locale.h>
 
+#include "progname.h"
 #include "xvasprintf.h"
 
 static void usage(const char* name)
@@ -92,6 +93,8 @@ int main(int argc, char** argv)
     unsigned options = 0;
 
     const char* progname;
+
+    set_program_name(argv[0]);
 
     setlocale(LC_ALL, "");
 
