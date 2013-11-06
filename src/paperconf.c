@@ -12,11 +12,7 @@
 #include <paper.h>
 #include <locale.h>
 
-
-/* needed for GNU/Hurd */
-#ifndef MAXPATHLEN
-#define MAXPATHLEN 4096
-#endif
+#include "xvasprintf.h"
 
 static void usage(const char* name)
 {
@@ -195,10 +191,11 @@ int main(int argc, char** argv)
         if (!paper) paper = systempapername();
         if (!paper) paper = defaultpapername();
 	if (!paper) {
-	    char errmsg[2 * MAXPATHLEN + 64];
+	    char *errmsg;
 
-	    sprintf(errmsg, "%s: cannot get paper size from %s",
-		progname, systempapersizefile());
+	    if (asprintf(&errmsg, "%s: cannot get paper size from %s",
+                         progname, systempapersizefile()) == -1)
+              errmsg = "ERROR CONSTRUCTING ERROR MESSAGE";
 
 	    if (errno) {
 		perror(errmsg);
