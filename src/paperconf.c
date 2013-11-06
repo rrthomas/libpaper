@@ -195,7 +195,7 @@ int main(int argc, char** argv)
 
 	    if (asprintf(&errmsg, "%s: cannot get paper size from %s",
                          progname, systempapersizefile()) == -1)
-              errmsg = "ERROR CONSTRUCTING ERROR MESSAGE";
+              errmsg = (char *)"ERROR CONSTRUCTING ERROR MESSAGE";
 
 	    if (errno) {
 		perror(errmsg);
