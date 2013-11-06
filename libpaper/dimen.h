@@ -7,6 +7,8 @@
  *
  */
 
+#include <config.h>
+
 #ifndef DIMEN_H
 #define DIMEN_H
 

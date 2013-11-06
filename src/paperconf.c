@@ -1,7 +1,4 @@
-
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <config.h>
 
 #include <sys/param.h>
 
@@ -24,9 +21,9 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-	"usage: %s [ [ -p ] papername | -d | -a ] [ -z ] [ -n | -N ] [ -s | -w | -h ] [ -c | -m | -i ]\n",
+	"Usage: %s [[-p] PAPERNAME|-d|-a] [-z] [-n|-N] [-s|-w|-h] [-c|-m|-i]\n",
 	    name);
-    exit(1);
+    exit(EXIT_FAILURE);
 }
 
 #define OPT_NAME	1
@@ -187,7 +184,7 @@ int main(int argc, char** argv)
     paperinit();
 
     if (all) {
- 	const struct paper* papers;
+	const struct paper* papers;
 
 	for (papers = paperfirst(); papers; papers = papernext(papers)) {
 	    printinfo(papers, options);
@@ -232,6 +229,6 @@ int main(int argc, char** argv)
 
     paperdone();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 

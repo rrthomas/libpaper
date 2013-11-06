@@ -1,14 +1,17 @@
+AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS)
 
 lib_LTLIBRARIES = libpaper.la
 libpaper_la_SOURCES = dimen.c paper.c dimen.h paperspecs.h
 libpaper_la_LDFLAGS = -version-info 2:2:1
-libpaper_la_CPPFLAGS = -D_REENTRANT -DPAPERCONF='"$(PAPERCONF)"' -DRUNPARTSDIR='"$(RUNPARTSDIR)"'
+libpaper_la_CPPFLAGS = -I$(top_srcdir)/lib -I$(top_builddir)/lib -D_REENTRANT -DPAPERCONF='"$(PAPERCONF)"' -DRUNPARTSDIR='"$(RUNPARTSDIR)"'
 
 BUILT_SOURCES = paperspecs.h
 
 include_HEADERS = paper.h
 
 EXTRA_DIST = paperspecs
+
+DISTCLEANFILES = $(BUILT_SOURCES)
 
 paperspecs.h: paperspecs Makefile
 	echo '    /* This file has been automatically generated.' >$@

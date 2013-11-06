@@ -7,9 +7,7 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <config.h>
 
 #include <ctype.h>
 #include <string.h>
@@ -24,9 +22,9 @@ static struct {
     { "in",	1. },
     { "ft",	12. },
     { "pt",	1. / 72. },
-    { "m", 	100. / 2.54 },
+    { "m",	100. / 2.54 },
     { "dm",	10. / 2.54 },
-    { "cm", 	1. / 2.54 },
+    { "cm",	1. / 2.54 },
     { "mm",	.1 / 2.54 },
     { 0 }
 };

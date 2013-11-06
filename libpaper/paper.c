@@ -7,9 +7,7 @@
  *
  */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <config.h>
 
 #include <sys/stat.h>
 
@@ -111,7 +109,7 @@ in PAPERCONFVAR, fall-back to the old behaviour.
 }
 
 const char* defaultpapername(void) {
-#if defined(LC_PAPER) && defined(_GNU_SOURCE)
+#if defined LC_PAPER  && defined _GNU_SOURCE
 
 #define NL_PAPER_GET(x)         \
   ((union { char *string; unsigned int word; })nl_langinfo(x)).word
