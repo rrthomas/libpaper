@@ -78,13 +78,11 @@ AH_TEMPLATE(PAPERCONF, [Default configuration file location])
 
 PAPERCONFVAR=PAPERCONF
 AC_SUBST(PAPERCONFVAR)
-AH_TEMPLATE(PAPERCONFVAR, [Environment variable that overrides the default configuration file location])
-AC_DEFINE_UNQUOTED(PAPERCONFVAR, "$PAPERCONFVAR")
+AC_DEFINE_UNQUOTED([PAPERCONFVAR], "$PAPERCONFVAR", [Environment variable that overrides the default configuration file location])
 
 PAPERSIZE=letter
 AC_SUBST(PAPERSIZE)
-AH_TEMPLATE(PAPERSIZE, [Default paper size])
-AC_DEFINE_UNQUOTED(PAPERSIZE, "$PAPERSIZE")
+AC_DEFINE_UNQUOTED([PAPERSIZE], "$PAPERSIZE", [Default paper size])
 
 RUNPARTSDIR="${sysconfdir}/libpaper.d"
 AC_SUBST(RUNPARTSDIR)
@@ -92,13 +90,11 @@ AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])
 
 RUNPARTSDIRVAR=PAPERDIR
 AC_SUBST(RUNPARTSDIRVAR)
-AH_TEMPLATE(RUNPARTSDIRVAR, [Environment variable that overrides the default directory for run-parts])
-AC_DEFINE_UNQUOTED(RUNPARTSDIRVAR, "$RUNPARTSDIRVAR")
+AC_DEFINE_UNQUOTED([RUNPARTSDIRVAR], "$RUNPARTSDIRVAR", [Environment variable that overrides the default directory for run-parts])
 
 PAPERSIZEVAR=PAPERSIZE
 AC_SUBST(PAPERSIZEVAR)
-AH_TEMPLATE(PAPERSIZEVAR, [Environment variable that overrides the default paper size])
-AC_DEFINE_UNQUOTED(PAPERSIZEVAR, "$PAPERSIZEVAR")
+AC_DEFINE_UNQUOTED([PAPERSIZEVAR], "$PAPERSIZEVAR", [Environment variable that overrides the default paper size])
 
 dnl Create files
 AC_CONFIG_HEADER([config.h])
