@@ -22,17 +22,8 @@
  *
  */
 
-#if __STDC__ - 0 == 0
-#define const
-#endif
-
-#if __STDC__ - 0 == 0
-extern float unitfactor();
-extern int psdimension();
-#else
 extern float unitfactor(const char* unit);
 extern int psdimension(const char* dimspec, int* dim);
-#endif
 
 #endif
 

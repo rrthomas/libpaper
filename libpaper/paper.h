@@ -22,48 +22,30 @@
  *
  */
 
-#if !defined(__STDC__)
-
-#define __PAPER_CONST
-#define __PAPER_PROTO(p)	()
-
-#else
-
-#define __PAPER_CONST		const
-#define __PAPER_PROTO(p)	p
-
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 struct paper;
 
-extern int paperinit __PAPER_PROTO((void));
-extern int paperdone __PAPER_PROTO((void));
+extern int paperinit(void);
+extern int paperdone(void);
 
-extern __PAPER_CONST char* papername __PAPER_PROTO((const struct paper*));
-extern double paperpswidth __PAPER_PROTO((const struct paper*));
-extern double paperpsheight __PAPER_PROTO((const struct paper*));
+extern const char* papername(const struct paper*);
+extern double paperpswidth(const struct paper*);
+extern double paperpsheight(const struct paper*);
 
-extern __PAPER_CONST char* defaultpapersizefile __PAPER_PROTO((void));
-extern __PAPER_CONST char* systempapersizefile __PAPER_PROTO((void));
-extern __PAPER_CONST char* defaultpapername __PAPER_PROTO((void));
-extern char* systempapername __PAPER_PROTO((void));
-extern __PAPER_CONST struct paper* paperinfo __PAPER_PROTO((const char*));
-extern __PAPER_CONST struct paper* paperwithsize __PAPER_PROTO((
-    double pswidth, double psheight));
+extern const char* defaultpapersizefile(void);
+extern const char* systempapersizefile(void);
+extern const char* defaultpapername(void);
+extern char* systempapername(void);
+extern const struct paper* paperinfo(const char*);
+extern const struct paper* paperwithsize(double pswidth, double psheight);
 
-extern __PAPER_CONST struct paper* paperfirst __PAPER_PROTO((void));
-extern __PAPER_CONST struct paper* paperlast __PAPER_PROTO((void));
-extern __PAPER_CONST struct paper* papernext __PAPER_PROTO((
-    const struct paper*));
-extern __PAPER_CONST struct paper* paperprev __PAPER_PROTO((
-    const struct paper*));
-
-#undef __PAPER_CONST
-#undef __PAPER_PROTO
+extern const struct paper* paperfirst(void);
+extern const struct paper* paperlast(void);
+extern const struct paper* papernext(const struct paper*);
+extern const struct paper* paperprev(const struct paper*);
 
 #ifdef __cplusplus
 }
