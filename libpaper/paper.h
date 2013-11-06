@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
  *
@@ -52,4 +51,3 @@ extern const struct paper* paperprev(const struct paper*);
 #endif
 
 #endif
-

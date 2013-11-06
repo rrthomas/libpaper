@@ -50,4 +50,3 @@ Full path to a file containing the paper size to use.
 Contains the name of the system-wide default paper size to be used.
 .SH SEE ALSO
 .BR papersize (5)
-

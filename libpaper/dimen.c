@@ -1,4 +1,3 @@
- 
 /*
  * Copyright (C) Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
  *
@@ -67,4 +66,3 @@ int psdimension(const char* what, int* dim)
 	return 1;
     }
 }
-

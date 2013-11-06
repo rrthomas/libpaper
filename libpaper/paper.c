@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
  *
@@ -257,4 +256,3 @@ _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double pshe
 
     return 0;
 }
-

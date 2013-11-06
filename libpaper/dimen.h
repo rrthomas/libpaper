@@ -1,4 +1,3 @@
-
 /*
  * Copyright (C) Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
  *
@@ -26,4 +25,3 @@ extern float unitfactor(const char* unit);
 extern int psdimension(const char* dimspec, int* dim);
 
 #endif
-
