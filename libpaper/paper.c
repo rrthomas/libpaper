@@ -39,30 +39,30 @@ static struct paper papers[] = {
     { 0 }
 };
 
-int paperinit(void) {
+_GL_ATTRIBUTE_CONST int paperinit(void) {
     return 0;
 }
 
-int paperdone(void) {
+_GL_ATTRIBUTE_CONST int paperdone(void) {
     return 0;
 }
 
-const char* papername(const struct paper* spaper)
+_GL_ATTRIBUTE_PURE const char* papername(const struct paper* spaper)
 {
     return spaper->name;
 }
 
-double paperpswidth(const struct paper* spaper)
+_GL_ATTRIBUTE_PURE double paperpswidth(const struct paper* spaper)
 {
     return spaper->pswidth;
 }
 
-double paperpsheight(const struct paper* spaper)
+_GL_ATTRIBUTE_PURE double paperpsheight(const struct paper* spaper)
 {
     return spaper->psheight;
 }
 
-const struct paper* paperfirst(void) {
+_GL_ATTRIBUTE_CONST const struct paper* paperfirst(void) {
     return papers;
 }
 
@@ -77,17 +77,17 @@ const struct paper* paperlast(void) {
     return lastpaper;
 }
 
-const struct paper* papernext(const struct paper* spaper)
+_GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
 {
     return (++spaper)->name ? spaper : 0;
 }
 
-const struct paper* paperprev(const struct paper* spaper)
+_GL_ATTRIBUTE_CONST const struct paper* paperprev(const struct paper* spaper)
 {
     return spaper == papers ? 0 : --spaper;
 }
 
-const char* defaultpapersizefile(void) {
+_GL_ATTRIBUTE_CONST const char* defaultpapersizefile(void) {
     return PAPERCONF;
 }
 
@@ -231,7 +231,7 @@ PAPERSIZEVAR, fall-back to the old behaviour.
         return 0;
 }
 
-const struct paper* paperinfo(const char* paper)
+_GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
 {
     const struct paper* pp;
 
@@ -244,7 +244,7 @@ const struct paper* paperinfo(const char* paper)
     return 0;
 }
 
-const struct paper* paperwithsize(double pswidth, double psheight)
+_GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double psheight)
 {
     const struct paper* pp;
 

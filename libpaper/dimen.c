@@ -29,7 +29,7 @@ static struct {
     { 0 }
 };
 
-float unitfactor(const char* unit)
+_GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
 {
     int i;
 
