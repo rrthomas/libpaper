@@ -30,39 +30,31 @@ static struct {
 
 _GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
 {
-    int i;
-
-    for (i = 0; units[i].name; ++i) {
-	if (!strcasecmp(units[i].name, unit)) {
+    for (int i = 0; units[i].name; ++i)
+	if (!strcasecmp(units[i].name, unit))
 	    return units[i].factor;
-	}
-    }
 
     return 0;
 }
 
 int psdimension(const char* what, int* dim)
 {
-    const char* unit;
-    int dot = 0;
-
     if (!what || !*what) return -1;
 
+    const char* unit;
     if (*(unit = what) == '-') ++unit;
 
-    for (; isdigit(*unit) || (*unit == '.' && !dot++); ++unit);
+    for (int dot = 0; isdigit(*unit) || (*unit == '.' && !dot++); ++unit);
 
-    if (*unit && !isalpha(*unit)) {
-	return -1;
-    } else {
-	double base = atof(what);
-	double factor = unitfactor(unit);
+    if (*unit && !isalpha(*unit)) return -1;
 
-	if (factor) {
-	    *dim = base * factor * 72;
-	    return 0;
-	}
+    double base = atof(what);
+    double factor = unitfactor(unit);
 
-	return 1;
+    if (factor) {
+        *dim = base * factor * 72;
+        return 0;
     }
+
+    return 1;
 }
