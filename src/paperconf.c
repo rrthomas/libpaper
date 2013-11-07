@@ -1,8 +1,7 @@
 #include <config.h>
 
-#include <sys/param.h>
-
 #include <ctype.h>
+#include <locale.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +9,6 @@
 #include <errno.h>
 
 #include <paper.h>
-#include <locale.h>
 
 #include "progname.h"
 #include "xvasprintf.h"
