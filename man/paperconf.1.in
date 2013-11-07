@@ -98,13 +98,13 @@ Use millimetres as unit for paper size.
 Use inches as unit for paper size.
 
 .SH ENVIRONMENT
-.TP 20            
+.TP 20
 .B @PAPERSIZEVAR@
 Paper size to use regardless of what the papersize file contains.
 .TP 20
 .B @PAPERCONFVAR@
 Full path to a file containing the paper size to use.
-.SH FILES         
+.SH FILES
 .TP 20
 .B @PAPERCONF@
 Contains the name of the system-wide default paper size to be used

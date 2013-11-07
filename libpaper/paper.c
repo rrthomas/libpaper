@@ -67,7 +67,7 @@ _GL_ATTRIBUTE_CONST const struct paper* paperfirst(void) {
 
 const struct paper* paperlast(void) {
     static const struct paper* lastpaper = 0;
-   
+
     const struct paper* next = papers;
     while (next->name) {
 	lastpaper = next, ++next;
@@ -92,7 +92,7 @@ _GL_ATTRIBUTE_CONST const char* defaultpapersizefile(void) {
 
 const char* systempapersizefile(void) {
     const char* paperconf = getenv(PAPERCONFVAR);
-/* 
+/*
 Previously PAPERCONFVAR used to contain a paper name and PAPERSIZEVAR
 contained a file path.  Now they're reversed.  If we don't find a '/'
 in PAPERCONFVAR, fall-back to the old behaviour.
@@ -122,9 +122,9 @@ const char* defaultpapername(void) {
 
     for (pp = paperfirst(); pp; pp = papernext(pp)) {
 	if (
-             PT_TO_MM(pp->pswidth) == w &&
-             PT_TO_MM(pp->psheight) == h
-           ) {
+	     PT_TO_MM(pp->pswidth) == w &&
+	     PT_TO_MM(pp->psheight) == h
+	   ) {
 	    return pp->name;
 	}
     }
@@ -142,7 +142,7 @@ char* systempapername(void) {
     const struct paper* pp;
     int c;
 
-/* 
+/*
 Previously PAPERSIZEVAR used to contain a file path and PAPERCONFVAR
 contained a paper name.  Now they're reversed.  If we find a '/' in
 PAPERSIZEVAR, fall-back to the old behaviour.
@@ -156,10 +156,10 @@ PAPERSIZEVAR, fall-back to the old behaviour.
     }
 
     if (paperenv) {
-        paperstr = malloc((strlen(paperenv) + 1) * sizeof(char));	
-	
+	paperstr = malloc((strlen(paperenv) + 1) * sizeof(char));
+
 	if (! paperstr) return 0;
-	
+
 	if ((pp = paperinfo(paperenv)))
 	    return strcpy(paperstr, pp->name);
 	else
@@ -168,30 +168,30 @@ PAPERSIZEVAR, fall-back to the old behaviour.
 
     paperconf = systempapersizefile();
     if (paperconf && stat(paperconf, &statbuf) == -1) return 0;
-    
+
     if (!paperconf) paperconf = defaultpapersizefile();
 
     if ((stat(paperconf, &statbuf) != -1) &&
 	(ps = fopen(paperconf, "r"))) {
 
-        while ((c = getc(ps)) != EOF) {
+	while ((c = getc(ps)) != EOF) {
 	    if (c == '#') {
-	        while ((c = getc(ps)) != EOF && c != '\n');
+		while ((c = getc(ps)) != EOF && c != '\n');
 		if (c == EOF) {
 		    break;
 		}
 	    } else if (!isspace(c)) {
-	        unsigned n = 0, m = 64;
+		unsigned n = 0, m = 64;
 		char* papername = malloc(m * sizeof(char));
-	    
+
 		if (!papername) {
 		    fclose(ps);
 		    return 0;
 		}
-	    
+
 		do {
 		    if (n == m-1) {
-		        char* newpaper = realloc(papername,
+			char* newpaper = realloc(papername,
 						 (m *= 2) * sizeof(char));
 			if (!newpaper) {
 			    free(papername);
@@ -219,15 +219,15 @@ PAPERSIZEVAR, fall-back to the old behaviour.
 		    return paperstr;
 	    }
 	}
-    } 
-      
+    }
+
     paperdef = defaultpapername();
     paperstr = malloc((strlen(paperdef) + 1) * sizeof(char));
-    
-    if (paperstr) 
-        return strcpy(paperstr, paperdef); 
+
+    if (paperstr)
+	return strcpy(paperstr, paperdef);
     else
-        return 0;
+	return 0;
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)

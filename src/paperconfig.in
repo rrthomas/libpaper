@@ -21,9 +21,9 @@ usage() {
 	cat <<EOF
 
 Options: -v, --verbose          print version information and exit
-         -h, --help             print this help and exit
+	 -h, --help             print this help and exit
 	 -p, --paper name	specify the paper to use
-         --force                force paper configuration
+	 --force                force paper configuration
 EOF
 	exit 0
     else
@@ -34,11 +34,11 @@ EOF
 # "|| true" added below, to assure that the script does not fail even if
 # called with bash -e. (MP 22/08/98)
 
-unset @PAPERSIZEVAR@ || true 
+unset @PAPERSIZEVAR@ || true
 : ${@PAPERCONFVAR@:=@PAPERCONF@}
 export @PAPERCONFVAR@
 
-unset @RUNPARTSDIRVAR@ || true 
+unset @RUNPARTSDIRVAR@ || true
 : ${@RUNPARTSDIRVAR@:=@RUNPARTSDIR@}
 export @RUNPARTSDIRVAR@
 
@@ -114,19 +114,19 @@ setpaper() {
 
     if 2>/dev/null echo "$paperright" >${@PAPERCONFVAR@}.new
     then
-        if 2>/dev/null mv -f ${@PAPERCONFVAR@}.new $@PAPERCONFVAR@
+	if 2>/dev/null mv -f ${@PAPERCONFVAR@}.new $@PAPERCONFVAR@
 	then
 	    if 2>/dev/null chmod 644 $@PAPERCONFVAR@
 	    then
 		ok=1
-            fi
-        fi
+	    fi
+	fi
     fi
 
     if [ $ok -eq 0 ]
     then
-        echo `basename $0`: cannot create $@PAPERCONFVAR@
-        exit 2
+	echo `basename $0`: cannot create $@PAPERCONFVAR@
+	exit 2
     else
 	#
 	# Added code for calling back applications when
@@ -155,7 +155,7 @@ knownpapers="`paperconf -a`"
 prompt=
 width=72
 
-# "|| true" added below, to assure that the script does not fail even if 
+# "|| true" added below, to assure that the script does not fail even if
 # called with bash -e. (MP 22/08/98)
 
 paper=`paperconf 2>/dev/null || true`
@@ -218,7 +218,7 @@ do
     paper=$ans
 done
 
-if [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[# 	]" $@PAPERCONFVAR@
+if [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[#	]" $@PAPERCONFVAR@
 then
     setpaper "$paper"
 fi

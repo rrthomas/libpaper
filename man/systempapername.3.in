@@ -20,7 +20,7 @@ This name is obtained by looking in that order at the
 .B @PAPERCONFVAR@
 environment variable, at the contents of the file returned by
 .B systempapersizefile()
-or by using 
+or by using
 .B defaultpapername()
 as a last chance.
 .PP
@@ -38,13 +38,13 @@ environment variable or by calling
 .B defaultpapersizefile
 returns the path of the default papersize file.
 .SH ENVIRONMENT
-.TP 20            
+.TP 20
 .B @PAPERSIZEVAR@
 Paper size to use regardless of what the papersize file contains.
 .TP 20
 .B @PAPERCONFVAR@
 Full path to a file containing the paper size to use.
-.SH FILES         
+.SH FILES
 .TP 20
 .B @PAPERCONF@
 Contains the name of the system-wide default paper size to be used.
