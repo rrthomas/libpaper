@@ -1,5 +1,6 @@
 /*
  * Copyright (C) Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
+ * Copyright (C) Reuben Thomas <rrt@sc3d.org>, 2013.
  *
  * Use under the GPL version 2. You are not allowed to remove this
  * copyright notice.
