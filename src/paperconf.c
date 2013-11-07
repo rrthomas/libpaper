@@ -86,44 +86,31 @@ static void printinfo(const struct paper* paper, int options)
 
 int main(int argc, char** argv)
 {
-    int c;
-
-    int all = 0;
-    const char* paper = 0;
-    unsigned options = 0;
-
-    const char* progname;
-
     set_program_name(argv[0]);
-
     setlocale(LC_ALL, "");
 
-    progname = strrchr(*argv, '/');
-    if (progname) {
-	++progname;
-    } else {
-	progname = *argv;
-    }
-
+    const char* paper = NULL;
+    int c, all = 0;
+    unsigned options = 0;
     while ((c = getopt(argc, argv, "adznNswhcmip:")) != EOF) {
 	switch (c) {
 	    case 'a':
 		if (paper || all) {
-		    usage(progname);
+		    usage(program_name);
 		}
 		all = 1;
 		break;
 
 	    case 'd':
 		if (paper || all) {
-		    usage(progname);
+		    usage(program_name);
 		}
 		paper = defaultpapername();
 		break;
 
 	    case 'p':
 		if (paper || all) {
-		    usage(progname);
+		    usage(program_name);
 		}
 		paper = optarg;
 		break;
@@ -133,12 +120,12 @@ int main(int argc, char** argv)
 		break;
 
 	    case 'n':
-		if (options & OPT_UPPERNAME) usage(progname);
+		if (options & OPT_UPPERNAME) usage(program_name);
 		options |= OPT_NAME;
 		break;
 
 	    case 'N':
-		if (options & OPT_NAME) usage(progname);
+		if (options & OPT_NAME) usage(program_name);
 		options |= OPT_UPPERNAME;
 		break;
 
@@ -155,27 +142,27 @@ int main(int argc, char** argv)
 		break;
 
 	    case 'c':
-	        if (options & OPT_UNIT) usage(progname);
+	        if (options & OPT_UNIT) usage(program_name);
 		options |= OPT_CM;
 		break;
 
 	    case 'm':
-	        if (options & OPT_UNIT) usage(progname);
+	        if (options & OPT_UNIT) usage(program_name);
 		options |= OPT_MM;
 		break;
 
 	    case 'i':
-	        if (options & OPT_UNIT) usage(progname);
+	        if (options & OPT_UNIT) usage(program_name);
 		options |= OPT_INCH;
 		break;
 
 	    default:
-		usage(progname);
+		usage(program_name);
 	}
     }
 
     if (optind < argc - 1 || (paper && optind != argc)) {
-	usage(progname);
+	usage(program_name);
     } else if (optind != argc) {
 	paper = argv[optind];
     }
@@ -183,21 +170,16 @@ int main(int argc, char** argv)
     paperinit();
 
     if (all) {
-	const struct paper* papers;
-
-	for (papers = paperfirst(); papers; papers = papernext(papers)) {
+	for (const struct paper* papers = paperfirst(); papers; papers = papernext(papers))
 	    printinfo(papers, options);
-	}
     } else {
-        const struct paper* syspaper;
-
         if (!paper) paper = systempapername();
         if (!paper) paper = defaultpapername();
 	if (!paper) {
 	    char *errmsg;
 
 	    if (asprintf(&errmsg, "%s: cannot get paper size from %s",
-                         progname, systempapersizefile()) == -1)
+                         program_name, systempapersizefile()) == -1)
               errmsg = (char *)"ERROR CONSTRUCTING ERROR MESSAGE";
 
 	    if (errno) {
@@ -211,12 +193,11 @@ int main(int argc, char** argv)
 	    exit(3);
 	}
 
-        syspaper = paperinfo(paper);
-
+        const struct paper* syspaper = paperinfo(paper);
         if (syspaper) {
             printinfo(syspaper, options);
         } else {
-	    fprintf(stderr, "%s: unknown paper `%s'\n", progname, paper);
+	    fprintf(stderr, "%s: unknown paper `%s'\n", program_name, paper);
 	    if (options & OPT_CONTINUE) {
 		puts(paper);
 	    }
