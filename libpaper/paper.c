@@ -66,15 +66,12 @@ _GL_ATTRIBUTE_CONST const struct paper* paperfirst(void) {
     return papers;
 }
 
-const struct paper* paperlast(void) {
-    static const struct paper* lastpaper = 0;
+_GL_ATTRIBUTE_PURE const struct paper* paperlast(void) {
+    const struct paper* next;
+    for (next = papers; next->name; next++)
+	;
 
-    const struct paper* next = papers;
-    while (next->name) {
-	lastpaper = next, ++next;
-    }
-
-    return lastpaper;
+    return --next;
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
@@ -171,25 +168,20 @@ _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
 {
     const struct paper* pp;
 
-    for (pp = paperfirst(); pp; pp = papernext(pp)) {
-	if (!strcasecmp(pp->name, paper)) {
-	    return pp;
-	}
-    }
+    for (pp = paperfirst(); pp; pp = papernext(pp))
+	if (!strcasecmp(pp->name, paper))
+	    break;
 
-    return 0;
+    return pp;
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double psheight)
 {
     const struct paper* pp;
 
-    for (pp = paperfirst(); pp; pp = papernext(pp)) {
-	if (pp->pswidth == pswidth
-	    && pp->psheight == psheight) {
+    for (pp = paperfirst(); pp; pp = papernext(pp))
+	if (pp->pswidth == pswidth && pp->psheight == psheight)
 	    return pp;
-	}
-    }
 
-    return 0;
+    return NULL;
 }
