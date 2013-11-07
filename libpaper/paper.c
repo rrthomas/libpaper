@@ -19,7 +19,9 @@
 #include <unistd.h>
 
 #include <locale.h>
+#if defined LC_PAPER  && defined _GNU_SOURCE
 #include <langinfo.h>
+#endif
 
 #include "paper.h"
 
@@ -94,8 +96,8 @@ const char* systempapersizefile(void) {
 }
 
 const char* defaultpapername(void) {
-#if defined LC_PAPER  && defined _GNU_SOURCE
 
+#if defined LC_PAPER  && defined _GNU_SOURCE
 #define NL_PAPER_GET(x)         \
   ((union { char *string; unsigned int word; })nl_langinfo(x)).word
 
@@ -106,15 +108,11 @@ const char* defaultpapername(void) {
     unsigned int w = NL_PAPER_GET(_NL_PAPER_WIDTH);
     unsigned int h = NL_PAPER_GET(_NL_PAPER_HEIGHT);
 
-    for (pp = paperfirst(); pp; pp = papernext(pp)) {
-	if (
-	     PT_TO_MM(pp->pswidth) == w &&
-	     PT_TO_MM(pp->psheight) == h
-	   ) {
+    for (pp = paperfirst(); pp; pp = papernext(pp))
+	if (PT_TO_MM(pp->pswidth) == w && PT_TO_MM(pp->psheight) == h)
 	    return pp->name;
-	}
-    }
 #endif
+
     return PAPERSIZE;
 }
 
