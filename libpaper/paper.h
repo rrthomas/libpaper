@@ -27,24 +27,24 @@ extern "C" {
 
 struct paper;
 
-extern int paperinit(void);
-extern int paperdone(void);
+int paperinit(void);
+int paperdone(void);
 
-extern const char* papername(const struct paper*);
-extern double paperpswidth(const struct paper*);
-extern double paperpsheight(const struct paper*);
+const char* papername(const struct paper*);
+double paperpswidth(const struct paper*);
+double paperpsheight(const struct paper*);
 
-extern const char* defaultpapersizefile(void);
-extern const char* systempapersizefile(void);
-extern const char* defaultpapername(void);
-extern char* systempapername(void);
-extern const struct paper* paperinfo(const char*);
-extern const struct paper* paperwithsize(double pswidth, double psheight);
+const char* defaultpapersizefile(void);
+const char* systempapersizefile(void);
+const char* defaultpapername(void);
+char* systempapername(void);
+const struct paper* paperinfo(const char*);
+const struct paper* paperwithsize(double pswidth, double psheight);
 
-extern const struct paper* paperfirst(void);
-extern const struct paper* paperlast(void);
-extern const struct paper* papernext(const struct paper*);
-extern const struct paper* paperprev(const struct paper*);
+const struct paper* paperfirst(void);
+const struct paper* paperlast(void);
+const struct paper* papernext(const struct paper*);
+const struct paper* paperprev(const struct paper*);
 
 #ifdef __cplusplus
 }
