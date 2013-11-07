@@ -3,10 +3,11 @@ way for applications to take actions based on a system- or user-specified
 paper size.
 
 It offers really basic functions (obtaining the system paper name and
-getting the height and width of a given kond of paper) that
+getting the height and width of a given kind of paper) that
 applications can immediately integrate.
 
-See the sources for paperconf(1) in src/paper.c for how to use the library.
+See the sources for paperconf(1) in src/paperconf.c for how to use the
+library.
 
 Adding new paper sizes
 ======================
