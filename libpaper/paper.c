@@ -92,18 +92,6 @@ _GL_ATTRIBUTE_CONST const char* defaultpapersizefile(void) {
 
 const char* systempapersizefile(void) {
     const char* paperconf = getenv(PAPERCONFVAR);
-/*
-Previously PAPERCONFVAR used to contain a paper name and PAPERSIZEVAR
-contained a file path.  Now they're reversed.  If we don't find a '/'
-in PAPERCONFVAR, fall-back to the old behaviour.
-*/
-
-    if ((paperconf != NULL) && (strchr(paperconf, '/') == NULL)) {
-	paperconf = getenv(PAPERSIZEVAR);
-	if ((paperconf != NULL) && (strchr(paperconf, '/') == NULL))
-	    paperconf = NULL;
-    }
-
     return paperconf ? paperconf : defaultpapersizefile();
 }
 
@@ -136,17 +124,6 @@ char* systempapername(void) {
     char* paperstr = NULL;
     const struct paper* pp;
     char *paperenv = getenv(PAPERSIZEVAR);
-
-    /*
-      Previously PAPERSIZEVAR used to contain a file path and PAPERCONFVAR
-      contained a paper name.  Now they're reversed.  If we find a '/' in
-      PAPERSIZEVAR, fall-back to the old behaviour.
-    */
-    if ((paperenv != NULL) && (strchr(paperenv, '/') != NULL)) {
-	paperenv = getenv(PAPERCONFVAR);
-	if ((paperenv != NULL) && (strchr(paperenv, '/') != NULL))
-	    paperenv = NULL;
-    }
 
     if (paperenv)
         paperstr = strdup(paperenv);
