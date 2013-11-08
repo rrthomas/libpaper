@@ -41,15 +41,10 @@ This name is obtained from the
 .B @PAPERCONFVAR@
 environment variable, or if that is not set, from
 .B @PAPERSPECS@
-or if that cannot be read, to the return value of
-.B defaultpapername()
-as a last chance.
-.PP
-.B defaultpapername()
-returns the name of the default paper to use if no paper size is
-configured. On systems that support it, it first tries to find the
-default paper of the configured locale; otherwise it defaults to the
-build-time configured value of
+or if that cannot be read, to the value controlled by the
+.B LC_PAPER
+locale setting (if supported by the system), or if that does not work,
+by using the build-time default
 .B @PAPERSIZE@
 .
 .PP

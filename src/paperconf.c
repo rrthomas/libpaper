@@ -16,7 +16,7 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-	"Usage: %s [[-p] PAPERNAME|-d|-a] [-z] [-n|-N] [-s|-w|-h] [-c|-m|-i]\n",
+	"Usage: %s [[-p] PAPERNAME|-a] [-z] [-n|-N] [-s|-w|-h] [-c|-m|-i]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
@@ -90,20 +90,13 @@ int main(int argc, char** argv)
     const char* paper = NULL;
     int c, all = 0;
     unsigned options = 0;
-    while ((c = getopt(argc, argv, "adznNswhcmip:")) != EOF) {
+    while ((c = getopt(argc, argv, "aznNswhcmip:")) != EOF) {
 	switch (c) {
 	    case 'a':
 		if (paper || all) {
 		    usage(program_name);
 		}
 		all = 1;
-		break;
-
-	    case 'd':
-		if (paper || all) {
-		    usage(program_name);
-		}
-		paper = defaultpapername();
 		break;
 
 	    case 'p':
@@ -172,7 +165,6 @@ int main(int argc, char** argv)
 	    printinfo(papers, options);
     } else {
         if (!paper) paper = systempapername();
-        if (!paper) paper = defaultpapername();
 	if (!paper) {
 	    char *errmsg;
 	    if (asprintf(&errmsg, "%s: cannot get system paper size", program_name) == -1)

@@ -147,7 +147,7 @@ prompt=
 width=72
 
 paper=`paperconf 2>/dev/null || true`
-dftpaper=`paperconf -d`
+dftpaper=`paperconf`
 
 if [ $force -eq 1 ] || [ ! -e $PAPERCONF ] || invalidpaper $paper
 then

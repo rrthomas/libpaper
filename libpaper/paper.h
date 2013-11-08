@@ -22,7 +22,6 @@ const char* papername(const struct paper*);
 double paperpswidth(const struct paper*);
 double paperpsheight(const struct paper*);
 
-const char* defaultpapername(void);
 const char* systempapername(void);
 const struct paper* paperinfo(const char*);
 const struct paper* paperwithsize(double pswidth, double psheight);
