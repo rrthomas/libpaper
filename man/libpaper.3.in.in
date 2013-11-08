@@ -36,24 +36,15 @@ function.
 The function returns zero on success, and non-zero on error.
 .PP
 .B systempapername()
-returns the name of the default paper to be used by a program.
-This name is obtained from the
-.B @PAPERCONFVAR@
-environment variable, or if that is not set, from
-.B @PAPERSPECS@
-or if that cannot be read, to the value controlled by the
-.B LC_PAPER
-locale setting (if supported by the system), or if that does not work,
-by using the build-time default
-.B @PAPERSIZE@
-.
+returns the name of the default paper to be used by a program, as if by running
+.B paperconf
+with no arguments. See paperconf(1).
 .PP
 .B paperinfo()
 returns a pointer to a
 .B struct paper
 containing informations about the paper with name
-.B papername
-.
+.BR papername .
 .B paperwithsize()
 looks for a paper whose width and height is
 .B psw
@@ -65,33 +56,19 @@ corresponding to the paper found, or \fBNULL\fR if the paper name is
 unknown.
 .PP
 .B papername()
-returns the name of a paper described by an opaque struct paper object
-.
+returns the name of a paper described by an opaque struct paper object.
 .B paperpswidth()
 returns the width, in PostScript points, of a paper described by an
-opaque struct paper object
-.
+opaque struct paper object.
+.PP
 .B paperpsheight()
 returns the height, in PostScript points, of a paper described by an
-opaque struct paper object
-.
+opaque struct paper object.
 .PP
 .B paperfirst()
 returns the first paper.
 Iteration from one entry to the next can be done
 with
-.B papernext()
-.
-.SH ENVIRONMENT
-.TP 20
-.B @PAPERSIZEVAR@
-Paper size to use regardless of what the papersize file contains.
-.TP 20
-.B @PAPERCONFVAR@
-Full path to a file containing the paper size to use.
-.SH FILES
-.TP 20
-.B @PAPERCONF@
-Contains the name of the system-wide default paper size to be used.
+.BR papernext() .
 .SH SEE ALSO
-.BR papersize (5)
+paperconf(1), papersize(5)

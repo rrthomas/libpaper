@@ -24,7 +24,7 @@ libpaper.3: $(builddir)/libpaper.3.in
 papersize.5: $(builddir)/papersize.5.in
 	rm -f $@ $@.tmp
 	paperspecslist="`cut -d ' ' -f 1 < $(top_srcdir)/libpaper/paperspecs | tr '\n' ' ' | sed -e 's/ /, /g;s/, $$//'`" && \
-		sed -e "s|@paperspecslist[@]|$$paperspecslist|g" $(builddir)/$@.in >$@.tmp
+		$(edit) -e "s|@paperspecslist[@]|$$paperspecslist|g" $(builddir)/$@.in >$@.tmp
 	mv $@.tmp $@
 
 paperconfig.8: $(builddir)/paperconfig.8.in

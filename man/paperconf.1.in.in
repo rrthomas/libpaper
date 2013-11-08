@@ -6,24 +6,26 @@
 \fBpaperconf\fR [[\fB\-p\fR] \fIpaper\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR|\fB\-N\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-c\fR|\fB\-m\fR|\fB\-i\fR]
 .SH DESCRIPTION
 .B paperconf
-prints information about a given paper.
+prints information about a given paper size.
 The information that can be obtained is the name of the paper, its
 size and its width or height.
-When called without arguments,
-.B paperconf
-prints the name of the system- or user-specified paper, obtained by
-looking in order at the
-.B PAPERSIZE
-environment variable, at the contents of the file specified by the
-.B PAPERCONF
-environment variable, at the contents of
-.B @PAPERCONF@
-, consulting the values controlled by the
-.B LC_PAPER
-locale setting (if supported by the system), or by using
-.B @PAPERSIZE@
-as a fall-back value if none of the other alternatives are successful.
-By default, width and height of the paper are printed in PostScript points.
+By default, dimensions are printed in PostScript points.
+.PP
+When called without arguments, \fBpaperconf\fR prints the name of the
+current paper size.
+.PP
+The current paper size is obtained by looking in order at the following
+values until a valid paper size is found:
+.IP \[bu]
+The \fBPAPERSIZE\fR environment variable
+.IP \[bu]
+The file specified by the \fBPAPERCONF\fR environment variable
+.IP \[bu]
+The contents of the file \fB@PAPERCONF@\fR
+.IP \[bu]
+The \fBLC_PAPER\fR environment variable (if supported by the system)
+.IP \[bu]
+The built-in default value \fB@PAPERSIZE@\fR
 .SH OPTIONS
 .TP
 .BI \-p " paper"
@@ -64,24 +66,18 @@ Use millimetres as unit for paper size.
 .TP
 .B \-i
 Use inches as unit for paper size.
-
-.SH ENVIRONMENT
-.TP 20
-.B @PAPERSIZEVAR@
-Paper size to use regardless of what the papersize file contains.
-.TP 20
-.B @PAPERCONFVAR@
-Full path to a file containing the paper size to use.
+.SH ENVIRONMENT VARIABLES
+.TP
+.B PAPERSIZE
+Paper size to use.
+.TP
+.B PAPERCONF
+Absolute path to a file containing the paper size to use.
 .SH FILES
-.TP 20
+.TP
 .B @PAPERCONF@
-Contains the name of the system-wide default paper size to be used
-if the
-.B @PAPERSIZEVAR@
-and
-.B @PAPERCONFVAR@
-variables are not set.
+The system-wide default paper size.
 .SH AUTHOR
-Yves Arrouye <arrouye@debian.org>
+Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
-.BR papersize (5)
+papersize(5)

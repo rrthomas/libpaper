@@ -7,7 +7,7 @@
 \fBpaperconfig\fR [\fB\-\-version\fR|\fB\-\-help\fR|\fB\-\-paper \fIpapername\fR|\fB\-\-force]
 .SH DESCRIPTION
 .B paperconfig
-sets the system (or default) paper to be used by tools using the
+sets the system default paper to be used by tools using the
 .B papersize
 file.
 It can either ask interactively for the paper to use or be called
@@ -38,28 +38,17 @@ is not a valid paper, print an error message and exit.
 .B \-\-force
 Force interactive selection of the system paper even if the current paper
 is valid.
-.SH ENVIRONMENT
-.B PAPERCONF
-Full path to a file containing the system paper size.
 .SH FILES
-.TP 20
-.B PAPERCONF
-Contains the name of the system-wide default paper size to be used
-if the
-.B PAPERSIZE
-variable is not set.
-.TP 20
+.TP
 .B @RUNPARTSDIR@
 Directory of scripts to run after the paper size has been changed.
 This package puts no scripts here, but other packages may.
 .B run-parts
 is used to run the scripts.  Therefore their names must comply
 with
-.B run-part's
+.BR run-part 's
 naming requirements.
 .SH AUTHOR
-Yves Arrouye <arrouye@debian.org>
+Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
-.BR paperconf (1)
-.br
-.BR papersize (5)
+paperconf(1), papersize(5)
