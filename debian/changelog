@@ -1,6 +1,22 @@
 libpaper (1.2) unstable; urgency=low
 
   * Major overhaul.
+  * Remove papersize(5).  Closes: #486338
+  * Update build system for recent autotools.  Closes: #496126, #700358
+  * Add JIS B series paper sizes (patch from TeXLive).  Closes: #403365
+  * Try LC_PAPER before falling back to default PAPERSIZE.  Closes #481213, #376350
+  * Debconf translations:
+    - Polish.  Closes: #658159
+    - Turkish.  Closes: #688293
+  * Document requirements of libpaper.d scripts.  Closes: #594931
+  * Fix cross-compilation.  Closes #693968
+  * Load paper sizes at run-time, allowing the user to change the configuration.
+  * Remove the library: the programs and data sources can be used instead.
+  * Reduce the range of supported units to those actually needed.
+  * Use the first entry in paperspecs as the "default default".  Closes #493722
+  * Replace badly-named --force option to paperconfig with --choose.  Closes #486341
+     This change also stops interactive mode being forced when a non-existent paper
+     size is supplied on the command line.
 
  -- Reuben Thomas <rrt@sc3d.org>  Thu, 07 Nov 2013 19:10:00 +0000
 
