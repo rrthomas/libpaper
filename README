@@ -1,17 +1,21 @@
-The paper library and accompanying files are intended to provide a simple
-way for applications to take actions based on a system- or user-specified
-paper size.
+libpaper
+========
 
-It offers really basic functions (obtaining the system paper name and
-getting the height and width of a given kind of paper) that
-applications can immediately integrate.
+The paper library and accompanying tools provide a simple way for
+applications to find information about paper sizes, and to find the
+user's preferred default paper size.
 
-See the libpaper(3) for how to use the library.
+It offers a command-line tool and simple C library that applications
+of all sorts can easily use, and an administrative tool to change the
+system default paper size, and inform other interested packages.
 
-Adding new paper sizes
-======================
+See libpaper(3) for how to use the library.
 
-New paper formats can be added to /etc/paperspecs (or equivalent if
+
+Changing and adding paper sizes
+===============================
+
+New paper sizes can be added to /etc/paperspecs (or equivalent if
 you have installed libpaper elsewhere). See that file for more
 details.
 
