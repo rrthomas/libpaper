@@ -36,25 +36,3 @@ _GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
 
     return 0;
 }
-
-int psdimension(const char* what, int* dim)
-{
-    if (!what || !*what) return -1;
-
-    const char* unit;
-    if (*(unit = what) == '-') ++unit;
-
-    for (int dot = 0; isdigit(*unit) || (*unit == '.' && !dot++); ++unit);
-
-    if (*unit && !isalpha(*unit)) return -1;
-
-    double base = atof(what);
-    double factor = unitfactor(unit);
-
-    if (factor) {
-        *dim = base * factor * 72;
-        return 0;
-    }
-
-    return 1;
-}
