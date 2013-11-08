@@ -175,9 +175,7 @@ int main(int argc, char** argv)
         if (!paper) paper = defaultpapername();
 	if (!paper) {
 	    char *errmsg;
-
-	    if (asprintf(&errmsg, "%s: cannot get paper size from %s",
-                         program_name, systempapersizefile()) == -1)
+	    if (asprintf(&errmsg, "%s: cannot get system paper size", program_name) == -1)
               errmsg = (char *)"ERROR CONSTRUCTING ERROR MESSAGE";
 
 	    if (errno) {

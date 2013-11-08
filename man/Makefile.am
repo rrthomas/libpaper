@@ -1,6 +1,5 @@
 raw_MANS = \
 	defaultpapername.3 \
-	defaultpapersizefile.3 \
 	paperdone.3 \
 	paperfirst.3 \
 	paperinfo.3 \
@@ -9,8 +8,7 @@ raw_MANS = \
 	paperpsheight.3 \
 	paperpsname.3 \
 	paperpswidth.3 \
-	paperwithsize.3 \
-	systempapersizefile.3
+	paperwithsize.3
 
 man_MANS = \
 	$(raw_MANS) \

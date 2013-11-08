@@ -191,13 +191,9 @@ _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
     return hash_get_next(papers, spaper);
 }
 
-_GL_ATTRIBUTE_CONST const char* defaultpapersizefile(void) {
-    return PAPERCONF;
-}
-
-const char* systempapersizefile(void) {
+static const char* systempapersizefile(void) {
     const char* paperconf = getenv(PAPERCONFVAR);
-    return paperconf ? paperconf : defaultpapersizefile();
+    return paperconf ? paperconf : PAPERCONF;
 }
 
 const char* defaultpapername(void) {
@@ -221,7 +217,7 @@ const char* defaultpapername(void) {
     return PAPERSIZE;
 }
 
-char* systempapername(void) {
+const char* systempapername(void) {
     char* paperstr = NULL;
     const struct paper* pp;
     char *paperenv = getenv(PAPERSIZEVAR);
@@ -230,23 +226,22 @@ char* systempapername(void) {
         paperstr = strdup(paperenv);
     else {
         struct stat statbuf;
-        FILE* ps;
         const char *paperconf = systempapersizefile();
+        if (paperconf && stat(paperconf, &statbuf) == 0) {
+            FILE* ps;
+            if ((ps = fopen(paperconf, "r"))) {
+                char *l = gettokline(ps), *saveptr;
 
-        if (paperconf && stat(paperconf, &statbuf) == -1) return 0;
+                if (l)
+                    paperstr = gettok(l, &saveptr);
 
-        if (!paperconf) paperconf = defaultpapersizefile();
+                free(l);
+                fclose(ps);
+            }
+        }
 
-        if ((ps = fopen(paperconf, "r"))) {
-            char *l = gettokline(ps), *saveptr;
-
-            if (l)
-                paperstr = gettok(l, &saveptr);
-
-            free(l);
-            fclose(ps);
-        } else
-            paperstr = strdup(defaultpapername());
+        if (!paperstr)
+            paperstr = strdup(PAPERSIZE);
     }
 
     if (paperstr && (pp = paperinfo(paperstr)))
