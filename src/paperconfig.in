@@ -31,9 +31,6 @@ EOF
     fi
 }
 
-# "|| true" added below, to assure that the script does not fail even if
-# called with bash -e. (MP 22/08/98)
-
 unset @PAPERSIZEVAR@ || true
 : ${@PAPERCONFVAR@:=@PAPERCONF@}
 export @PAPERCONFVAR@
@@ -104,9 +101,6 @@ format() {
     unset _maxwidth _cline _start
 }
 
-# "chmod 644" added below, to assure that the conf file is created
-# with the right access permissions (MP 13/05/2000)
-
 setpaper() {
     paperright=`paperconf "$1" 2>/dev/null`
 
@@ -128,10 +122,6 @@ setpaper() {
 	echo `basename $0`: cannot create $@PAPERCONFVAR@
 	exit 2
     else
-	#
-	# Added code for calling back applications when
-	# papersize changes. See bug #345466
-	# eppesuig@debian.org, 2006-01-05
 	if [ -d ${@RUNPARTSDIRVAR@} ]
 	then
 	    run-parts ${@RUNPARTSDIRVAR@}
@@ -154,9 +144,6 @@ knownpapers="`paperconf -a`"
 
 prompt=
 width=72
-
-# "|| true" added below, to assure that the script does not fail even if
-# called with bash -e. (MP 22/08/98)
 
 paper=`paperconf 2>/dev/null || true`
 dftpaper=`paperconf -d`
