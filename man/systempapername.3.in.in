@@ -2,7 +2,7 @@
 .SH NAME
 systempapername, defaultpapername \- return names for managing system paper
 information
-.SH SYNOPSYS
+.SH SYNOPSIS
 .nf
 .B #include <paper.h>
 .sp

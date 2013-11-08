@@ -2,7 +2,7 @@
 .SH NAME
 .B papersize
 \- specify preferred paper size
-.SH SYNOPSYS
+.SH SYNOPSIS
 .B @PAPERCONF@
 .SH DESCRIPTION
 The
