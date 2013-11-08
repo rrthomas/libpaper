@@ -76,6 +76,10 @@ PAPERCONF="${sysconfdir}/papersize"
 AC_SUBST(PAPERCONF)
 AH_TEMPLATE(PAPERCONF, [Default configuration file location])
 
+PAPERSPECS="${sysconfdir}/paperspecs"
+AC_SUBST(PAPERSPECS)
+AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
+
 PAPERCONFVAR=PAPERCONF
 AC_SUBST(PAPERCONFVAR)
 AC_DEFINE_UNQUOTED([PAPERCONFVAR], "$PAPERCONFVAR", [Environment variable that overrides the default configuration file location])

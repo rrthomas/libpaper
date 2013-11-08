@@ -42,9 +42,7 @@ const struct paper* paperinfo(const char*);
 const struct paper* paperwithsize(double pswidth, double psheight);
 
 const struct paper* paperfirst(void);
-const struct paper* paperlast(void);
 const struct paper* papernext(const struct paper*);
-const struct paper* paperprev(const struct paper*);
 
 #ifdef __cplusplus
 }

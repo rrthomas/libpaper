@@ -5,9 +5,7 @@ raw_MANS = \
 	paperfirst.3 \
 	paperinfo.3 \
 	paperinit.3 \
-	paperlast.3 \
 	papernext.3 \
-	paperprev.3 \
 	paperpsheight.3 \
 	paperpsname.3 \
 	paperpswidth.3 \

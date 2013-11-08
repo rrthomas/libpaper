@@ -1,6 +1,6 @@
 .TH PAPERINFO 3 "24 September 1996"
 .SH NAME
-paperinfo, paperwithsize, paperfirst, paperlast, papernext, paperprev
+paperinfo, paperwithsize, paperfirst, papernext
 \- return informations about a paper
 .SH SYNOPSYS
 .nf
@@ -15,8 +15,6 @@ paperinfo, paperwithsize, paperfirst, paperlast, papernext, paperprev
 .sp
 .B "const struct paper* paperfirst(void)"
 .B "const struct paper* papernext(const struct paper* pinfo)"
-.B "const struct paper* paperprev(const struct paper* pinfo)"
-.B "const struct paper* paperlast(void)"
 .fi
 .SH DESCRIPTION
 .B paperinfo()
@@ -47,15 +45,11 @@ opaque struct paper object
 .
 .PP
 .B paperfirst()
-and
-.B paperlast()
-return the first and last entries for papers.
+returns the first paper.
 Iteration from one entry to the next or the previous one can be done
 with
 .B papernext()
-and
-.B paperprev()
-respectively.
+.
 .SH SEE ALSO
 .BR paperinit (3),
 .BR paperdone (3)

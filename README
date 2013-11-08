@@ -12,15 +12,10 @@ library.
 Adding new paper sizes
 ======================
 
-If a paper format is missing, one need to add it to lib/paperspecs.  The
-format of this file is one paper format per line, with the name of the
-format, the width and height of the format separated with space.  You
-may add an option measurement unit among in, ft, pt, m, dm, cm, mm or you
-may leave the default unit of "point".  By defaults the width and height
-are specified in the "point" unit, which is 1/72 inch (2.54 cm).  This
-is the A4 entry:
-
-  a4 210 297 mm
+New paper formats can be added to /etc/paperspecs (or equivalent if
+you have installed libpaper elsewhere). See that file for more
+details.
 
 Copyright (C) Yves Arrouye <yves@debian.org>, 1996
-              Adrian Bunk  <bunk@fs.tum.de> , 2000
+              Adrian Bunk  <bunk@fs.tum.de>,  2000
+              Reuben Thomas <rrt@sc3d.org>,   2013

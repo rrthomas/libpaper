@@ -1,21 +1,14 @@
-a4 210 297 mm
-letter 612 792
-note 612 792
-legal 612 1008
-executive 522 756
-halfletter 396 612
-halfexecutive 378 522
-11x17 792 1224
-statement 396 612
-folio 612 936
-quarto 610 780
-10x14 720 1008
-ledger 1224 792
-tabloid 792 1224
+# libpaper paper specifications
+# The format of this file is one paper specification per line.
+# Each line has the format: NAME WIDTH HEIGHT [UNIT]
+# Valid units are: in, ft, m, dm, cm, mm, pt (pt is the default).
+# The original paper names came from Ghostscript 3.68's gs_stadt.ps
+
 a0 841 1189 mm
 a1 594 841 mm
 a2 420 594 mm
 a3 297 420 mm
+a4 210 297 mm
 a5 148 210 mm
 a6 105 148 mm
 a7 74 105 mm
@@ -52,6 +45,19 @@ jisb8 64 91 mm
 jisb9 45 64 mm
 jisb10 32 45 mm
 b5var 182 230 mm
+letter 612 792
+note 612 792
+legal 612 1008
+executive 522 756
+halfletter 396 612
+halfexecutive 378 522
+11x17 792 1224
+statement 396 612
+folio 612 936
+quarto 610 780
+10x14 720 1008
+ledger 1224 792
+tabloid 792 1224
 DL 110 220 mm
 Comm10 297 684
 Monarch 279 540
