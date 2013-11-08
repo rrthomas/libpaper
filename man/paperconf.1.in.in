@@ -13,9 +13,9 @@ When called without arguments,
 .B paperconf
 prints the name of the system- or user-specified paper, obtained by
 looking in order at the
-.B @PAPERSIZEVAR@
+.B PAPERSIZE
 environment variable, at the contents of the file specified by the
-.B @PAPERCONFVAR@
+.B PAPERCONF
 environment variable, at the contents of
 .B @PAPERCONF@
 , consulting the values controlled by the

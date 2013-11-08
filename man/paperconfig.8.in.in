@@ -43,10 +43,10 @@ is valid.
 Full path to a file containing the system paper size.
 .SH FILES
 .TP 20
-.B @PAPERCONF@
+.B PAPERCONF
 Contains the name of the system-wide default paper size to be used
 if the
-.B @PAPERSIZEVAR@
+.B PAPERSIZE
 variable is not set.
 .TP 20
 .B @RUNPARTSDIR@

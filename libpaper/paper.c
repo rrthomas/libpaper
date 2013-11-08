@@ -192,7 +192,7 @@ _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
 }
 
 static const char* systempapersizefile(void) {
-    const char* paperconf = getenv(PAPERCONFVAR);
+    const char* paperconf = getenv("PAPERCONF");
     return paperconf ? paperconf : PAPERCONF;
 }
 
@@ -220,7 +220,7 @@ const char* defaultpapername(void) {
 const char* systempapername(void) {
     char* paperstr = NULL;
     const struct paper* pp;
-    char *paperenv = getenv(PAPERSIZEVAR);
+    char *paperenv = getenv("PAPERSIZE");
 
     if (paperenv)
         paperstr = strdup(paperenv);

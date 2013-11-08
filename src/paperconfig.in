@@ -31,13 +31,13 @@ EOF
     fi
 }
 
-unset @PAPERSIZEVAR@ || true
-: ${@PAPERCONFVAR@:=@PAPERCONF@}
-export @PAPERCONFVAR@
+unset PAPERCONF || true
+: ${PAPERCONF:=@PAPERCONF@}
+export PAPERCONF
 
-unset @RUNPARTSDIRVAR@ || true
-: ${@RUNPARTSDIRVAR@:=@RUNPARTSDIR@}
-export @RUNPARTSDIRVAR@
+unset PAPERDIR || true
+: ${PAPERDIR:=@RUNPARTSDIR@}
+export PAPERDIR
 
 force=0
 
@@ -106,11 +106,11 @@ setpaper() {
 
     ok=0
 
-    if 2>/dev/null echo "$paperright" >${@PAPERCONFVAR@}.new
+    if 2>/dev/null echo "$paperright" >${PAPERCONF}.new
     then
-	if 2>/dev/null mv -f ${@PAPERCONFVAR@}.new $@PAPERCONFVAR@
+	if 2>/dev/null mv -f ${PAPERCONF}.new $PAPERCONF
 	then
-	    if 2>/dev/null chmod 644 $@PAPERCONFVAR@
+	    if 2>/dev/null chmod 644 $PAPERCONF
 	    then
 		ok=1
 	    fi
@@ -119,12 +119,12 @@ setpaper() {
 
     if [ $ok -eq 0 ]
     then
-	echo `basename $0`: cannot create $@PAPERCONFVAR@
+	echo `basename $0`: cannot create $PAPERCONF
 	exit 2
     else
-	if [ -d ${@RUNPARTSDIRVAR@} ]
+	if [ -d $PAPERDIR ]
 	then
-	    run-parts ${@RUNPARTSDIRVAR@}
+	    run-parts $PAPERDIR
 	fi
     fi
 }
@@ -148,7 +148,7 @@ width=72
 paper=`paperconf 2>/dev/null || true`
 dftpaper=`paperconf -d`
 
-if [ $force -eq 1 ] || [ ! -e $@PAPERCONFVAR@ ] || invalidpaper $paper
+if [ $force -eq 1 ] || [ ! -e $PAPERCONF ] || invalidpaper $paper
 then
     papers="`format $width \"\" $knownpapers`"
     echo
@@ -205,7 +205,7 @@ do
     paper=$ans
 done
 
-if [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[#	]" $@PAPERCONFVAR@
+if [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[#	]" $PAPERCONF
 then
     setpaper "$paper"
 fi
