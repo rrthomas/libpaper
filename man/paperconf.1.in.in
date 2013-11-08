@@ -20,7 +20,7 @@ environment variable, at the contents of
 .B @PAPERCONF@
 , consulting the values controlled by the
 .B LC_PAPER
-locale setting, or by using
+locale setting (if supported by the system), or by using
 .B @PAPERSIZE@
 as a fall-back value if none of the other alternatives are successful.
 By default, width and height of the paper are printed in PostScript points.
