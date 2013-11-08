@@ -4,6 +4,7 @@
 #
 # Copyright (C) 1996, Yves Arrouye <arrouye@debian.org>
 #               2001, Adrian Bunk  <bunk@fs.tum.de>
+#               2013, Reuben Thomas <rrt@sc3d.org>
 
 usage() {
     if [ "$1" = -h ]
@@ -14,7 +15,7 @@ usage() {
 	echo -n u
     fi
 
-    echo "sage: `basename $0` [ -v, --version ] [ -h, --help ] [ -p, --paper name | --force ]"
+    echo "sage: `basename $0` [--version|--help|--paper NAME|--force]"
 
     if [ "$1" = -h ]
     then
@@ -22,7 +23,7 @@ usage() {
 
 Options: -v, --verbose          print version information and exit
 	 -h, --help             print this help and exit
-	 -p, --paper name	specify the paper to use
+	 -p, --paper NAME	specify the paper to use
 	 --force                force paper configuration
 EOF
 	exit 0
@@ -50,7 +51,7 @@ while [ $# -ne 0 ]
 do
     case "$1" in
 	-v|--version)
-	    echo "`basename $0` version 1.0" \
+	    echo "`basename $0` version 1.1" \
 		"by Yves Arrouye <arrouye@debian.org>"
 	    exit 0
 	    ;;
