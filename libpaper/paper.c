@@ -28,7 +28,29 @@
 #include "hash.h"
 
 #include "paper.h"
-#include "dimen.h"
+
+static struct {
+    const char* name;
+    float factor;
+} units[] = {
+    { "in",	1. },
+    { "ft",	12. },
+    { "pt",	1. / 72. },
+    { "m",	100. / 2.54 },
+    { "dm",	10. / 2.54 },
+    { "cm",	1. / 2.54 },
+    { "mm",	.1 / 2.54 },
+    { 0 }
+};
+
+static _GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
+{
+    for (int i = 0; units[i].name; ++i)
+	if (!strcasecmp(units[i].name, unit))
+	    return units[i].factor;
+
+    return 0;
+}
 
 /* Return a line that contains non-blank non-comment characters.
    A comment is any line whose first non-blank is a hash */
