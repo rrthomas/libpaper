@@ -1,0 +1,101 @@
+.TH LIBPAPER 3 "8 November 2013"
+.SH NAME
+libpaper \- query and set system paper size, and get information on paper sizes
+.SH SYNOPSIS
+.nf
+.B #include <paper.h>
+.sp
+.B "int paperinit(void)"
+.B "int paperdone(void)"
+.sp
+.B "const char* systempapername(void)"
+.B "const char* defaultpapername(void)"
+.sp
+.B "const struct paper *paperinfo(const char *papername)"
+.B "const struct paper *paperwithsize(double psw, double psh)"
+.sp
+.B "char *papername(const struct paper *)"
+.B "double paperpswidth(const struct paper *)"
+.B "double paperpsheight(const struct paper *)"
+.sp
+.B "const struct paper *paperfirst(void)"
+.B "const struct paper *papernext(const struct paper *pinfo)"
+.fi
+.SH DESCRIPTION
+.B paperinit()
+initializes the paper library, allocating any resources that are
+necessary for its use.
+This function must be called before any other function of the paper
+library is used.
+The function returns zero on success, and non-zero on error.
+.PP
+.B paperdone()
+frees any resources that were allocated for the paper library.
+No function of the library should be called after a call to this
+function.
+The function returns zero on success, and non-zero on error.
+.PP
+.B systempapername()
+returns the name of the default paper to be used by a program.
+This name is obtained from the
+.B @PAPERCONFVAR@
+environment variable, or if that is not set, from
+.B @PAPERSPECS@
+or if that cannot be read, to the return value of
+.B defaultpapername()
+as a last chance.
+.PP
+.B defaultpapername()
+returns the name of the default paper to use if no paper size is
+configured. On systems that support it, it first tries to find the
+default paper of the configured locale; otherwise it defaults to the
+build-time configured value of
+.B @PAPERSIZE@
+.
+.PP
+.B paperinfo()
+returns a pointer to a
+.B struct paper
+containing informations about the paper with name
+.B papername
+.
+.B paperwithsize()
+looks for a paper whose width and height is
+.B psw
+and
+.B psh
+in PostScript points, and return a pointer to a
+.B struct paper
+corresponding to the paper found.
+.PP
+.B papername()
+returns the name of a paper described by an opaque struct paper object
+.
+.B paperpswidth()
+returns the width, in PostScript points, of a paper described by an
+opaque struct paper object
+.
+.B paperpsheight()
+returns the height, in PostScript points, of a paper described by an
+opaque struct paper object
+.
+.PP
+.B paperfirst()
+returns the first paper.
+Iteration from one entry to the next can be done
+with
+.B papernext()
+.
+.SH ENVIRONMENT
+.TP 20
+.B @PAPERSIZEVAR@
+Paper size to use regardless of what the papersize file contains.
+.TP 20
+.B @PAPERCONFVAR@
+Full path to a file containing the paper size to use.
+.SH FILES
+.TP 20
+.B @PAPERCONF@
+Contains the name of the system-wide default paper size to be used.
+.SH SEE ALSO
+.BR papersize (5)

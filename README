@@ -6,8 +6,7 @@ It offers really basic functions (obtaining the system paper name and
 getting the height and width of a given kind of paper) that
 applications can immediately integrate.
 
-See the sources for paperconf(1) in src/paperconf.c for how to use the
-library.
+See the libpaper(3) for how to use the library.
 
 Adding new paper sizes
 ======================

@@ -1,27 +1,13 @@
-raw_MANS = \
-	defaultpapername.3 \
-	paperdone.3 \
-	paperfirst.3 \
-	paperinfo.3 \
-	paperinit.3 \
-	papernext.3 \
-	paperpsheight.3 \
-	paperpsname.3 \
-	paperpswidth.3 \
-	paperwithsize.3
-
-generated_MANS = \
+man_MANS = \
 	paperconf.1 \
-	systempapername.3 \
+	libpaper.3 \
 	papersize.5 \
 	paperconfig.8
 
-man_MANS = $(raw_MANS) $(generated_MANS)
-
 EXTRA_DIST = \
-	$(raw_MANS) \
+	$(man_MANS) \
 	paperconf.1.in.in \
-	systempapername.3.in.in \
+	libpaper.3.in.in \
 	papersize.5.in.in \
 	paperconfig.8.in.in
 
@@ -32,7 +18,7 @@ edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
 paperconf.1: $(builddir)/paperconf.1.in
 	$(edit) $(builddir)/$@.in >$@
 
-systempapername.3: $(builddir)/systempapername.3.in
+libpaper.3: $(builddir)/libpaper.3.in
 	$(edit) $(builddir)/$@.in >$@
 
 papersize.5: $(builddir)/papersize.5.in
