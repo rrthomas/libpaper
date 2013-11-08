@@ -109,8 +109,8 @@ AC_OUTPUT([
 	src/Makefile
 	src/paperconfig
 	man/Makefile
-	man/paperconf.1
-	man/paperconfig.8
+	man/paperconf.1.in
+	man/paperconfig.8.in
 	man/papersize.5.in
-	man/systempapername.3
+	man/systempapername.3.in
 ])

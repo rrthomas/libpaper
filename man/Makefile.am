@@ -10,24 +10,36 @@ raw_MANS = \
 	paperpswidth.3 \
 	paperwithsize.3
 
-man_MANS = \
-	$(raw_MANS) \
+generated_MANS = \
 	paperconf.1 \
 	systempapername.3 \
 	papersize.5 \
 	paperconfig.8
 
+man_MANS = $(raw_MANS) $(generated_MANS)
+
 EXTRA_DIST = \
 	$(raw_MANS) \
-	paperconf.1.in \
-	systempapername.3.in \
+	paperconf.1.in.in \
+	systempapername.3.in.in \
 	papersize.5.in.in \
-	paperconfig.8.in
+	paperconfig.8.in.in
 
-DISTCLEANFILES = papersize.5
+DISTCLEANFILES = $(generated_MANS)
+
+edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
+
+paperconf.1: $(builddir)/paperconf.1.in
+	$(edit) $(builddir)/$@.in >$@
+
+systempapername.3: $(builddir)/systempapername.3.in
+	$(edit) $(builddir)/$@.in >$@
 
 papersize.5: $(builddir)/papersize.5.in
 	rm -f $@ $@.tmp
-	paperspecs="`cut -d ' ' -f 1 < $(top_srcdir)/libpaper/paperspecs | tr '\n' ' ' | sed -e 's/ /, /g;s/, $$//'`" && \
-		sed -e "s|@paperspecs[@]|$$paperspecs|g" $(builddir)/$@.in >$@.tmp
+	paperspecslist="`cut -d ' ' -f 1 < $(top_srcdir)/libpaper/paperspecs | tr '\n' ' ' | sed -e 's/ /, /g;s/, $$//'`" && \
+		sed -e "s|@paperspecslist[@]|$$paperspecslist|g" $(builddir)/$@.in >$@.tmp
 	mv $@.tmp $@
+
+paperconfig.8: $(builddir)/paperconfig.8.in
+	$(edit) $(builddir)/$@.in >$@

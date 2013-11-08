@@ -17,7 +17,7 @@ string found; the case in the name of the paper does not import (see
 section however).
 .SH "PAPER NAMES"
 The following names are understood by the version of libpaper installed on this system:
-@paperspecs@
+@paperspecslist@
 .PP
 The value of the
 .B papersize
