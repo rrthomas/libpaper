@@ -79,5 +79,3 @@ Absolute path to a file containing the paper size to use.
 The system-wide default paper size.
 .SH AUTHOR
 Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
-.SH SEE ALSO
-papersize(5)

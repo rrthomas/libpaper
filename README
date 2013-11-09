@@ -9,15 +9,10 @@ It offers a command-line tool and simple C library that applications
 of all sorts can easily use, and an administrative tool to change the
 system default paper size, and inform other interested packages.
 
-See libpaper(3) for how to use the library.
+See paperconf(1) for information on command-line tool, libpaper(3) for
+how to use the library, and paperspecs(5) for how to configure the
+paper sizes.
 
-
-Changing and adding paper sizes
-===============================
-
-New paper sizes can be added to /etc/paperspecs (or equivalent if
-you have installed libpaper elsewhere). See that file for more
-details.
 
 Copyright (C) Yves Arrouye <yves@debian.org>, 1996
               Adrian Bunk  <bunk@fs.tum.de>,  2000

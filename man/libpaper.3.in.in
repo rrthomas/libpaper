@@ -71,4 +71,4 @@ Iteration from one entry to the next can be done
 with
 .BR papernext() .
 .SH SEE ALSO
-paperconf(1), papersize(5)
+paperconf(1)

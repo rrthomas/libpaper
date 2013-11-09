@@ -51,4 +51,4 @@ naming requirements.
 .SH AUTHOR
 Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
-paperconf(1), papersize(5)
+paperconf(1)
