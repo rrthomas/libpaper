@@ -93,16 +93,14 @@ int main(int argc, char** argv)
     while ((c = getopt(argc, argv, "aznNswhcmip:")) != EOF) {
 	switch (c) {
 	    case 'a':
-		if (paper || all) {
+		if (paper)
 		    usage(program_name);
-		}
 		all = 1;
 		break;
 
 	    case 'p':
-		if (paper || all) {
+		if (paper || all)
 		    usage(program_name);
-		}
 		paper = optarg;
 		break;
 
