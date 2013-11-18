@@ -11,6 +11,7 @@
 #include <paper.h>
 
 #include "progname.h"
+#include "relocatable.h"
 #include "xvasprintf.h"
 
 static void usage(const char* name)

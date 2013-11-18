@@ -11,7 +11,6 @@
 
 #include <assert.h>
 #include <sys/stat.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,13 +18,13 @@
 #include <ctype.h>
 #include <unistd.h>
 #include <errno.h>
-
 #include <locale.h>
 #if defined LC_PAPER  && defined _GNU_SOURCE
 #include <langinfo.h>
 #endif
 
 #include "hash.h"
+#include "relocatable.h"
 
 #include "paper.h"
 
@@ -117,7 +116,7 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
     papers = hash_initialize(256, NULL, paperhash, papereq, paperfree);
 
     FILE *ps;
-    if ((ps = fopen(PAPERSPECS, "r"))) {
+    if ((ps = fopen(relocate(PAPERSPECS), "r"))) {
         for (char *l = NULL; ret == 0 && (l = gettokline(ps));) {
             char *saveptr;
             char *name = gettok(l, &saveptr);
@@ -193,7 +192,7 @@ _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
 
 static const char* systempapersizefile(void) {
     const char* paperconf = getenv("PAPERCONF");
-    return paperconf ? paperconf : PAPERCONF;
+    return paperconf ? paperconf : relocate(PAPERCONF);
 }
 
 static const char* localepapername(void) {

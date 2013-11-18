@@ -88,6 +88,9 @@ RUNPARTSDIR="${sysconfdir}/libpaper.d"
 AC_SUBST(RUNPARTSDIR)
 AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])
 
+RELOCATABLE_LIBRARY_PATH='$(libdir)'
+AC_SUBST(RELOCATABLE_LIBRARY_PATH)
+
 dnl Create files
 AC_CONFIG_HEADER([config.h])
 AC_OUTPUT([

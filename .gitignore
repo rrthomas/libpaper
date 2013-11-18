@@ -23,6 +23,7 @@ Makefile.in
 /config.sub
 /configure
 /depcomp
+/doc
 /gnulib
 /install-sh
 /lib

@@ -6,6 +6,24 @@
 #               2001, Adrian Bunk  <bunk@fs.tum.de>
 #               2013, Reuben Thomas <rrt@sc3d.org>
 
+@relocatable_sh@
+if test "@RELOCATABLE@" = yes; then
+    exec_prefix="@exec_prefix@"
+    bindir="@bindir@"
+    orig_installdir="$sbindir" # see Makefile.am's *_SCRIPTS variables
+    func_find_curr_installdir # determine curr_installdir
+    func_find_prefixes
+    # Relocate the directory variables that we use.
+    PAPERCONF=`
+        echo "@PAPERCONF@/" \
+        | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
+        | sed -e 's,/$,,'`
+    PAPERDIR=`
+        echo "@PAPERDIR@/" \
+        | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
+        | sed -e 's,/$,,'`
+fi
+
 usage() {
     if [ "$1" = -h ]
     then
@@ -31,14 +49,6 @@ EOF
 	exit 1
     fi
 }
-
-unset PAPERCONF || true
-: ${PAPERCONF:=@PAPERCONF@}
-export PAPERCONF
-
-unset PAPERDIR || true
-: ${PAPERDIR:=@RUNPARTSDIR@}
-export PAPERDIR
 
 force=0
 
