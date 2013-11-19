@@ -1,9 +1,4 @@
 # libpaper paper specifications
-# The format of this file is one paper specification per line.
-# Each line has the format: NAME WIDTH HEIGHT [UNIT]
-# Valid units are: in, ft, m, dm, cm, mm, pt (pt is the default).
-# The original paper names came from Ghostscript 3.68's gs_stadt.ps
-
 a0 841 1189 mm
 a1 594 841 mm
 a2 420 594 mm
