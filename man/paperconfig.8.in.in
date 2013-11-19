@@ -1,5 +1,5 @@
 .\" paperconfig.8, Copyright (C) 1996, Yves Arrouye <arrouye@debian.org>
-.TH PAPERCONFIG 8 "8 November 2013" "Debian/Linux" "Linux Administrator's Manual"
+.TH PAPERCONFIG 8 "8 November 2013"
 .SH NAME
 .B paperconfig
 \- configure the system default paper size
