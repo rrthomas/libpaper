@@ -3,7 +3,7 @@
 .B paperconf
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperconf\fR [[\fB\-p\fR] \fIpaper\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR|\fB\-N\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-c\fR|\fB\-m\fR|\fB\-i\fR]
+\fBpaperconf\fR [[\fB\-p\fR] \fIPAPER\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR|\fB\-N\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR]
 .SH DESCRIPTION
 .B paperconf
 prints information about a given paper size, which can include the
@@ -54,14 +54,10 @@ Print the width of the paper.
 .B \-h
 Print the height of the paper.
 .TP
-.B \-c
-Use centimetres as unit for paper size.
-.TP
-.B \-m
-Use millimetres as unit for paper size.
-.TP
-.B \-i
-Use inches as unit for paper size.
+.B \-u " UNIT"
+Specify the units in which to print dimensions.
+See paperspecs(5) for a list of valid units.
+By default, dimensions are printed in PostScript points.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B PAPERSIZE
@@ -75,3 +71,5 @@ Absolute path to a file containing the paper size to use.
 The system-wide default paper size.
 .SH AUTHOR
 Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
+.SH SEE ALSO
+paperspecs(5)
