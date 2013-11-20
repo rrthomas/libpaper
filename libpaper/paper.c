@@ -45,8 +45,8 @@ static struct {
 static _GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
 {
     for (int i = 0; units[i].name; ++i)
-	if (!strcasecmp(units[i].name, unit))
-	    return units[i].factor;
+        if (!strcasecmp(units[i].name, unit))
+            return units[i].factor;
 
     return 0;
 }
@@ -207,8 +207,8 @@ static const char* localepapername(void) {
     unsigned int w = NL_PAPER_GET(_NL_PAPER_WIDTH);
     unsigned int h = NL_PAPER_GET(_NL_PAPER_HEIGHT);
     for (pp = paperfirst(); pp; pp = papernext(pp))
-	if (PT_TO_MM(pp->pswidth) == w && PT_TO_MM(pp->psheight) == h)
-	    return pp->name;
+        if (PT_TO_MM(pp->pswidth) == w && PT_TO_MM(pp->psheight) == h)
+            return pp->name;
 #endif
 
     return NULL;
@@ -262,8 +262,8 @@ _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double pshe
     const struct paper* pp;
 
     for (pp = paperfirst(); pp; pp = papernext(pp))
-	if (pp->pswidth == pswidth && pp->psheight == psheight)
-	    return pp;
+        if (pp->pswidth == pswidth && pp->psheight == psheight)
+            return pp;
 
     return NULL;
 }
