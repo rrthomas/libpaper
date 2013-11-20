@@ -6,10 +6,8 @@
 \fBpaperconf\fR [[\fB\-p\fR] \fIpaper\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR|\fB\-N\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-c\fR|\fB\-m\fR|\fB\-i\fR]
 .SH DESCRIPTION
 .B paperconf
-prints information about a given paper size.
-The information that can be obtained is the name of the paper, its
-size and its width or height.
-By default, dimensions are printed in PostScript points.
+prints information about a given paper size, which can include the
+standard form of its name, and its width and/or height.
 .PP
 When called without arguments, \fBpaperconf\fR prints the name of the
 current paper size.
@@ -28,10 +26,8 @@ The \fBLC_PAPER\fR environment variable (if supported by the system)
 The built-in default value \fB@PAPERSIZE@\fR
 .SH OPTIONS
 .TP
-.BI \-p " paper"
-Specify the name of the
-.I paper
-about which information is asked.
+.BI \-p " PAPER"
+The name of the \fIPAPER\fR to give information about.
 .TP
 .B \-d
 Use the default builtin paper name.
