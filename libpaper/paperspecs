@@ -1,68 +1,68 @@
 # libpaper paper specifications, commonest first
-a4 210 297 mm
-letter 612 792
-note 612 792
-legal 612 1008
-executive 522 756
-a5 148 210 mm
-halfletter 396 612
-halfexecutive 378 522
-a0 841 1189 mm
-a1 594 841 mm
-a2 420 594 mm
-a3 297 420 mm
-a6 105 148 mm
-a7 74 105 mm
-a8 52 74 mm
-a9 37 52 mm
-a10 26 37 mm
-b0 1000 1414 mm
-b1 707 1000 mm
-b2 500 707 mm
-b3 353 500 mm
-b4 250 353 mm
-b5 176 250 mm
-b6 125 176 mm
-b7 88 125 mm
-b8 62 88 mm
-b9 44 62 mm
-b10 31 44 mm
-c2 458 648 mm
-c3 324 458 mm
-c4 229 354 mm
-c5 162 229 mm
-c6 114 162 mm
-c7 81 114 mm
-c8 57 81 mm
-jisb0 1030 1456 mm
-jisb1 728 1030 mm
-jisb2 515 728 mm
-jisb3 364 515 mm
-jisb4 257 364 mm
-jisb5 182 257 mm
-jisb6 128 182 mm
-jisb7 91 128 mm
-jisb8 64 91 mm
-jisb9 45 64 mm
-jisb10 32 45 mm
-b5var 182 230 mm
+A4 210 297 mm
+Letter 612 792
+Note 612 792
+Legal 612 1008
+Executive 522 756
+A5 148 210 mm
+HalfLetter 396 612
+HalfExecutive 378 522
+A0 841 1189 mm
+A1 594 841 mm
+A2 420 594 mm
+A3 297 420 mm
+A6 105 148 mm
+A7 74 105 mm
+A8 52 74 mm
+A9 37 52 mm
+A10 26 37 mm
+B0 1000 1414 mm
+B1 707 1000 mm
+B2 500 707 mm
+B3 353 500 mm
+B4 250 353 mm
+B5 176 250 mm
+B6 125 176 mm
+B7 88 125 mm
+B8 62 88 mm
+B9 44 62 mm
+B10 31 44 mm
+C2 458 648 mm
+C3 324 458 mm
+C4 229 354 mm
+C5 162 229 mm
+C6 114 162 mm
+C7 81 114 mm
+C8 57 81 mm
+JISB0 1030 1456 mm
+JISB1 728 1030 mm
+JISB2 515 728 mm
+JISB3 364 515 mm
+JISB4 257 364 mm
+JISB5 182 257 mm
+JISB6 128 182 mm
+JISB7 91 128 mm
+JISB8 64 91 mm
+JISB9 45 64 mm
+JISB10 32 45 mm
+B5var 182 230 mm
 11x17 792 1224
-statement 396 612
-folio 612 936
-quarto 610 780
+Statement 396 612
+Folio 612 936
+Quarto 610 780
 10x14 720 1008
-ledger 1224 792
-tabloid 792 1224
+Ledger 1224 792
+Tabloid 792 1224
 DL 110 220 mm
 Comm10 297 684
 Monarch 279 540
-archE 2592 3456
-archD 1728 2592
-archC 1296 1728
-archB 864 1296
+ArchE 2592 3456
+ArchD 1728 2592
+ArchC 1296 1728
+ArchB 864 1296
 archA 648 864
-flsa 612 936
-flse 612 936
-csheet 1224 1584
-dsheet 1584 2448
-esheet 2448 3168
+FLSA 612 936
+FLSE 612 936
+CSheet 1224 1584
+DSheet 1584 2448
+ESheet 2448 3168

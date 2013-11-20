@@ -3,7 +3,7 @@
 .B paperconf
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperconf\fR [[\fB\-p\fR] \fIPAPER\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR|\fB\-N\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR]
+\fBpaperconf\fR [[\fB\-p\fR] \fIPAPER\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-z\fR] [\fB\-n\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR]
 .SH DESCRIPTION
 .B paperconf
 prints information about a given paper size, which can include the
@@ -41,9 +41,6 @@ standard error and exit with a non-zero code.
 .TP
 .B \-n
 Print the name of the paper.
-.TP
-.B \-N
-Print the name of the paper with the first letter capitalized.
 .TP
 .B \-s
 Print the size (width followed by height) of the paper.

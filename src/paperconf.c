@@ -1,6 +1,5 @@
 #include <config.h>
 
-#include <ctype.h>
 #include <locale.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -14,17 +13,16 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-	"Usage: %s [[-p] PAPERNAME|-a] [-z] [-n|-N] [-s|-w|-h] [-u UNIT]\n",
+	"Usage: %s [[-p] PAPERNAME|-a] [-z] [-n] [-s|-w|-h] [-u UNIT]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
 
 #define OPT_NAME	1
-#define OPT_UPPERNAME	2
-#define OPT_WIDTH	4
-#define OPT_HEIGHT      8
-#define OPT_UNIT       16
-#define OPT_CONTINUE   32
+#define OPT_WIDTH	2
+#define OPT_HEIGHT      4
+#define OPT_UNIT        8
+#define OPT_CONTINUE   16
 
 static void printinfo(const struct paper* paper, int options, double dim, const char *unit)
 {
@@ -36,13 +34,6 @@ static void printinfo(const struct paper* paper, int options, double dim, const 
 
     if (options & OPT_NAME) {
 	printf("%s", papername(paper));
-	pr = 1;
-    } else if (options & OPT_UPPERNAME) {
-	if (islower(*papername(paper))) {
-	    printf("%c%s", toupper(*papername(paper)), papername(paper) + 1);
-	} else {
-	    printf("%s", papername(paper));
-	}
 	pr = 1;
     }
 
@@ -75,7 +66,7 @@ int main(int argc, char** argv)
     double dim = 1.0;
     int c, all = 0;
     unsigned options = 0;
-    while ((c = getopt(argc, argv, "aznNswhp:u:")) != EOF) {
+    while ((c = getopt(argc, argv, "aznswhp:u:")) != EOF) {
 	switch (c) {
 	    case 'a':
 		if (paper)
@@ -94,13 +85,7 @@ int main(int argc, char** argv)
 		break;
 
 	    case 'n':
-		if (options & OPT_UPPERNAME) usage(program_name);
 		options |= OPT_NAME;
-		break;
-
-	    case 'N':
-		if (options & OPT_NAME) usage(program_name);
-		options |= OPT_UPPERNAME;
 		break;
 
 	    case 's':
