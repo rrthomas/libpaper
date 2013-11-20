@@ -8,6 +8,8 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 dnl Check for standard build environment
 gl_EARLY
 AC_PROG_CC_C99
+AS_IF([test "$ac_cv_prog_cc_c99" = "no"],
+      [AC_MSG_ERROR([C99 compiler required!])])
 AM_PROG_CC_C_O
 AC_GNU_SOURCE
 AC_PROG_INSTALL
