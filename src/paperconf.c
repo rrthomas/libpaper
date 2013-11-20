@@ -13,7 +13,7 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-	"Usage: %s [[-p] PAPERNAME|-a] [-z] [-n] [-s|-w|-h] [-u UNIT]\n",
+	"Usage: %s [[-p] PAPERNAME|-a] [-n] [-s|-w|-h] [-u UNIT]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
@@ -22,15 +22,13 @@ static void usage(const char* name)
 #define OPT_WIDTH	2
 #define OPT_HEIGHT      4
 #define OPT_UNIT        8
-#define OPT_CONTINUE   16
 
 static void printinfo(const struct paper* paper, int options, double dim, const char *unit)
 {
     int pr = 0;
 
-    if ((options & ~(OPT_CONTINUE)) == 0) {
+    if (options == 0)
 	options = OPT_NAME;
-    }
 
     if (options & OPT_NAME) {
 	printf("%s", papername(paper));
@@ -66,7 +64,7 @@ int main(int argc, char** argv)
     double dim = 1.0;
     int c, all = 0;
     unsigned options = 0;
-    while ((c = getopt(argc, argv, "aznswhp:u:")) != EOF) {
+    while ((c = getopt(argc, argv, "answhp:u:")) != EOF) {
 	switch (c) {
 	    case 'a':
 		if (paper)
@@ -78,10 +76,6 @@ int main(int argc, char** argv)
 		if (paper || all)
 		    usage(program_name);
 		paper = optarg;
-		break;
-
-	    case 'z':
-		options |= OPT_CONTINUE;
 		break;
 
 	    case 'n':
@@ -131,12 +125,7 @@ int main(int argc, char** argv)
             printinfo(syspaper, options, dim, unit);
         } else {
 	    fprintf(stderr, "%s: unknown paper `%s'\n", program_name, paper);
-	    if (options & OPT_CONTINUE) {
-		puts(paper);
-	    }
-
 	    paperdone();
-
 	    exit(2);
         }
     }
