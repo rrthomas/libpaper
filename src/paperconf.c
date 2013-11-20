@@ -49,7 +49,6 @@ static void printinfo(const struct paper* paper, int options, double dim, const 
           printf("%g %s", paperpsheight(paper) / dim, unit );
 	else
           printf("%g", paperpsheight(paper) );
-	pr = 1;
     }
 
     putchar('\n');
