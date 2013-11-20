@@ -13,7 +13,7 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-	"Usage: %s [[-p] PAPERNAME|-a] [-n] [-s|-w|-h] [-u UNIT]\n",
+            "Usage: %s [[-p] PAPERNAME|-a] [-n] [-s|-w|-h] [-u UNIT]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
@@ -35,17 +35,17 @@ static void printinfo(const struct paper* paper, int options, double dim, const 
     if (options & OPT_WIDTH) {
 	if (pr) putchar(' ');
         if (options & OPT_UNIT)
-          printf("%g %s", paperpswidth(paper) / dim, unit );
+            printf("%g %s", paperpswidth(paper) / dim, unit);
 	else
-          printf("%g", paperpswidth(paper) );
+            printf("%g", paperpswidth(paper));
 	pr = 1;
     }
     if (options & OPT_HEIGHT) {
 	if (pr) putchar(' ');
         if (options & OPT_UNIT)
-          printf("%g %s", paperpsheight(paper) / dim, unit );
+            printf("%g %s", paperpsheight(paper) / dim, unit);
 	else
-          printf("%g", paperpsheight(paper) );
+            printf("%g", paperpsheight(paper));
     }
 
     putchar('\n');
@@ -62,51 +62,50 @@ int main(int argc, char** argv)
     unsigned options = 0;
     while ((c = getopt(argc, argv, "answhp:u:")) != EOF) {
 	switch (c) {
-	    case 'a':
-		if (paper)
-		    usage(program_name);
-		all = 1;
-		break;
+        case 'a':
+            if (paper)
+                usage(program_name);
+            all = 1;
+            break;
 
-	    case 'p':
-		if (paper || all)
-		    usage(program_name);
-		paper = optarg;
-		break;
+        case 'p':
+            if (paper || all)
+                usage(program_name);
+            paper = optarg;
+            break;
 
-	    case 'n':
-		options |= OPT_NAME;
-		break;
+        case 'n':
+            options |= OPT_NAME;
+            break;
 
-	    case 's':
-		options |= OPT_WIDTH | OPT_HEIGHT;
-		break;
+        case 's':
+            options |= OPT_WIDTH | OPT_HEIGHT;
+            break;
 
-	    case 'w':
-		options |= OPT_WIDTH;
-		break;
+        case 'w':
+            options |= OPT_WIDTH;
+            break;
 
-	    case 'h':
-		options |= OPT_HEIGHT;
-		break;
+        case 'h':
+            options |= OPT_HEIGHT;
+            break;
 
-	    case 'u':
-                options |= OPT_UNIT;
-                unit = optarg;
-                dim = unitfactor(unit);
-                if (dim == 0) usage(program_name);
-		break;
+        case 'u':
+            options |= OPT_UNIT;
+            unit = optarg;
+            dim = unitfactor(unit);
+            if (dim == 0) usage(program_name);
+            break;
 
-	    default:
-		usage(program_name);
+        default:
+            usage(program_name);
 	}
     }
 
-    if (optind < argc - 1 || (paper && optind != argc)) {
+    if (optind < argc - 1 || (paper && optind != argc))
 	usage(program_name);
-    } else if (optind != argc) {
+    else if (optind != argc)
 	paper = argv[optind];
-    }
 
     paperinit();
 
