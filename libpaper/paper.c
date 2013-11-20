@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <ctype.h>
 #include <unistd.h>
 #include <errno.h>
@@ -23,7 +22,6 @@
 #include <langinfo.h>
 #endif
 
-#include "hash.h"
 #include "relocatable.h"
 
 #include "paper.h"
@@ -92,32 +90,17 @@ static char *gettok(char *p, char **saveptr) {
 struct paper {
     const char* name;
     double pswidth, psheight;
+    struct paper *next;
 };
 
-static size_t paperhash(const void *v, size_t n) {
-    return hash_string(((const struct paper *)v)->name, n);
-}
-
-static bool papereq(const void *v, const void *w) {
-    return strcasecmp(((const struct paper *)v)->name, ((const struct paper *) w)->name) == 0;
-}
-
-static void paperfree(void *v) {
-    char *s = (char *)((struct paper *)v)->name;
-    free(s);
-    free(v);
-}
-
-Hash_table *papers;
+struct paper *papers;
 
 _GL_ATTRIBUTE_CONST int paperinit(void) {
     int ret = 0;
-
-    papers = hash_initialize(256, NULL, paperhash, papereq, paperfree);
-
     FILE *ps;
     if ((ps = fopen(relocate(PAPERSPECS), "r"))) {
-        for (char *l = NULL; ret == 0 && (l = gettokline(ps));) {
+        struct paper *prev = NULL, *p;
+        for (char *l = NULL; ret == 0 && (l = gettokline(ps)); prev = p) {
             char *saveptr;
             char *name = gettok(l, &saveptr);
             char *wstr = gettok(NULL, &saveptr), *hstr = gettok(NULL, &saveptr);
@@ -139,11 +122,15 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
                         h *= (double)dim;
                     }
                 }
-                struct paper *p = malloc(sizeof(struct paper));
+                p = calloc(1, sizeof(struct paper));
                 if (!p) ret = -1;
-                else *p = (struct paper){name, w, h};
-                if (hash_insert(papers, p) == NULL)
-                    ret = -1;
+                else {
+                    *p = (struct paper){name, w, h, NULL};
+                    if (prev)
+                        prev->next = p;
+                    else
+                        prev = papers = p;
+                }
             } else
                 ret = 2;
             free(wstr);
@@ -158,8 +145,13 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
 }
 
 _GL_ATTRIBUTE_CONST int paperdone(void) {
-    assert(papers);
-    hash_free(papers);
+    struct paper *q;
+    for (struct paper *p = papers; p; p = q) {
+        char *s = (char *)p->name;
+        free(s);
+        q = p->next;
+        free(p);
+    }
     papers = NULL;
     return 0;
 }
@@ -180,14 +172,13 @@ _GL_ATTRIBUTE_PURE double paperpsheight(const struct paper* spaper)
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* paperfirst(void) {
-    assert(papers);
-    return hash_get_first(papers);
+    return papers;
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
 {
-    assert(papers);
-    return hash_get_next(papers, spaper);
+    assert(spaper);
+    return spaper->next;
 }
 
 static const char* systempapersizefile(void) {
@@ -252,9 +243,11 @@ const char* systempapername(void) {
 
 _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
 {
-    struct paper p = {paper, 0, 0};
-    assert(papers);
-    return hash_lookup(papers, &p);
+    for (struct paper *p = papers; p; p = p->next)
+        if (strcasecmp(paper, p->name) == 0)
+            return p;
+
+    return NULL;
 }
 
 _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double psheight)

@@ -1,10 +1,16 @@
-# libpaper paper specifications
+# libpaper paper specifications, commonest first
+a4 210 297 mm
+letter 612 792
+note 612 792
+legal 612 1008
+executive 522 756
+a5 148 210 mm
+halfletter 396 612
+halfexecutive 378 522
 a0 841 1189 mm
 a1 594 841 mm
 a2 420 594 mm
 a3 297 420 mm
-a4 210 297 mm
-a5 148 210 mm
 a6 105 148 mm
 a7 74 105 mm
 a8 52 74 mm
@@ -40,12 +46,6 @@ jisb8 64 91 mm
 jisb9 45 64 mm
 jisb10 32 45 mm
 b5var 182 230 mm
-letter 612 792
-note 612 792
-legal 612 1008
-executive 522 756
-halfletter 396 612
-halfexecutive 378 522
 11x17 792 1224
 statement 396 612
 folio 612 936
