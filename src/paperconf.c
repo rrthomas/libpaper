@@ -6,13 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>
 
 #include <paper.h>
 
 #include "progname.h"
 #include "relocatable.h"
-#include "xvasprintf.h"
 
 static void usage(const char* name)
 {
@@ -164,21 +162,6 @@ int main(int argc, char** argv)
 	    printinfo(papers, options);
     } else {
         if (!paper) paper = systempapername();
-	if (!paper) {
-	    char *errmsg;
-	    if (asprintf(&errmsg, "%s: cannot get system paper size", program_name) == -1)
-              errmsg = (char *)"ERROR CONSTRUCTING ERROR MESSAGE";
-
-	    if (errno) {
-		perror(errmsg);
-	    } else {
-	        fputs(errmsg, stderr);
-	    }
-
-	    paperdone();
-
-	    exit(3);
-	}
 
         const struct paper* syspaper = paperinfo(paper);
         if (syspaper) {

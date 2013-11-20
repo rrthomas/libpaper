@@ -7,6 +7,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 dnl Check for standard build environment
 gl_EARLY
+AC_PROG_CC_C99
 AM_PROG_CC_C_O
 AC_GNU_SOURCE
 AC_PROG_INSTALL
