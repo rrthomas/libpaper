@@ -23,7 +23,7 @@ static void usage(const char* name)
 #define OPT_HEIGHT      4
 #define OPT_UNIT        8
 
-static void printinfo(const struct paper* paper, int options, double dim, const char *unit)
+static void printinfo(const struct paper* paper, int options, double dim)
 {
     int pr = 0;
 
@@ -34,18 +34,12 @@ static void printinfo(const struct paper* paper, int options, double dim, const 
 
     if (options & OPT_WIDTH) {
 	if (pr) putchar(' ');
-        if (options & OPT_UNIT)
-            printf("%g %s", paperpswidth(paper) / dim, unit);
-	else
-            printf("%g", paperpswidth(paper));
+        printf("%g", paperpswidth(paper) / dim);
 	pr = 1;
     }
     if (options & OPT_HEIGHT) {
 	if (pr) putchar(' ');
-        if (options & OPT_UNIT)
-            printf("%g %s", paperpsheight(paper) / dim, unit);
-	else
-            printf("%g", paperpsheight(paper));
+        printf("%g", paperpsheight(paper) / dim);
     }
 
     putchar('\n');
@@ -112,12 +106,12 @@ int main(int argc, char** argv)
     const struct paper* syspaper = NULL;
     if (all) {
 	for (const struct paper* papers = paperfirst(); papers; papers = papernext(papers))
-	    printinfo(papers, options, dim, unit);
+	    printinfo(papers, options, dim);
     } else {
         if (!paper) paper = systempapername();
 
         if ((syspaper = paperinfo(paper)))
-            printinfo(syspaper, options, dim, unit);
+            printinfo(syspaper, options, dim);
         else
 	    fprintf(stderr, "%s: unknown paper `%s'\n", program_name, paper);
     }
