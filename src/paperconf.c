@@ -114,23 +114,20 @@ int main(int argc, char** argv)
 
     paperinit();
 
+    const struct paper* syspaper = NULL;
     if (all) {
 	for (const struct paper* papers = paperfirst(); papers; papers = papernext(papers))
 	    printinfo(papers, options, dim, unit);
     } else {
         if (!paper) paper = systempapername();
 
-        const struct paper* syspaper = paperinfo(paper);
-        if (syspaper) {
+        if ((syspaper = paperinfo(paper)))
             printinfo(syspaper, options, dim, unit);
-        } else {
+        else
 	    fprintf(stderr, "%s: unknown paper `%s'\n", program_name, paper);
-	    paperdone();
-	    exit(2);
-        }
     }
 
     paperdone();
 
-    return EXIT_SUCCESS;
+    return (all || syspaper) ? EXIT_SUCCESS : 2;
 }
