@@ -20,6 +20,8 @@ libpaper \- query and set system paper size, and get information on paper sizes
 .sp
 .B "const struct paper *paperfirst(void)"
 .B "const struct paper *papernext(const struct paper *pinfo)"
+.sp
+.B "double unitfactor(const char *unit)"
 .fi
 .SH DESCRIPTION
 .B paperinit()
@@ -70,5 +72,9 @@ returns the first paper, and
 .B papernext()
 the next paper after the given paper.
 When no more papers are available, \fBNULL\fR is returned.
+.PP
+.B unitfactor()
+returns the number of points in the given unit, or zero if the unit is
+invalid.
 .SH SEE ALSO
 paperconf(1)

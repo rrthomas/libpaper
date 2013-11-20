@@ -29,6 +29,8 @@ const struct paper* paperwithsize(double pswidth, double psheight);
 const struct paper* paperfirst(void);
 const struct paper* papernext(const struct paper*);
 
+double unitfactor(const char* unit);
+
 #ifdef __cplusplus
 }
 #endif

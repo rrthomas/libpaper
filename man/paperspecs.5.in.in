@@ -8,7 +8,7 @@ Each line has the format:
 .TP
 NAME WIDTH HEIGHT [UNIT]
 .PP
-Valid units are: \fBpt\fR (the default), \fBmm\fR, \fBcm\fR, \fBin\fR, \fBdm\fR, \fBft\fR, \fBm\fR.
+Valid units are: \fBpt\fR (the default), \fBmm\fR, \fBcm\fR, \fBin\fR, \fBft\fR, \fBm\fR.
 .SH FILES
 .TP
 .B @PAPERSPECS@

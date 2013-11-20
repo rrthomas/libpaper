@@ -28,19 +28,18 @@
 
 static struct {
     const char* name;
-    float factor;
+    double factor;
 } units[] = {
-    { "in",	1. },
-    { "ft",	12. },
-    { "pt",	1. / 72. },
-    { "m",	100. / 2.54 },
-    { "dm",	10. / 2.54 },
-    { "cm",	1. / 2.54 },
-    { "mm",	.1 / 2.54 },
+    { "pt",	1. },
+    { "mm",	72. * .1 / 2.54 },
+    { "cm",	72. * 1. / 2.54 },
+    { "in",	72. },
+    { "ft",	12. * 72. },
+    { "m",	72. * 100. / 2.54 },
     { 0 }
 };
 
-static _GL_ATTRIBUTE_PURE float unitfactor(const char* unit)
+_GL_ATTRIBUTE_PURE double unitfactor(const char* unit)
 {
     for (int i = 0; units[i].name; ++i)
         if (!strcasecmp(units[i].name, unit))
@@ -114,12 +113,12 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
                 double h = strtod(hstr, NULL);
                 if (errno) ret = 1;
                 if (unit) {
-                    float dim;
+                    double dim;
                     if ((dim = unitfactor(unit)) == 0)
                         ret = 1;
                     else {
-                        w *= (double)dim;
-                        h *= (double)dim;
+                        w *= dim;
+                        h *= dim;
                     }
                 }
                 p = calloc(1, sizeof(struct paper));
