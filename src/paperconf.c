@@ -27,10 +27,7 @@ static void printinfo(const struct paper* paper, int options, double dim, const 
 {
     int pr = 0;
 
-    if (options == 0)
-	options = OPT_NAME;
-
-    if (options & OPT_NAME) {
+    if (options & OPT_NAME || options == 0) {
 	printf("%s", papername(paper));
 	pr = 1;
     }
