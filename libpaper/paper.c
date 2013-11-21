@@ -45,25 +45,6 @@ _GL_ATTRIBUTE_PURE double unitfactor(const char* unit)
     return 0;
 }
 
-/* Return a line that contains non-blank non-comment characters.
-   A comment is any line whose first non-blank is a hash */
-static char *gettokline(FILE *fp) {
-    char *l = NULL;
-    size_t sz;
-    ssize_t n;
-
-    for (n = 0; (n = getline(&l, &sz, fp)) != -1;) {
-        char *p;
-        for (p = l; isspace(*p); p++)
-            ;
-        if (*p != '\0' && *p != '#')
-            return l;
-    }
-
-    free(l);
-    return NULL;
-}
-
 /* Return next token from a string.
    On the first call, p points to the string, and saveptr is ignored;
    on subsequent calls, p should be NULL, and saveptr unchanged since
@@ -96,12 +77,13 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
     FILE *ps;
     if ((ps = fopen(relocate(PAPERSPECS), "r"))) {
         struct paper *prev = NULL, *p;
-        for (char *l = NULL; ret == 0 && (l = gettokline(ps)); prev = p) {
+        size_t n;
+        char *l;
+        for (l = NULL; ret == 0 && getline(&l, &n, ps) > 0; prev = p) {
             char *saveptr;
             char *name = gettok(l, &saveptr);
             char *wstr = gettok(NULL, &saveptr), *hstr = gettok(NULL, &saveptr);
             char *unit = gettok(NULL, &saveptr);
-            free(l);
             if (name && wstr && hstr && unit) {
                 errno = 0;
                 double w = strtod(wstr, NULL);
@@ -132,6 +114,7 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
             free(unit);
         }
         fclose(ps);
+        free(l);
     } else
         ret = -1;
 
@@ -212,9 +195,9 @@ const char* systempapername(void) {
         if (paperconf && stat(paperconf, &statbuf) == 0) {
             FILE* ps;
             if ((ps = fopen(paperconf, "r"))) {
-                char *l = gettokline(ps), *saveptr;
-
-                if (l)
+                char *l = NULL, *saveptr;
+                size_t n;
+                if (getline(&l, &n, ps) > 0)
                     paperstr = gettok(l, &saveptr);
 
                 free(l);
