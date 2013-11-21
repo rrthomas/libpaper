@@ -1,5 +1,5 @@
-.\" paperconfig.8, Copyright (C) 1996, Yves Arrouye <arrouye@debian.org>
-.TH PAPERCONFIG 8 "8 November 2013"
+.\" paperconfig.1, Copyright (C) 1996, Yves Arrouye <arrouye@debian.org>
+.TH PAPERCONFIG 1 "8 November 2013"
 .SH NAME
 .B paperconfig
 \- configure the system default paper size
@@ -7,11 +7,10 @@
 \fBpaperconfig\fR [\fB\-\-version\fR|\fB\-\-help\fR|\fB\-\-paper \fIpapername\fR|\fB\-\-force]
 .SH DESCRIPTION
 .B paperconfig
-sets the system default paper to be used by tools using the
-.B papersize
-file.
-It can either ask interactively for the paper to use or be called
-non-interactively by scripts.
+queries the current paper size, and sets the system default paper to
+be used by tools using the \fBpapersize\fR file. It can either ask
+interactively for the paper to use or be called non-interactively by
+scripts.
 .PP
 When the paper size has been changed,
 .B paperconfig
@@ -51,4 +50,4 @@ naming requirements.
 .SH AUTHOR
 Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
-paperconf(1)
+paperinfo(1)

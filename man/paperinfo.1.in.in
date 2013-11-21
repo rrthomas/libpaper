@@ -1,11 +1,11 @@
-.TH PAPERCONF 1 "8 November 2013"
+.TH PAPERINFO 1 "8 November 2013"
 .SH NAME
-.B paperconf
+.B paperinfo
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperconf\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
+\fBpaperinfo\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
 .SH DESCRIPTION
-.B paperconf
+.B paperinfo
 prints information about the given paper sizes, which can include the
 standard form of its name, its width and height.
 .PP
@@ -30,7 +30,7 @@ The built-in default value \fB@PAPERSIZE@\fR
 Give information about all known paper sizes.
 .TP
 .B \-n
-Print the name of paper. (By default, \fBpaperconf\fR does not print
+Print the name of paper. (By default, \fBpaperinfo\fR does not print
 the name of the paper when given exactly one paper size argument.)
 .TP
 .B \-s

@@ -39,8 +39,8 @@ The function returns zero on success, and non-zero on error.
 .PP
 .B systempapername()
 returns the name of the default paper to be used by a program, as if by running
-.B paperconf
-with no arguments. See paperconf(1).
+.B paperinfo
+with no arguments. See paperinfo(1).
 .PP
 .B paperinfo()
 returns a pointer to a
@@ -77,4 +77,4 @@ When no more papers are available, \fBNULL\fR is returned.
 returns the number of points in the given unit, or zero if the unit is
 invalid.
 .SH SEE ALSO
-paperconf(1)
+paperinfo(1)
