@@ -82,10 +82,6 @@ PAPERSPECS="${sysconfdir}/paperspecs"
 AC_SUBST(PAPERSPECS)
 AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
 
-PAPERSIZE=letter
-AC_SUBST(PAPERSIZE)
-AC_DEFINE_UNQUOTED([PAPERSIZE], "$PAPERSIZE", [Default paper size])
-
 RUNPARTSDIR="${sysconfdir}/libpaper.d"
 AC_SUBST(RUNPARTSDIR)
 AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])

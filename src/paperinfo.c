@@ -148,7 +148,7 @@ static const char* localepapername(void) {
 
 static const char* systempapername(void) {
     const char* paperstr = NULL;
-    const struct paper* pp;
+    const struct paper *pp = NULL;
     char *paperenv = getenv("PAPERSIZE");
 
     if (paperenv)
@@ -173,13 +173,12 @@ static const char* systempapername(void) {
                 }
             }
         }
-        if (paperstr == NULL)
-            paperstr = PAPERSIZE;
     }
 
-    if (paperstr && (pp = paperinfo(paperstr)))
-        return pp->name;
-    return paperstr;
+    if (!paperstr) paperstr = papers->name;
+
+    pp = paperinfo(paperstr);
+    return pp ? pp->name : paperstr;
 }
 
 static void usage(const char* name)
