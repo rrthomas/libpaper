@@ -14,7 +14,6 @@ AM_PROG_CC_C_O
 AC_GNU_SOURCE
 AC_PROG_INSTALL
 AM_PROG_AR
-AM_PROG_LIBTOOL
 AC_PROG_MAKE_SET
 
 dnl Compiler features
@@ -91,20 +90,15 @@ RUNPARTSDIR="${sysconfdir}/libpaper.d"
 AC_SUBST(RUNPARTSDIR)
 AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])
 
-RELOCATABLE_LIBRARY_PATH='$(libdir)'
-AC_SUBST(RELOCATABLE_LIBRARY_PATH)
-
 dnl Create files
 AC_CONFIG_HEADER([config.h])
 AC_OUTPUT([
 	Makefile
 	lib/Makefile
-	libpaper/Makefile
 	src/Makefile
 	src/paperconfig
 	man/Makefile
 	man/paperconfig.1.in
 	man/paperinfo.1.in
         man/paperspecs.5.in
-	man/libpaper.3.in
 ])

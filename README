@@ -1,17 +1,17 @@
 libpaper
 ========
 
-The paper library and accompanying tools provide a simple way for
-applications to find information about paper sizes, and to find the
-user's preferred default paper size.
+The paper files and tools provide a simple way for applications to
+find information about paper sizes, and to find the user's preferred
+default paper size.
 
-It offers command-line tools and a simple C library that applications
-can easily use.  Other programs can be informed when the system
-default paper size is changed.
+It offers command-line tools and files that applications can easily
+use. Other programs can be informed when the system default paper size
+is changed.
 
 See paperinfo(1) and paperconfig(1) for information on the
-command-line tools, libpaper(3) for how to use the library, and
-paperspecs(5) for how to configure the paper sizes.
+command-line tools, and paperspecs(5) for how to configure the paper
+sizes.
 
 
 Copyright (C) Yves Arrouye <yves@debian.org>, 1996

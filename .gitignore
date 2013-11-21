@@ -28,8 +28,6 @@ Makefile.in
 /install-sh
 /lib
 /libpaper*.tar.gz
-/libtool
-/ltmain.sh
 /m4
 /missing
 /stamp-h1
