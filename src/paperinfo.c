@@ -120,49 +120,12 @@ static _GL_ATTRIBUTE_CONST int paperinit(void) {
     return ret;
 }
 
-static _GL_ATTRIBUTE_CONST int paperdone(void) {
-    struct paper *q;
-    for (struct paper *p = papers; p; p = q) {
-        char *s = (char *)p->name;
-        free(s);
-        q = p->next;
-        free(p);
-    }
-    papers = NULL;
-    return 0;
-}
-
-static _GL_ATTRIBUTE_PURE const char* papername(const struct paper* spaper)
-{
-    return spaper->name;
-}
-
-static _GL_ATTRIBUTE_PURE double paperpswidth(const struct paper* spaper)
-{
-    return spaper->pswidth;
-}
-
-static _GL_ATTRIBUTE_PURE double paperpsheight(const struct paper* spaper)
-{
-    return spaper->psheight;
-}
-
-static _GL_ATTRIBUTE_PURE const struct paper* paperfirst(void) {
-    return papers;
-}
-
-static _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
-{
-    assert(spaper);
-    return spaper->next;
-}
-
 static _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double psheight)
 {
     const struct paper* pp;
 
-    for (pp = paperfirst(); pp; pp = papernext(pp))
-        if (paperpswidth(pp) == pswidth && paperpsheight(pp) == psheight)
+    for (pp = papers; pp; pp = pp->next)
+        if (pp->pswidth == pswidth && pp->psheight == psheight)
             return pp;
 
     return NULL;
@@ -188,7 +151,7 @@ static const char* localepapername(void) {
     const struct paper* pp;
     unsigned int w = NL_PAPER_GET(_NL_PAPER_WIDTH);
     unsigned int h = NL_PAPER_GET(_NL_PAPER_HEIGHT);
-    for (pp = paperfirst(); pp; pp = papernext(pp))
+    for (pp = papers; pp; pp = pp->next)
         if (PT_TO_MM(pp->pswidth) == w && PT_TO_MM(pp->psheight) == h)
             return pp->name;
 #endif
@@ -251,13 +214,13 @@ static void printinfo(const struct paper* paper, int options, double dim)
     int pr = 0;
 
     if (options & (OPT_NAME | OPT_ALL) || options == 0) {
-	printf("%s", papername(paper));
+	printf("%s", paper->name);
 	pr = 1;
     }
 
     if (options & OPT_SIZE) {
 	if (pr) putchar(' ');
-        printf("%g %g", paperpswidth(paper) / dim, paperpsheight(paper) / dim);
+        printf("%g %g", paper->pswidth / dim, paper->psheight / dim);
     }
 
     putchar('\n');
@@ -305,7 +268,7 @@ int main(int argc, char** argv)
 
     const struct paper *pinfo = NULL;
     if (options & OPT_ALL) {
-	for (const struct paper* p = paperfirst(); p; p = papernext(p))
+	for (const struct paper* p = papers; p; p = p->next)
 	    printinfo(p, options, dim);
     } else {
         if (optind < argc - 1) options |= OPT_NAME;
@@ -320,8 +283,6 @@ int main(int argc, char** argv)
         if (argc == 1)
             printinfo(paperinfo(systempapername()), options, dim);
     }
-
-    assert(paperdone() == 0);
 
     return ((options & OPT_ALL) || pinfo) ? EXIT_SUCCESS : 2;
 }
