@@ -16,7 +16,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
-#if defined LC_PAPER  && defined _GNU_SOURCE
+#if defined LC_PAPER && defined _GNU_SOURCE
 #include <langinfo.h>
 #endif
 
@@ -180,7 +180,7 @@ static void usage(const char* name)
 {
     fprintf(stderr,
             "Usage: %s [-n] [-s] [-u UNIT] [-a|PAPER...]\n",
-	    name);
+            name);
     exit(EXIT_FAILURE);
 }
 
@@ -194,12 +194,12 @@ static void printinfo(const struct paper* paper, int options, double dim)
     int pr = 0;
 
     if (options & (OPT_NAME | OPT_ALL) || options == 0) {
-	printf("%s", paper->name);
-	pr = 1;
+        printf("%s", paper->name);
+        pr = 1;
     }
 
     if (options & OPT_SIZE) {
-	if (pr) putchar(' ');
+        if (pr) putchar(' ');
         printf("%g %g", paper->pswidth / dim, paper->psheight / dim);
     }
 
@@ -216,7 +216,7 @@ int main(int argc, char** argv)
     int c;
     unsigned options = 0;
     while ((c = getopt(argc, argv, "ansu:")) != EOF) {
-	switch (c) {
+        switch (c) {
         case 'a':
             options |= OPT_ALL;
             break;
@@ -238,11 +238,11 @@ int main(int argc, char** argv)
 
         default:
             usage(program_name);
-	}
+        }
     }
 
     if (((options & OPT_ALL) && optind != argc) || (!(options & OPT_ALL) && optind == argc && argc > 1))
-	usage(program_name);
+        usage(program_name);
 
     const struct paper *pinfo = NULL;
     if (paperinit())
