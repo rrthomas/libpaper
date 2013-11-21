@@ -3,11 +3,11 @@
 .B paperconf
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperconf\fR [\fB\-n\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
+\fBpaperconf\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
 .SH DESCRIPTION
 .B paperconf
 prints information about the given paper sizes, which can include the
-standard form of its name, and its width and/or height.
+standard form of its name, its width and height.
 .PP
 If neither a paper size nor the \fB\-a\fR option is given, the current
 paper size is used.
@@ -35,12 +35,6 @@ the name of the paper when given exactly one paper size argument.)
 .TP
 .B \-s
 Print the size (width followed by height) of the paper.
-.TP
-.B \-w
-Print the width of the paper.
-.TP
-.B \-h
-Print the height of the paper.
 .TP
 .B \-u " UNIT"
 Specify the units in which to print dimensions.

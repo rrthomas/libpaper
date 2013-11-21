@@ -13,16 +13,15 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-            "Usage: %s [-n] [-s|-w|-h] [-u UNIT] [-a|PAPER...]\n",
+            "Usage: %s [-n] [-s] [-u UNIT] [-a|PAPER...]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
 
 #define OPT_NAME	1
-#define OPT_WIDTH	2
-#define OPT_HEIGHT      4
-#define OPT_UNIT        8
-#define OPT_ALL        16
+#define OPT_SIZE	2
+#define OPT_UNIT        4
+#define OPT_ALL         8
 
 static void printinfo(const struct paper* paper, int options, double dim)
 {
@@ -33,14 +32,9 @@ static void printinfo(const struct paper* paper, int options, double dim)
 	pr = 1;
     }
 
-    if (options & OPT_WIDTH) {
+    if (options & OPT_SIZE) {
 	if (pr) putchar(' ');
-        printf("%g", paperpswidth(paper) / dim);
-	pr = 1;
-    }
-    if (options & OPT_HEIGHT) {
-	if (pr) putchar(' ');
-        printf("%g", paperpsheight(paper) / dim);
+        printf("%g %g", paperpswidth(paper) / dim, paperpsheight(paper) / dim);
     }
 
     putchar('\n');
@@ -55,7 +49,7 @@ int main(int argc, char** argv)
     double dim = 1.0;
     int c;
     unsigned options = 0;
-    while ((c = getopt(argc, argv, "answhu:")) != EOF) {
+    while ((c = getopt(argc, argv, "ansu:")) != EOF) {
 	switch (c) {
         case 'a':
             options |= OPT_ALL;
@@ -66,15 +60,7 @@ int main(int argc, char** argv)
             break;
 
         case 's':
-            options |= OPT_WIDTH | OPT_HEIGHT;
-            break;
-
-        case 'w':
-            options |= OPT_WIDTH;
-            break;
-
-        case 'h':
-            options |= OPT_HEIGHT;
+            options |= OPT_SIZE;
             break;
 
         case 'u':
