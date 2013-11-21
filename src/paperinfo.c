@@ -154,12 +154,12 @@ static const char* systempapername(void) {
     if (paperenv)
         paperstr = paperenv;
     else {
-        struct stat statbuf;
         const char* paperconf = getenv("PAPERCONF");
         if (!paperconf)
             paperstr = localepapername();
         if (!paperstr) {
             paperconf = relocate(PAPERCONF);
+            struct stat statbuf;
             if (stat(paperconf, &statbuf) == 0) {
                 FILE* ps;
                 if ((ps = fopen(paperconf, "r"))) {
