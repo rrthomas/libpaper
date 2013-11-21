@@ -158,11 +158,6 @@ _GL_ATTRIBUTE_PURE const struct paper* papernext(const struct paper* spaper)
     return spaper->next;
 }
 
-static const char* systempapersizefile(void) {
-    const char* paperconf = getenv("PAPERCONF");
-    return paperconf ? paperconf : relocate(PAPERCONF);
-}
-
 static const char* localepapername(void) {
 #if defined LC_PAPER && defined _GNU_SOURCE
 
@@ -191,7 +186,8 @@ const char* systempapername(void) {
         paperstr = strdup(paperenv);
     else {
         struct stat statbuf;
-        const char *paperconf = systempapersizefile();
+        const char* paperconf = getenv("PAPERCONF");
+        if (!paperconf) paperconf = relocate(PAPERCONF);
         if (paperconf && stat(paperconf, &statbuf) == 0) {
             FILE* ps;
             if ((ps = fopen(paperconf, "r"))) {
