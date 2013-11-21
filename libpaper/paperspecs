@@ -1,12 +1,12 @@
 # libpaper paper specifications, commonest first
 A4 210 297 mm
-Letter 612 792
-Note 612 792
-Legal 612 1008
-Executive 522 756
+Letter 8.5 11 in
+Note 8.5 11 in
+Legal 8.5 14 in
+Executive 7.25 10.5 in
 A5 148 210 mm
-HalfLetter 396 612
-HalfExecutive 378 522
+HalfLetter 5.5 8.5 in
+HalfExecutive 5.25 7.25 in
 A0 841 1189 mm
 A1 594 841 mm
 A2 420 594 mm
@@ -46,23 +46,22 @@ JISB8 64 91 mm
 JISB9 45 64 mm
 JISB10 32 45 mm
 B5var 182 230 mm
-11x17 792 1224
-Statement 396 612
-Folio 612 936
-Quarto 610 780
-10x14 720 1008
-Ledger 1224 792
-Tabloid 792 1224
+11x17 11 17 in
+Statement 5.5 8.5 in
+Folio 8.5 13 in
+10x14 10 14 in
+Ledger 17 11 in
+Tabloid 11 17 in
 DL 110 220 mm
-Comm10 297 684
-Monarch 279 540
-ArchE 2592 3456
-ArchD 1728 2592
-ArchC 1296 1728
-ArchB 864 1296
-archA 648 864
-FLSA 612 936
-FLSE 612 936
-CSheet 1224 1584
-DSheet 1584 2448
-ESheet 2448 3168
+Comm10 4.125 9.5 in
+Monarch 3.875 7.5 in
+ArchE 36 48 in
+ArchD 24 36 in
+ArchC 18 24 in
+ArchB 12 18 in
+ArchA 9.5 12 in
+FLSA 8.5 13 in
+FLSE 8.5 13 in
+CSheet 17 22 in
+DSheet 22 34 in
+ESheet 34 44 in

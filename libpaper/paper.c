@@ -102,21 +102,19 @@ _GL_ATTRIBUTE_CONST int paperinit(void) {
             char *wstr = gettok(NULL, &saveptr), *hstr = gettok(NULL, &saveptr);
             char *unit = gettok(NULL, &saveptr);
             free(l);
-            if (name && wstr && hstr) {
+            if (name && wstr && hstr && unit) {
                 errno = 0;
                 double w = strtod(wstr, NULL);
                 if (errno) ret = 1;
                 errno = 0;
                 double h = strtod(hstr, NULL);
                 if (errno) ret = 1;
-                if (unit) {
-                    double dim;
-                    if ((dim = unitfactor(unit)) == 0)
-                        ret = 1;
-                    else {
-                        w *= dim;
-                        h *= dim;
-                    }
+                double dim;
+                if ((dim = unitfactor(unit)) == 0)
+                    ret = 1;
+                else {
+                    w *= dim;
+                    h *= dim;
                 }
                 p = calloc(1, sizeof(struct paper));
                 if (!p) ret = -1;

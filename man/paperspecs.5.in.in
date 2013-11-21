@@ -6,9 +6,9 @@
 This file lists the paper size specifications used by libpaper, one per line.
 Each line has the format:
 .TP
-NAME WIDTH HEIGHT [UNIT]
+NAME WIDTH HEIGHT UNIT
 .PP
-Valid units are: \fBpt\fR (PostScript points, the default), \fBmm\fR, \fBin\fR.
+Valid units are: \fBpt\fR (PostScript points), \fBmm\fR, \fBin\fR.
 .SH FILES
 .TP
 .B @PAPERSPECS@
