@@ -146,38 +146,39 @@ static const char* localepapername(void) {
     return NULL;
 }
 
-static const char* systempapername(void) {
-    const char* paperstr = NULL;
-    const struct paper *pp = NULL;
-    char *paperenv = getenv("PAPERSIZE");
+static const char *readpaperconf(const char *paperconf) {
+    struct stat statbuf;
+    char *paperstr = NULL;
+    if (stat(paperconf, &statbuf) == 0) {
+        FILE* ps;
+        if ((ps = fopen(paperconf, "r"))) {
+            char *l = NULL, *saveptr = NULL;
+            size_t n;
+            if (getline(&l, &n, ps) > 0)
+                paperstr = gettok(l, &saveptr);
 
-    if (paperenv)
-        paperstr = paperenv;
-    else {
-        const char* paperconf = getenv("PAPERCONF");
-        if (!paperconf)
-            paperstr = localepapername();
-        if (!paperstr) {
-            paperconf = relocate(PAPERCONF);
-            struct stat statbuf;
-            if (stat(paperconf, &statbuf) == 0) {
-                FILE* ps;
-                if ((ps = fopen(paperconf, "r"))) {
-                    char *l = NULL, *saveptr = NULL;
-                    size_t n;
-                    if (getline(&l, &n, ps) > 0)
-                        paperstr = gettok(l, &saveptr);
-
-                    free(l);
-                    fclose(ps);
-                }
-            }
+            free(l);
+            fclose(ps);
         }
     }
+    return paperstr;
+}
 
-    if (!paperstr) paperstr = papers->name;
+static const char* systempapername(void) {
+    const char *paperstr = getenv("PAPERSIZE");
+    if (!paperstr) {
+        const char *paperconf = getenv("PAPERCONF");
+        if (paperconf)
+            paperstr = readpaperconf(paperconf);
+    }
+    if (!paperstr)
+        paperstr = localepapername();
+    if (!paperstr)
+        readpaperconf(relocate(PAPERCONF));
+    if (!paperstr)
+        paperstr = papers->name;
 
-    pp = paperinfo(paperstr);
+    const struct paper *pp = paperinfo(paperstr);
     return pp ? pp->name : paperstr;
 }
 
