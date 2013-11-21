@@ -5,7 +5,6 @@ man_MANS = \
 	paperspecs.5
 
 EXTRA_DIST = \
-	$(man_MANS) \
 	paperconfig.1.in.in \
 	paperinfo.1.in.in \
 	libpaper.3.in.in \
