@@ -10,7 +10,6 @@
 #include <config.h>
 
 #include <assert.h>
-#include <sys/stat.h>
 #include <locale.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -146,19 +145,16 @@ static const char* localepapername(void) {
 }
 
 static const char *readpaperconf(const char *paperconf) {
-    struct stat statbuf;
     char *paperstr = NULL;
-    if (stat(paperconf, &statbuf) == 0) {
-        FILE* ps;
-        if ((ps = fopen(paperconf, "r"))) {
-            char *l = NULL, *saveptr = NULL;
-            size_t n;
-            if (getline(&l, &n, ps) > 0)
-                paperstr = gettok(l, &saveptr);
+    FILE* ps;
+    if ((ps = fopen(paperconf, "r"))) {
+        char *l = NULL, *saveptr = NULL;
+        size_t n;
+        if (getline(&l, &n, ps) > 0)
+            paperstr = gettok(l, &saveptr);
 
-            free(l);
-            fclose(ps);
-        }
+        free(l);
+        fclose(ps);
     }
     return paperstr;
 }
