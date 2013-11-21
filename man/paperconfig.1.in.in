@@ -17,6 +17,9 @@ When the paper size has been changed,
 notifies other packages of the change by running the scripts in the
 .I @RUNPARTSDIR@
 directory.
+.PP
+When no paper is specified, \fBpaperconfig\fR prints the
+current system paper size.
 .SH OPTIONS
 .TP
 .BR "\-v\fP, \fB\-\-version"
