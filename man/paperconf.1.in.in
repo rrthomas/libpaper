@@ -9,8 +9,8 @@
 prints information about a given paper size, which can include the
 standard form of its name, and its width and/or height.
 .PP
-When called without arguments, \fBpaperconf\fR prints the name of the
-current paper size.
+When no paper is specified, \fBpaperconf\fR prints information
+about the current paper size.
 .PP
 The current paper size is obtained by looking in order at the following
 values until a valid paper size is found:
