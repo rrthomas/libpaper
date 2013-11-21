@@ -18,7 +18,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
-#include <math.h>
 #if defined LC_PAPER  && defined _GNU_SOURCE
 #include <langinfo.h>
 #endif
@@ -134,12 +133,12 @@ static const char* localepapername(void) {
 #if defined LC_PAPER && defined _GNU_SOURCE
 
 #define NL_PAPER_GET(x)         \
-  ((union { char *string; unsigned int word; })nl_langinfo(x)).word
-#define MM_TO_PT(v) (unsigned int)((v * 72 / 2.54 / 10) + 0.5)
-    double w = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_WIDTH));
-    double h = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_HEIGHT));
+  ((union { char *string; unsigned word; })nl_langinfo(x)).word
+#define MM_TO_PT(v) (unsigned)((v * 72 / 2.54 / 10) + 0.5)
+    unsigned w = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_WIDTH));
+    unsigned h = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_HEIGHT));
     for (struct paper *pp = papers; pp; pp = pp->next)
-        if (floor(pp->pswidth + 0.5) == w && floor(pp->psheight + 0.5) == h)
+        if ((unsigned)(pp->pswidth + 0.5) == w && (unsigned)(pp->psheight + 0.5) == h)
             return pp->name;
 #endif
 
