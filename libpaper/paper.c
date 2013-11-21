@@ -228,7 +228,7 @@ _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double pshe
     const struct paper* pp;
 
     for (pp = paperfirst(); pp; pp = papernext(pp))
-        if (pp->pswidth == pswidth && pp->psheight == psheight)
+        if (paperpswidth(pp) == pswidth && paperpsheight(pp) == psheight)
             return pp;
 
     return NULL;
