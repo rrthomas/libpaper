@@ -181,10 +181,7 @@ then
 	cat <<EOF
 The default (also known as system) paper can be chosen from many known
 papers that are currently recognized by programs using the libpaper
-library (with libpaper, paper names are case insensitive; if you use
-programs that use the system paper size but do not rely on the libpaper
-library, this may not be true and some of the papers listed below may
-not be known by these programs):
+library:
 
 EOF
 	echo "$papers" | sed 's/^/    /'
