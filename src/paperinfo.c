@@ -245,7 +245,7 @@ int main(int argc, char** argv)
         }
     }
 
-    if (((options & OPT_ALL) && optind != argc) || (!(options & OPT_ALL) && optind == argc && argc > 1))
+    if (((options & OPT_ALL) && optind != argc))
         usage(program_name);
 
     const struct paper *pinfo = NULL;
@@ -257,6 +257,7 @@ int main(int argc, char** argv)
                 printinfo(p, options, dim);
         } else {
             if (optind < argc - 1) options |= OPT_NAME;
+            else if (optind == argc) printinfo(paperinfo(systempapername()), options, dim);
             for (int i = optind; i < argc; i++) {
                 if ((pinfo = paperinfo(argv[i])))
                     printinfo(pinfo, options, dim);
@@ -265,8 +266,6 @@ int main(int argc, char** argv)
                     break;
                 }
             }
-            if (argc == 1)
-                printinfo(paperinfo(systempapername()), options, dim);
         }
     }
 
