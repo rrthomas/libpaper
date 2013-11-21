@@ -147,12 +147,12 @@ static const char* localepapername(void) {
 }
 
 static const char* systempapername(void) {
-    char* paperstr = NULL;
+    const char* paperstr = NULL;
     const struct paper* pp;
     char *paperenv = getenv("PAPERSIZE");
 
     if (paperenv)
-        paperstr = strdup(paperenv);
+        paperstr = paperenv;
     else {
         struct stat statbuf;
         const char* paperconf = getenv("PAPERCONF");
@@ -178,7 +178,7 @@ static const char* systempapername(void) {
     }
 
     if (paperstr && (pp = paperinfo(paperstr)))
-        return strcpy(paperstr, pp->name);
+        return pp->name;
     return paperstr;
 }
 
