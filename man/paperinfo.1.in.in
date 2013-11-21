@@ -19,9 +19,9 @@ The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
 The file specified by the \fBPAPERCONF\fR environment variable
 .IP \[bu]
-The contents of the file \fB@PAPERCONF@\fR
-.IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
+.IP \[bu]
+The contents of the file \fB@PAPERCONF@\fR
 .IP \[bu]
 The built-in default value \fB@PAPERSIZE@\fR
 .SH OPTIONS

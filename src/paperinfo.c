@@ -18,6 +18,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
+#include <math.h>
 #if defined LC_PAPER  && defined _GNU_SOURCE
 #include <langinfo.h>
 #endif
@@ -120,17 +121,6 @@ static _GL_ATTRIBUTE_CONST int paperinit(void) {
     return ret;
 }
 
-static _GL_ATTRIBUTE_PURE const struct paper* paperwithsize(double pswidth, double psheight)
-{
-    const struct paper* pp;
-
-    for (pp = papers; pp; pp = pp->next)
-        if (pp->pswidth == pswidth && pp->psheight == psheight)
-            return pp;
-
-    return NULL;
-}
-
 static _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
 {
     for (struct paper *p = papers; p; p = p->next)
@@ -145,14 +135,11 @@ static const char* localepapername(void) {
 
 #define NL_PAPER_GET(x)         \
   ((union { char *string; unsigned int word; })nl_langinfo(x)).word
-
-#define PT_TO_MM(v) (unsigned int)((v * 2.54 * 10 / 72) + 0.5)
-
-    const struct paper* pp;
-    unsigned int w = NL_PAPER_GET(_NL_PAPER_WIDTH);
-    unsigned int h = NL_PAPER_GET(_NL_PAPER_HEIGHT);
-    for (pp = papers; pp; pp = pp->next)
-        if (PT_TO_MM(pp->pswidth) == w && PT_TO_MM(pp->psheight) == h)
+#define MM_TO_PT(v) (unsigned int)((v * 72 / 2.54 / 10) + 0.5)
+    double w = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_WIDTH));
+    double h = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_HEIGHT));
+    for (struct paper *pp = papers; pp; pp = pp->next)
+        if (floor(pp->pswidth + 0.5) == w && floor(pp->psheight + 0.5) == h)
             return pp->name;
 #endif
 
@@ -169,26 +156,25 @@ static const char* systempapername(void) {
     else {
         struct stat statbuf;
         const char* paperconf = getenv("PAPERCONF");
-        if (!paperconf) paperconf = relocate(PAPERCONF);
-        if (paperconf && stat(paperconf, &statbuf) == 0) {
-            FILE* ps;
-            if ((ps = fopen(paperconf, "r"))) {
-                char *l = NULL, *saveptr = NULL;
-                size_t n;
-                if (getline(&l, &n, ps) > 0)
-                    paperstr = gettok(l, &saveptr);
+        if (!paperconf)
+            paperstr = localepapername();
+        if (!paperstr) {
+            paperconf = relocate(PAPERCONF);
+            if (stat(paperconf, &statbuf) == 0) {
+                FILE* ps;
+                if ((ps = fopen(paperconf, "r"))) {
+                    char *l = NULL, *saveptr = NULL;
+                    size_t n;
+                    if (getline(&l, &n, ps) > 0)
+                        paperstr = gettok(l, &saveptr);
 
-                free(l);
-                fclose(ps);
+                    free(l);
+                    fclose(ps);
+                }
             }
         }
-
-        if (!paperstr) {
-            const char *s = localepapername();
-            if (s == NULL)
-                s = PAPERSIZE;
-            paperstr = strdup(s);
-        }
+        if (paperstr == NULL)
+            paperstr = PAPERSIZE;
     }
 
     if (paperstr && (pp = paperinfo(paperstr)))
