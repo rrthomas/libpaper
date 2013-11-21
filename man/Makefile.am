@@ -10,7 +10,7 @@ EXTRA_DIST = \
 	libpaper.3.in.in \
 	paperspecs.5.in.in
 
-DISTCLEANFILES = $(generated_MANS)
+DISTCLEANFILES = $(man_MANS)
 
 edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
 
