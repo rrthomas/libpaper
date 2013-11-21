@@ -25,7 +25,7 @@
 #include "relocatable.h"
 
 static struct {
-    const char* name;
+    const char *name;
     double factor;
 } units[] = {
     { "pt",	1. },
@@ -34,7 +34,7 @@ static struct {
     { 0 }
 };
 
-static _GL_ATTRIBUTE_PURE double unitfactor(const char* unit)
+static _GL_ATTRIBUTE_PURE double unitfactor(const char *unit)
 {
     for (int i = 0; units[i].name; ++i)
         if (!strcasecmp(units[i].name, unit))
@@ -63,7 +63,7 @@ static char *gettok(char *p, char **saveptr) {
 }
 
 struct paper {
-    const char* name;
+    const char *name;
     double pswidth, psheight;
     struct paper *next;
 };
@@ -123,7 +123,7 @@ static _GL_ATTRIBUTE_CONST int paperinit(void) {
     return ret;
 }
 
-static _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
+static _GL_ATTRIBUTE_PURE const struct paper *paperinfo(const char *paper)
 {
     for (struct paper *p = papers; p; p = p->next)
         if (strcasecmp(paper, p->name) == 0)
@@ -132,7 +132,7 @@ static _GL_ATTRIBUTE_PURE const struct paper* paperinfo(const char* paper)
     return NULL;
 }
 
-static const char* localepapername(void) {
+static const char *localepapername(void) {
 #if defined LC_PAPER && defined _GNU_SOURCE
 
 #define NL_PAPER_GET(x)         \
@@ -150,7 +150,7 @@ static const char* localepapername(void) {
 
 static const char *readpaperconf(const char *file) {
     char *paperstr = NULL;
-    FILE* ps;
+    FILE *ps;
     if ((ps = fopen(file, "r"))) {
         char *l = NULL, *saveptr = NULL;
         size_t n;
@@ -163,7 +163,7 @@ static const char *readpaperconf(const char *file) {
     return paperstr;
 }
 
-static const char* systempapername(void) {
+static const char *systempapername(void) {
     const char *paperstr = getenv("PAPERSIZE");
     if (!paperstr) {
         const char *file = getenv("PAPERCONF");
@@ -181,7 +181,7 @@ static const char* systempapername(void) {
     return pp ? pp->name : paperstr;
 }
 
-static void usage(const char* name)
+static void usage(const char *name)
 {
     fprintf(stderr,
             "Usage: %s [-n] [-s] [-u UNIT] [-a|PAPER...]\n",
@@ -191,7 +191,7 @@ static void usage(const char* name)
 
 bool opt_name, opt_size, opt_unit, opt_all;
 
-static void printinfo(const struct paper* paper, double dim)
+static void printinfo(const struct paper *paper, double dim)
 {
     int pr = 0;
 
@@ -208,7 +208,7 @@ static void printinfo(const struct paper* paper, double dim)
     putchar('\n');
 }
 
-int main(int argc, char** argv)
+int main(int argc, char *argv[])
 {
     set_program_name(argv[0]);
     setlocale(LC_ALL, "");
@@ -250,7 +250,7 @@ int main(int argc, char** argv)
         fprintf(stderr, "%s: could not read `%s'\n", program_name, paperspecs);
     else {
         if (opt_all) {
-            for (const struct paper* p = papers; p; p = p->next)
+            for (const struct paper *p = papers; p; p = p->next)
                 printinfo(p, dim);
         } else {
             if (optind < argc - 1) opt_name = true;
