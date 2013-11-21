@@ -25,15 +25,7 @@ if test "@RELOCATABLE@" = yes; then
 fi
 
 usage() {
-    if [ "$1" = -h ]
-    then
-	exec 1>&2
-	echo -n U
-    else
-	echo -n u
-    fi
-
-    echo "sage: `basename $0` [--version|--help|--paper NAME|--force]"
+    echo "Usage: `basename $0` [--version|--help|--paper NAME|--force]"
 
     if [ "$1" = -h ]
     then
@@ -180,9 +172,8 @@ then
 
     (
 	cat <<EOF
-The default (also known as system) paper can be chosen from many known
-papers that are currently recognized by programs using the libpaper
-library:
+The system paper can be chosen from many known papers that are
+currently recognized:
 
 EOF
 	echo "$papers" | sed 's/^/    /'
@@ -203,7 +194,7 @@ do
     then
 	echo "Please choose a paper from the available papers list."
     else
-	echo "Unknow paper \"$paper\"," \
+	echo "Unknown paper \"$paper\"," \
 	    "please choose one from the available papers list."
     fi
 
