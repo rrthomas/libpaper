@@ -3,14 +3,14 @@
 .B paperconf
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperconf\fR [[\fB\-p\fR] \fIPAPER\fR|\fB\-d\fR|\fB\-a\fR] [\fB\-n\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR]
+\fBpaperconf\fR [\fB\-n\fR] [\fB\-s\fR|\fB\-w\fR|\fB\-h\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
 .SH DESCRIPTION
 .B paperconf
-prints information about a given paper size, which can include the
+prints information about the given paper sizes, which can include the
 standard form of its name, and its width and/or height.
 .PP
-When no paper is specified, \fBpaperconf\fR prints information
-about the current paper size.
+If neither a paper size nor the \fB\-a\fR option is given, the current
+paper size is used.
 .PP
 The current paper size is obtained by looking in order at the following
 values until a valid paper size is found:
@@ -26,17 +26,12 @@ The \fBLC_PAPER\fR environment variable (if supported by the system)
 The built-in default value \fB@PAPERSIZE@\fR
 .SH OPTIONS
 .TP
-.BI \-p " PAPER"
-The name of the \fIPAPER\fR to give information about.
-.TP
-.B \-d
-Use the default builtin paper name.
-.TP
 .B \-a
-Consider all known paper names.
+Give information about all known paper sizes.
 .TP
 .B \-n
-Print the name of the paper.
+Print the name of paper. (By default, \fBpaperconf\fR does not print
+the name of the paper when given exactly one paper size argument.)
 .TP
 .B \-s
 Print the size (width followed by height) of the paper.

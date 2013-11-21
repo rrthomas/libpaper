@@ -13,7 +13,7 @@
 static void usage(const char* name)
 {
     fprintf(stderr,
-            "Usage: %s [[-p] PAPERNAME|-a] [-n] [-s|-w|-h] [-u UNIT]\n",
+            "Usage: %s [-n] [-s|-w|-h] [-u UNIT] [-a|PAPER...]\n",
 	    name);
     exit(EXIT_FAILURE);
 }
@@ -22,12 +22,13 @@ static void usage(const char* name)
 #define OPT_WIDTH	2
 #define OPT_HEIGHT      4
 #define OPT_UNIT        8
+#define OPT_ALL        16
 
 static void printinfo(const struct paper* paper, int options, double dim)
 {
     int pr = 0;
 
-    if (options & OPT_NAME || options == 0) {
+    if (options & (OPT_NAME | OPT_ALL) || options == 0) {
 	printf("%s", papername(paper));
 	pr = 1;
     }
@@ -50,22 +51,14 @@ int main(int argc, char** argv)
     set_program_name(argv[0]);
     setlocale(LC_ALL, "");
 
-    const char *paper = NULL, *unit = NULL;
+    const char *unit = NULL;
     double dim = 1.0;
-    int c, all = 0;
+    int c;
     unsigned options = 0;
-    while ((c = getopt(argc, argv, "answhp:u:")) != EOF) {
+    while ((c = getopt(argc, argv, "answhu:")) != EOF) {
 	switch (c) {
         case 'a':
-            if (paper)
-                usage(program_name);
-            all = 1;
-            break;
-
-        case 'p':
-            if (paper || all)
-                usage(program_name);
-            paper = optarg;
+            options |= OPT_ALL;
             break;
 
         case 'n':
@@ -96,27 +89,30 @@ int main(int argc, char** argv)
 	}
     }
 
-    if (optind < argc - 1 || (paper && optind != argc))
+    if (((options & OPT_ALL) && optind != argc) || (!(options & OPT_ALL) && optind == argc && argc > 1))
 	usage(program_name);
-    else if (optind != argc)
-	paper = argv[optind];
 
     paperinit();
 
-    const struct paper* syspaper = NULL;
-    if (all) {
+    const struct paper *pinfo = NULL;
+    if (options & OPT_ALL) {
 	for (const struct paper* papers = paperfirst(); papers; papers = papernext(papers))
 	    printinfo(papers, options, dim);
     } else {
-        if (!paper) paper = systempapername();
-
-        if ((syspaper = paperinfo(paper)))
-            printinfo(syspaper, options, dim);
-        else
-	    fprintf(stderr, "%s: unknown paper `%s'\n", program_name, paper);
+        if (optind < argc - 1) options |= OPT_NAME;
+        for (int i = optind; i < argc; i++) {
+            if ((pinfo = paperinfo(argv[i])))
+                printinfo(pinfo, options, dim);
+            else {
+                fprintf(stderr, "%s: unknown paper `%s'\n", program_name, argv[i]);
+                break;
+            }
+        }
+        if (argc == 1)
+            printinfo(paperinfo(systempapername()), options, dim);
     }
 
     paperdone();
 
-    return (all || syspaper) ? EXIT_SUCCESS : 2;
+    return ((options & OPT_ALL) || pinfo) ? EXIT_SUCCESS : 2;
 }
