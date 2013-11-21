@@ -68,11 +68,15 @@ struct paper {
 };
 
 struct paper *papers;
+const char *paperspecs, *paperconf;
 
 static _GL_ATTRIBUTE_CONST int paperinit(void) {
+    paperspecs = relocate(PAPERSPECS);
+    paperconf = relocate(PAPERCONF);
+
     int ret = 0;
     FILE *ps;
-    if ((ps = fopen(relocate(PAPERSPECS), "r"))) {
+    if ((ps = fopen(paperspecs, "r"))) {
         struct paper *prev = NULL, *p;
         size_t n;
         char *l;
@@ -143,10 +147,10 @@ static const char* localepapername(void) {
     return NULL;
 }
 
-static const char *readpaperconf(const char *paperconf) {
+static const char *readpaperconf(const char *file) {
     char *paperstr = NULL;
     FILE* ps;
-    if ((ps = fopen(paperconf, "r"))) {
+    if ((ps = fopen(file, "r"))) {
         char *l = NULL, *saveptr = NULL;
         size_t n;
         if (getline(&l, &n, ps) > 0)
@@ -161,14 +165,14 @@ static const char *readpaperconf(const char *paperconf) {
 static const char* systempapername(void) {
     const char *paperstr = getenv("PAPERSIZE");
     if (!paperstr) {
-        const char *paperconf = getenv("PAPERCONF");
-        if (paperconf)
-            paperstr = readpaperconf(paperconf);
+        const char *file = getenv("PAPERCONF");
+        if (file)
+            paperstr = readpaperconf(file);
     }
     if (!paperstr)
         paperstr = localepapername();
     if (!paperstr)
-        readpaperconf(relocate(PAPERCONF));
+        paperstr = readpaperconf(paperconf);
     if (!paperstr)
         paperstr = papers->name;
 
@@ -246,7 +250,7 @@ int main(int argc, char** argv)
 
     const struct paper *pinfo = NULL;
     if (paperinit())
-        fprintf(stderr, "%s: could not read `%s'\n", program_name, relocate(PAPERSPECS));
+        fprintf(stderr, "%s: could not read `%s'\n", program_name, paperspecs);
     else {
         if (options & OPT_ALL) {
             for (const struct paper* p = papers; p; p = p->next)
