@@ -157,15 +157,12 @@ then
     papers="`format $width \"\" $knownpapers`"
     echo
 
-    if [ -x /usr/bin/pager ]
+    if [ -x /usr/bin/sensible-pager ]
     then
-	: ${PAGER:=/usr/bin/pager}
+      : ${pager:=/usr/bin/sensible-pager}
+    else
+      : ${pager:=more}
     fi
-    if [ -x /bin/more ]
-    then
-	: ${PAGER:=/bin/more}
-    fi
-    : ${PAGER:=cat}
 
     LESS="-X -E $LESS"
     export LESS
@@ -178,7 +175,7 @@ currently recognized:
 EOF
 	echo "$papers" | sed 's/^/    /'
 	echo
-    ) | ${PAGER}
+    ) | ${pager}
 
     : ${paper:=$dftpaper}
 
