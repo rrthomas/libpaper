@@ -10,7 +10,7 @@
 if test "@RELOCATABLE@" = yes; then
     exec_prefix="@exec_prefix@"
     bindir="@bindir@"
-    orig_installdir="$sbindir" # see Makefile.am's *_SCRIPTS variables
+    orig_installdir="$bindir" # see Makefile.am's *_SCRIPTS variables
     func_find_curr_installdir # determine curr_installdir
     func_find_prefixes
     # Relocate the directory variables that we use.
