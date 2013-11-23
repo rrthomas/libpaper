@@ -32,9 +32,9 @@ usage() {
 	cat <<EOF
 
 Options: -v, --verbose          print version information and exit
-	 -h, --help             print this help and exit
-	 -p, --paper NAME	specify the paper to use
-	 -c, --choose           choose paper interactively
+         -h, --help             print this help and exit
+         -p, --paper NAME       specify the paper to use
+         -c, --choose           choose paper interactively
 EOF
 	exit 0
     else
