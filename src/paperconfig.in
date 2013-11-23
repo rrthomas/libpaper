@@ -25,7 +25,7 @@ if test "@RELOCATABLE@" = yes; then
 fi
 
 usage() {
-    echo "Usage: `basename $0` [--version|--help|--paper NAME|--force]"
+    echo "Usage: `basename $0` [--version|--help|--paper NAME|--choose]"
 
     if [ "$1" = -h ]
     then
@@ -34,7 +34,7 @@ usage() {
 Options: -v, --verbose          print version information and exit
 	 -h, --help             print this help and exit
 	 -p, --paper NAME	specify the paper to use
-	 --force                force paper configuration
+	 -c, --choose           choose paper interactively
 EOF
 	exit 0
     else
@@ -42,7 +42,7 @@ EOF
     fi
 }
 
-force=0
+choose=0
 
 if [ "$#" -eq 0 ]
   then
@@ -66,8 +66,8 @@ do
 	    paper="$2"
 	    shift
 	    ;;
-	--force)
-	    force=1
+	-c|--choose)
+	    choose=1
 	    ;;
 	*)
 	    usage
@@ -152,7 +152,7 @@ width=72
 paper=`paperconf 2>/dev/null || true`
 dftpaper=`paperconf`
 
-if [ $force -eq 1 ] || [ ! -e $PAPERCONF ] || invalidpaper $paper
+if [ $choose -eq 1 ]
 then
     papers="`format $width \"\" $knownpapers`"
     echo
@@ -186,26 +186,30 @@ EOF
     read ans
     : ${ans:=$paper}
     paper=$ans
+
+    while invalidpaper "$paper"
+    do
+        if [ -z "$paper" ]
+        then
+	    echo "Please choose a paper from the available papers list."
+        else
+	    echo "Unknown paper \"$paper\"," \
+	        "please choose one from the available papers list."
+        fi
+
+        paper=$dftpaper
+
+        echo -n "Default paper name? [$paper] "
+        read ans
+        paper=$ans
+    done
 fi
 
-while invalidpaper "$paper"
-do
-    if [ -z "$paper" ]
-    then
-	echo "Please choose a paper from the available papers list."
-    else
-	echo "Unknown paper \"$paper\"," \
-	    "please choose one from the available papers list."
-    fi
-
-    paper=$dftpaper
-
-    echo -n "Default paper name? [$paper] "
-    read ans
-    paper=$ans
-done
-
-if [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[#	]" $PAPERCONF
+if invalidpaper "$paper"
+then
+    echo "Invalid paper \"$paper\": not setting the system default."
+    exit 4
+elif [ "`paperconf 2>/dev/null`" != "$paper" ] || grep -q "[#	]" $PAPERCONF
 then
     setpaper "$paper"
 fi
