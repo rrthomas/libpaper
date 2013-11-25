@@ -69,11 +69,10 @@ struct paper {
 };
 
 struct paper *papers;
-const char *paperspecs, *paperconf;
+const char *paperspecs;
 
 static _GL_ATTRIBUTE_CONST int paperinit(void) {
     paperspecs = relocate(PAPERSPECS);
-    paperconf = relocate(PAPERCONF);
 
     int ret = 0;
     FILE *ps;
@@ -148,32 +147,10 @@ static const char *localepapername(void) {
     return NULL;
 }
 
-static const char *readpaperconf(const char *file) {
-    char *paperstr = NULL;
-    FILE *ps;
-    if ((ps = fopen(file, "r"))) {
-        char *l = NULL, *saveptr = NULL;
-        size_t n;
-        if (getline(&l, &n, ps) > 0)
-            paperstr = gettok(l, &saveptr);
-
-        free(l);
-        fclose(ps);
-    }
-    return paperstr;
-}
-
 static const char *systempapername(void) {
     const char *paperstr = getenv("PAPERSIZE");
-    if (!paperstr) {
-        const char *file = getenv("PAPERCONF");
-        if (file)
-            paperstr = readpaperconf(file);
-    }
     if (!paperstr)
         paperstr = localepapername();
-    if (!paperstr)
-        paperstr = readpaperconf(paperconf);
     if (!paperstr)
         paperstr = papers->name;
 

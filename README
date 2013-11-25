@@ -5,13 +5,11 @@ The paper files and tools provide a simple way for applications to
 find information about paper sizes, and to find the user's preferred
 default paper size.
 
-It offers command-line tools and files that applications can easily
-use. Other programs can be informed when the system default paper size
-is changed.
+It offers a command-line tool and files that applications can easily
+use.
 
-See paperinfo(1) and paperconfig(1) for information on the
-command-line tools, and paperspecs(5) for how to configure the paper
-sizes.
+See paperinfo(1) for information on the command-line tool, and
+paperspecs(5) for how to configure the paper sizes.
 
 
 Copyright (C) Yves Arrouye <yves@debian.org>, 1996

@@ -17,11 +17,7 @@ values until a valid paper size is found:
 .IP \[bu]
 The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
-The file specified by the \fBPAPERCONF\fR environment variable
-.IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
-.IP \[bu]
-The contents of the file \fB@PAPERCONF@\fR
 .IP \[bu]
 The first paper size listed in \fB@PAPERSPECS@\fR
 .SH OPTIONS
@@ -44,13 +40,7 @@ By default, dimensions are printed in PostScript points.
 .TP
 .B PAPERSIZE
 Paper size to use.
-.TP
-.B PAPERCONF
-Absolute path to a file containing the paper size to use.
 .SH FILES
-.TP
-.B @PAPERCONF@
-The system-wide default paper size.
 .SH AUTHOR
 Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO

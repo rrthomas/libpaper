@@ -73,17 +73,9 @@ AC_SUBST([ISYSTEM])
 gl_INIT
 
 dnl set up some substitutions
-PAPERCONF="${sysconfdir}/papersize"
-AC_SUBST(PAPERCONF)
-AH_TEMPLATE(PAPERCONF, [Default configuration file location])
-
 PAPERSPECS="${sysconfdir}/paperspecs"
 AC_SUBST(PAPERSPECS)
 AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
-
-RUNPARTSDIR="${sysconfdir}/libpaper.d"
-AC_SUBST(RUNPARTSDIR)
-AH_TEMPLATE(RUNPARTSDIR, [Default directory for run-parts])
 
 dnl Create files
 AC_CONFIG_HEADER([config.h])
@@ -91,9 +83,7 @@ AC_OUTPUT([
 	Makefile
 	lib/Makefile
 	src/Makefile
-	src/paperconfig
 	man/Makefile
-	man/paperconfig.1.in
 	man/paperinfo.1.in
         man/paperspecs.5.in
 ])
