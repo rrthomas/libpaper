@@ -31,7 +31,7 @@ usage() {
     then
 	cat <<EOF
 
-Options: -v, --verbose          print version information and exit
+Options: -v, --version          print version information and exit
          -h, --help             print this help and exit
          -p, --paper NAME       specify the paper to use
          -c, --choose           choose paper interactively
