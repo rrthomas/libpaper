@@ -1,9 +1,9 @@
 libpaper
 ========
 
-The paper files and tools provide a simple way for applications to
-find information about paper sizes, and to find the user's preferred
-default paper size.
+The paper package provides a simple way for applications to find
+information about paper sizes, and to find the user's preferred
+default.
 
 It offers a command-line tool and files that applications can easily
 use.

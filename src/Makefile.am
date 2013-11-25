@@ -1,12 +1,8 @@
-AM_CFLAGS = $(WERROR_CFLAGS) $(WARN_CFLAGS)
+libexec_PROGRAMS= localepaper
+LDADD		= $(top_builddir)/lib/libgnu.a
+AM_CPPFLAGS	= -I$(top_srcdir)/lib
 
-bin_PROGRAMS	= paperinfo
-paperinfo_LDADD		= $(top_builddir)/lib/libgnu.a
-paperinfo_CPPFLAGS	= $(ISYSTEM)$(top_srcdir)/lib -DINSTALLDIR=\"$(bindir)\" -DPAPERSPECS='"$(PAPERSPECS)"'
-if RELOCATABLE_VIA_LD
-paperinfo_LDFLAGS	= `$(RELOCATABLE_LDFLAGS) $(bindir)`
-endif
-
+bin_SCRIPTS	= paperinfo
 sysconf_DATA	= paperspecs
 
 EXTRA_DIST	= $(sysconf_DATA)
