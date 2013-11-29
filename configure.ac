@@ -9,7 +9,6 @@ dnl Check for standard build environment
 gl_EARLY
 AC_PROG_CC
 AC_GNU_SOURCE
-AC_PROG_INSTALL
 
 gl_INIT
 
