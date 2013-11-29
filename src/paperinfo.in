@@ -15,18 +15,18 @@ if test "@RELOCATABLE@" = yes; then
     echo "@libexecdir@/" \
     | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
     | sed -e 's,/$,,'`
-  PAPERSPECS=`
-    echo "@PAPERSPECS@/" \
+  sysconfdir=`
+    echo "@sysconfdir@/" \
     | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
     | sed -e 's,/$,,'`
 fi
 
 #!perl
-eval 'exec perl -x -wS $0 "$libexecdir" "$PAPERSPECS" ${1+"$@"}'
+eval 'exec perl -x -wS $0 "$libexecdir" "$sysconfdir" ${1+"$@"}'
     if 0;
 
 my $libexecdir = shift;
-my $paperspecs = shift;
+my $sysconfdir = shift;
 
 # End of relocatable header; "real" Perl starts here.
 
@@ -37,6 +37,7 @@ use warnings;
 
 use Scalar::Util qw(looks_like_number);
 use File::Basename;
+use File::Spec::Functions;
 use POSIX qw(locale_h);
 use Getopt::Long;
 
@@ -78,19 +79,30 @@ END
 
 # Initialise papers list
 my @papers;
-open(PAPERSPECS, $paperspecs) or Die("could not read `$paperspecs'");
-while (<PAPERSPECS>) {
-  chomp $_;
-  my ($name, $w, $h, $unit) = split;
-  local *local_die = sub { Die("$_[0] in line $. of $paperspecs"); };
-  local_die("missing field") if !defined($name) || !defined($w) || !defined($h) || !defined($unit);
-  local_die("bad width") unless looks_like_number($w);
-  local_die("bad height") unless looks_like_number($h);
-  my $dim = $units{$unit};
-  local_die($unit_err) unless $dim;
-  push @papers, {name => $name, width => $w * $dim, height => $h * $dim};
+
+sub readspecs {
+  my ($file) = @_;
+  open(PAPERSPECS, $file) or Die("could not read `$file'");
+  while (<PAPERSPECS>) {
+    chomp $_;
+    my ($name, $w, $h, $unit) = split;
+    local *local_die = sub { Die("$_[0] in line $. of $file"); };
+    local_die("missing field") if !defined($name) || !defined($w) || !defined($h) || !defined($unit);
+    local_die("bad width") unless looks_like_number($w);
+    local_die("bad height") unless looks_like_number($h);
+    my $dim = $units{$unit};
+    local_die($unit_err) unless $dim;
+    push @papers, {name => $name, width => $w * $dim, height => $h * $dim};
+  }
+  close(PAPERSPECS);
 }
-close(PAPERSPECS);
+
+my $home = glob($ENV{HOME});
+if ($home) {
+  my $userspecs = catfile($home, ".@PAPERSPECS@");
+  readspecs($userspecs) if -e $userspecs;
+}
+readspecs(catfile($sysconfdir, "@PAPERSPECS@"));
 
 # Parse command-line options
 my ($opt_all, $opt_name, $opt_size, $opt_help, $opt_version);
@@ -115,7 +127,8 @@ usage(1) if $opt_all && $#ARGV >= 0;
 sub mm_to_pt { int(($_[0] * 72 / 2.54 / 10) + 0.5); }
 
 sub localepapername {
-  my $dims = `$libexecdir/localepaper` or return;
+  my $localepaper = catfile($libexecdir, "localepaper");
+  my $dims = `$localepaper` or return;
   chomp $dims;
   return if !defined($dims);
   my ($w, $h) = split /\s/, $dims;

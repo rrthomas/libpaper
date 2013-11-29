@@ -19,7 +19,9 @@ The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
 .IP \[bu]
-The first paper size listed in \fB@PAPERSPECS@\fR
+The first paper size listed in the concatenation of
+\fB~/.@PAPERSPECS@\fR (if it exists), or
+\fB@sysconfdir@/@PAPERSPECS@\fR otherwise
 .SH OPTIONS
 .TP
 .B \-a

@@ -3,17 +3,28 @@
 .B paperspecs
 \- paper size specifications
 .SH DESCRIPTION
-This file lists the paper size specifications used by libpaper, one per line.
+A list of the paper size specifications used by libpaper, one per line.
 Each line has the format:
 .TP
 NAME WIDTH HEIGHT UNIT
 .PP
 Valid units are: \fBpt\fR (PostScript points), \fBmm\fR, \fBin\fR.
+.PP
+A size may be defined more than once. Only the first definition is
+normally used. This means that the user's paperspecs file overrides
+sizes in the system file (see below).
+.PP
+Multiple definitions are also used to allow inexact definitions to be
+looked up by size. For example, the \fBLC_PAPER\fR mechanism available
+on some systems defines paper sizes in whole numbers of millimetres,
+which results in a definition for Letter size that does not exactly
+match the definition in inches.
 .SH FILES
 .TP
-.B @PAPERSPECS@
-Directory of scripts to run after the paper size has been changed.
-This package puts no scripts here, but other packages may.
+.B @sysconfdir@/@PAPERSPECS@
+System list of paper sizes.
+.B ~/.@PAPERSPECS@
+User's list of paper sizes. This is prepended to the system list.
 .SH CREDITS
 The original paper names came from Ghostscript 3.68's gs_stadt.ps.
 .SH AUTHOR

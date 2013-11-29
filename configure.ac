@@ -20,7 +20,7 @@ if test -z "$PERL"; then
 fi
 
 dnl set up some substitutions
-PAPERSPECS="${sysconfdir}/paperspecs"
+PAPERSPECS="paperspecs"
 AC_SUBST(PAPERSPECS)
 AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
 
