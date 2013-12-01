@@ -1,12 +1,12 @@
-.TH PAPERSPECS 5 "19 November 2013"
+.TH PAPERSPECS 5 "1 December 2013"
 .SH NAME
 .B paperspecs
 \- paper size specifications
 .SH DESCRIPTION
-A list of the paper size specifications used by libpaper, one per line.
-Each line has the format:
+A CSV format list of the paper size specifications used by libpaper.
+Each line contains the following fields:
 .TP
-NAME WIDTH HEIGHT UNIT
+NAME,WIDTH,HEIGHT,UNIT
 .PP
 Valid units are: \fBpt\fR (PostScript points), \fBmm\fR, \fBin\fR.
 .PP
@@ -25,6 +25,9 @@ match the definition in inches.
 System list of paper sizes.
 .B ~/.@PAPERSPECS@
 User's list of paper sizes. This is prepended to the system list.
+.SH BUGS
+The CSV format is restricted: quotes are not allowed; hence, fields
+cannot be escaped.
 .SH CREDITS
 The original paper names came from Ghostscript 3.68's gs_stadt.ps.
 .SH AUTHOR

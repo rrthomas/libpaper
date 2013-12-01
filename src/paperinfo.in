@@ -85,7 +85,8 @@ sub readspecs {
   open(PAPERSPECS, $file) or Die("could not read `$file'");
   while (<PAPERSPECS>) {
     chomp $_;
-    my ($name, $w, $h, $unit) = split;
+    my ($name, $w, $h, $unit) = split /,/;
+    $name =~ s/ //;
     local *local_die = sub { Die("$_[0] in line $. of $file"); };
     local_die("missing field") if !defined($name) || !defined($w) || !defined($h) || !defined($unit);
     local_die("bad width") unless looks_like_number($w);

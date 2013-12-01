@@ -1,4 +1,4 @@
-.TH PAPERINFO 1 "8 November 2013"
+.TH PAPERINFO 1 "1 December 2013"
 .SH NAME
 .B paperinfo
 \- print paper configuration information
@@ -8,6 +8,7 @@
 .B paperinfo
 prints information about the given paper sizes, which can include the
 standard form of its name, its width and height.
+The name is matched case-insensitively, and ignoring spaces.
 .PP
 If neither a paper size nor the \fB\-a\fR option is given, the current
 paper size is used.
