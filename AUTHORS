@@ -1,3 +1,4 @@
-Yves Arrouye <yves@debian.org> wrote the original library in 1996.
-Adrian Bunk  <bunk@fs.tum.de> improved it in 2000.
-Reuben Thomas <rrt@sc3d.org> overhauled it in 2013.
+paper was developed by Reuben Thomas <rrt@sc3d.org> in 2013, based on
+libpaper, a C library, associated utilities and paper catalogues by
+Yves Arrouye <yves@debian.org>, who wrote the original library in
+1996, and Adrian Bunk <bunk@fs.tum.de>, who improved it in 2000.

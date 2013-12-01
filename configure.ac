@@ -28,8 +28,8 @@ AC_OUTPUT([
 	Makefile
 	lib/Makefile
 	src/Makefile
-        src/paperinfo
+        src/paper
 	man/Makefile
-	man/paperinfo.1.in
+	man/paper.1.in
         man/paperspecs.5.in
 ])

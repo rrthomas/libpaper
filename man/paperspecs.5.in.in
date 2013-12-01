@@ -33,4 +33,4 @@ The original paper names came from Ghostscript 3.68's gs_stadt.ps.
 .SH AUTHOR
 Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
-paperinfo(1)
+paper(1)

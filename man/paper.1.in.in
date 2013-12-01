@@ -1,11 +1,11 @@
-.TH PAPERINFO 1 "1 December 2013"
+.TH PAPER 1 "1 December 2013"
 .SH NAME
-.B paperinfo
+.B paper
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaperinfo\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
+\fBpaper\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
 .SH DESCRIPTION
-.B paperinfo
+.B paper
 prints information about the given paper sizes, which can include the
 standard form of its name, its width and height.
 The name is matched case-insensitively, and ignoring spaces.
@@ -29,7 +29,7 @@ The first paper size listed in the concatenation of
 Give information about all known paper sizes.
 .TP
 .B \-n
-Print the name of paper. (By default, \fBpaperinfo\fR does not print
+Print the name of paper. (By default, \fBpaper\fR does not print
 the name of the paper when given exactly one paper size argument.)
 .TP
 .B \-s
