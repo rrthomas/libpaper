@@ -4,8 +4,8 @@ Note,8.5,11,in
 Legal,8.5,14,in
 Executive,7.25,10.5,in
 A5,148,210,mm
-HalfLetter,5.5,8.5,in
-HalfExecutive,5.25,7.25,in
+Half Letter,5.5,8.5,in
+Half Executive,5.25,7.25,in
 A0,841,1189,mm
 A1,594,841,mm
 A2,420,594,mm
@@ -15,6 +15,7 @@ A7,74,105,mm
 A8,52,74,mm
 A9,37,52,mm
 A10,26,37,mm
+Super A3,330,483,mm
 B0,1000,1414,mm
 B1,707,1000,mm
 B2,500,707,mm
@@ -26,6 +27,8 @@ B7,88,125,mm
 B8,62,88,mm
 B9,44,62,mm
 B10,31,44,mm
+C0,917,1297,mm
+C1,648,917,mm
 C2,458,648,mm
 C3,324,458,mm
 C4,229,354,mm
@@ -33,18 +36,19 @@ C5,162,229,mm
 C6,114,162,mm
 C7,81,114,mm
 C8,57,81,mm
-JISB0,1030,1456,mm
-JISB1,728,1030,mm
-JISB2,515,728,mm
-JISB3,364,515,mm
-JISB4,257,364,mm
-JISB5,182,257,mm
-JISB6,128,182,mm
-JISB7,91,128,mm
-JISB8,64,91,mm
-JISB9,45,64,mm
-JISB10,32,45,mm
-B5var,182,230,mm
+C9,40,57,mm
+C10,28,40,mm
+JIS B0,1030,1456,mm
+JIS B1,728,1030,mm
+JIS B2,515,728,mm
+JIS B3,364,515,mm
+JIS B4,257,364,mm
+JIS B5,182,257,mm
+JIS B6,128,182,mm
+JIS B7,91,128,mm
+JIS B8,64,91,mm
+JIS B9,45,64,mm
+JIS B10,32,45,mm
 11x17,11,17,in
 Statement,5.5,8.5,in
 Folio,8.5,13,in
@@ -52,16 +56,27 @@ Folio,8.5,13,in
 Ledger,17,11,in
 Tabloid,11,17,in
 DL,110,220,mm
-Comm10,4.125,9.5,in
+Comm 10,4.125,9.5,in
 Monarch,3.875,7.5,in
-ArchE,36,48,in
-ArchD,24,36,in
-ArchC,18,24,in
-ArchB,12,18,in
-ArchA,9.5,12,in
+Arch A,9,12,in
+Arch B,12,18,in
+Arch C,18,24,in
+Arch D,24,36,in
+Arch E,36,48,in
+Arch E1,30,42,in
+Arch E2,26,36,in
+Arch E3,27,39,in
 FLSA,8.5,13,in
 FLSE,8.5,13,in
-CSheet,17,22,in
-DSheet,22,34,in
-ESheet,34,44,in
+A Sheet,8.5,11,in
+B Sheet,11,17,in
+C Sheet,17,22,in
+D Sheet,22,34,in
+E Sheet,34,44,in
+ANSI A,8.5,11,in
+ANSI B,11,17,in
+ANSI C,17,22,in
+ANSI D,22,34,in
+ANSI E,34,44,in
+ANSI Super B,13,19,in
 Letter,216,279,mm
