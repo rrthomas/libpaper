@@ -2,15 +2,5 @@
 /autoreconf.before
 /build
 /files
-/libpaper-dev.debhelper.log
-/libpaper-dev.substvars
-/libpaper-dev/
-/libpaper-utils.debhelper.log
-/libpaper-utils.substvars
-/libpaper-utils/
-/libpaper2.debhelper.log
-/libpaper2.postinst.debhelper
-/libpaper2.postrm.debhelper
-/libpaper2.substvars
-/libpaper2/
+/paper/
 /tmp/

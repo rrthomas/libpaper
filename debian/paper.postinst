@@ -1,0 +1,26 @@
+#! /bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+#DEBHELPER#
+
+if [ "$1" ]; then
+ db_get paper/paperspecs
+ echo $RET > /etc/paperspecs.dpkg-inst
+ # it is okay if /etc/paperspecs does not exist
+ md5_old=`md5sum /etc/paperspecs 2> /dev/null | awk '{print $1}'`
+ md5_inst=`md5sum /etc/paperspecs.dpkg-inst | awk '{print $1}'`
+ ucf --debconf-ok /etc/paperspecs.dpkg-inst /etc/papersize
+ md5_new=`md5sum /etc/paperspecs 2> /dev/null | awk '{print $1}'`
+
+ # cleanup clutter
+
+ if [ -e /etc/paperspecs.dpkg-inst ]; then
+  if [ "$md5_inst" = "$md5_new" ]; then
+   rm -f /etc/paperspecs.dpkg-inst
+  fi
+ fi
+fi
+
+exit 0
+

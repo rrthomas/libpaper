@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-# debian/rules for libpaper
+# debian/rules for paper
 
 export DH_OPTIONS=
 
@@ -11,17 +11,14 @@ prefix	:= $(CURDIR)/debian/tmp
 share	:= /usr/share
 
 config_flags	:= --prefix=/usr \
-	--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 	--sysconfdir=/etc \
 	--mandir=$(share)/man \
 	--infodir=$(share)/info \
 	--build=$(DEB_BUILD_GNU_TYPE)
 ifeq ($(DEB_BUILD_GNU_TYPE), $(DEB_HOST_GNU_TYPE))
 cross_config_flags	:=
-native_paperconf	:= debian/build/src/paperconf
 else
 cross_config_flags	:= --host=$(DEB_HOST_GNU_TYPE)
-native_paperconf	:= debian/build-native/src/paperconf
 endif
 
 cflags	:= -g -Wall
@@ -62,7 +59,7 @@ ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 endif
 	touch $@
 
-build:	config build-stamp debian/libpaper3.config
+build:	config build-stamp
 build-stamp:
 	$(MAKE) -C debian/build
 ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
@@ -70,22 +67,11 @@ ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 endif
 	touch $@
 
-debian/libpaper3.config: build-stamp
-	exec > $@.new \
-		&& sed -n '1,/^__BEGIN_PAPERSPECS__/p' $@ \
-		&& $(native_paperconf) -amns \
-		&& sed -n '/^__END_PAPERSPECS__/,$$p' $@
-	mv $@.new $@
-
 clean:	checkroot
 	rm -f *-stamp
 	[ ! -f Makefile ] || $(MAKE) distclean
 	rm -rf debian/build debian/build-native
 	dh_clean
-	exec > /tmp/libpaper3.new \
-		&& sed -n '1,/^__BEGIN_PAPERSPECS__/p' debian/libpaper3.config \
-		&& sed -n '/^__END_PAPERSPECS__/,$$p' debian/libpaper3.config
-	mv /tmp/libpaper3.new debian/libpaper3.config
 
 binary-indep:	DH_OPTIONS=-i
 binary-indep:	checkroot build
@@ -114,10 +100,8 @@ binary-arch:	checkroot build
 	dh_strip
 	dh_compress
 	dh_fixperms
-	dh_makeshlibs
 	dh_installdebconf
 	dh_installdeb
-	dh_shlibdeps -L$(package) -ldebian/$(package)/usr/lib/$(DEB_HOST_MULTIARCH)
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
