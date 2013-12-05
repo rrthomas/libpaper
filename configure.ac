@@ -11,12 +11,6 @@ AC_PROG_CC
 AC_GNU_SOURCE
 gl_INIT
 
-dnl Perl
-AX_WITH_PROG([PERL], [perl])
-if test -z "$PERL"; then
-  AC_MSG_FAILURE([cannot find perl])
-fi
-
 dnl set up some substitutions
 PAPERSPECS="paperspecs"
 AC_SUBST(PAPERSPECS)
