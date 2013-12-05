@@ -3,7 +3,6 @@ dnl Process this file with autoconf to produce a configure script.
 AC_INIT([paper], [2.0])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 dnl Check for standard build environment
 gl_EARLY
