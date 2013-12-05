@@ -1,9 +1,9 @@
-.TH PAPER 1 "1 December 2013"
+.TH PAPER 1 "5 December 2013"
 .SH NAME
 .B paper
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaper\fR [\fB\-n\fR] [\fB\-s\fR] [\fB\-u\fR \fIUNIT\fR] [\fIPAPER\fR...|\fB\-a\fR]
+\fBpaper\fR [OPTION...][\fIPAPER\fR...|\fB\-\-all\fR]
 .SH DESCRIPTION
 .B paper
 prints information about the given paper sizes, which can include the
@@ -20,31 +20,28 @@ The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
 .IP \[bu]
-The first paper size listed in the concatenation of
-\fB~/.@PAPERSPECS@\fR (if it exists), or
-\fB@sysconfdir@/@PAPERSPECS@\fR otherwise
+The first paper size in the configured list (see paperspecs(5)).
 .SH OPTIONS
 .TP
-.B \-a
+.B \-\-all
 Give information about all known paper sizes.
 .TP
-.B \-n
+.B \-\-name
 Print the name of paper. (By default, \fBpaper\fR does not print
 the name of the paper when given exactly one paper size argument.)
 .TP
-.B \-s
+.B \-\-size
 Print the size (width followed by height) of the paper.
 .TP
-.B \-u " UNIT"
+.B \-\-unit=UNIT
 Specify the units in which to print dimensions.
-See paperspecs(5) for a list of valid units.
+Valid units are listed in paperspecs(5).
 By default, dimensions are printed in PostScript points.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B PAPERSIZE
 Paper size to use.
-.SH FILES
 .SH AUTHOR
-Yves Arrouye <arrouye@debian.org>, Reuben Thomas <rrt@sc3d.org>
+Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
 paperspecs(5)
