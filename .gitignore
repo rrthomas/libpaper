@@ -27,7 +27,7 @@ Makefile.in
 /gnulib
 /install-sh
 /lib
-/libpaper*.tar.gz
+/paper*.tar.gz
 /missing
 /stamp-h1
 /GNUmakefile
