@@ -1,11 +1,13 @@
 paper (2.0) unstable; urgency=low
 
-  * Redesign and rewrite of libpaper.
+  * Redesign and rewrite of libpaper.  Closes #727656, #729004
+  * No config files in Multi-Arch package.  Closes #682420, #695271
+  * Remove /etc/papersize.  Closes #731430
   * Remove papersize(5).  Closes: #486338
   * Update build system for recent autotools.  Closes: #496126, #700358
   * Add JIS B series paper sizes (patch from TeXLive).  Closes: #403365
   * Try LC_PAPER before falling back to default PAPERSIZE.  Closes #481213, #376350
-  * run-parts support removed.  Closes: #594931
+  * run-parts support removed.  Closes: #594931, #690247, #695536, #731432
   * Fix cross-compilation.  Closes #693968
   * Load paper sizes at run-time, allowing the user to change the configuration.
   * Remove the library: the programs and data sources can be used instead.
@@ -15,8 +17,9 @@ paper (2.0) unstable; urgency=low
   * Debconf translations removed.
     - Polish.  Closes: #658159
     - Turkish.  Closes: #688293
+  * FIXME: Bugs remaining: #413722, #574750
 
- -- Reuben Thomas <rrt@sc3d.org>  Thu, 07 Nov 2013 19:10:00 +0000
+ -- Reuben Thomas <rrt@sc3d.org>  Sat, 07 Dec 2013 00:01:00 +0000
 
 libpaper (1.1.24+nmu2) unstable; urgency=low
 

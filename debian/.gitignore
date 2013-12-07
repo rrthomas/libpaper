@@ -1,6 +1,9 @@
+/paper*.debhelper.log
+/paper*.substvars
 /autoreconf.after
 /autoreconf.before
 /build
 /files
 /paper/
+/paper-bin/
 /tmp/
