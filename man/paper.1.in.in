@@ -3,7 +3,7 @@
 .B paper
 \- print paper configuration information
 .SH SYNOPSIS
-\fBpaper\fR [OPTION...][\fIPAPER\fR...|\fB\-\-all\fR]
+\fBpaper\fR [OPTION...] [\fIPAPER\fR...|\fB\-\-all\fR]
 .SH DESCRIPTION
 .B paper
 prints information about the given paper sizes, which can include the
