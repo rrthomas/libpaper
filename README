@@ -12,6 +12,20 @@ can also be used directly (see paperspecs(5)).
 Paper is based on libpaper: see AUTHORS for more information.
 
 
+Installation
+------------
+
+Quick start:
+
+  ./configure && make && (sudo) make install
+
+Paper can be built as a relocatable package that can be copied
+anywhere once built and installed. To use this feature, use the
+--enable-relocatable option to configure.
+
+See INSTALL for more information.
+
+
 Use from C
 ----------
 
