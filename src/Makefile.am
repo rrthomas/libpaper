@@ -6,3 +6,8 @@ bin_SCRIPTS	= paper
 sysconf_DATA	= paperspecs
 
 EXTRA_DIST	= $(sysconf_DATA)
+
+edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
+
+paper: $(builddir)/paper.in
+	$(edit) $(builddir)/$@.in >$@

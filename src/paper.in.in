@@ -19,6 +19,9 @@ if test "@RELOCATABLE@" = yes; then
     echo "@sysconfdir@/" \
     | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
     | sed -e 's,/$,,'`
+else
+  libexecdir="@libexecdir@"
+  sysconfdir="@sysconfdir@"
 fi
 
 #!perl

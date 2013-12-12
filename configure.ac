@@ -21,7 +21,7 @@ AC_OUTPUT([
 	Makefile
 	lib/Makefile
 	src/Makefile
-        src/paper
+        src/paper.in
 	man/Makefile
 	man/paper.1.in
         man/paperspecs.5.in
