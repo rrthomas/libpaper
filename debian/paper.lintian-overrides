@@ -1,0 +1,4 @@
+# Our package name also happens to be a common noun
+paper binary: description-starts-with-package-name
+# This is a Perl script disguised as a shell script
+paper binary: shell-script-fails-syntax-check usr/bin/paper

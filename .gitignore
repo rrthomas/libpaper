@@ -5,6 +5,7 @@
 .deps
 .gitmodules
 .libs
+/*.cdbs-orig
 /.sc-start-sc*
 Makefile
 Makefile.in
@@ -28,6 +29,7 @@ Makefile.in
 /install-sh
 /lib
 /paper*.tar.gz
+/paper*.tar.gz.cdbs-config_list
 /missing
 /stamp-h1
 /GNUmakefile

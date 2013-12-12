@@ -1,23 +1,27 @@
-paper (2.0) unstable; urgency=low
+paper (2.0+nmu1) unstable; urgency=low
 
-  * Redesign and rewrite of libpaper.  Closes #727656, #729004
-  * No config files in Multi-Arch package.  Closes #682420, #695271
-  * Remove /etc/papersize.  Closes #731430
+  * Non-maintainer upload.
+  * Redesign and rewrite of libpaper.  Closes: #727656, #729004
+  * No config files in Multi-Arch package.  Closes: #682420, #695271
+  * Remove /etc/papersize.  Closes: #731430
   * Remove papersize(5).  Closes: #486338
   * Update build system for recent autotools.  Closes: #496126, #700358
   * Add JIS B series paper sizes (patch from TeXLive).  Closes: #403365
-  * Try LC_PAPER before falling back to default PAPERSIZE.  Closes #481213, #376350
+  * Try LC_PAPER before falling back to default PAPERSIZE.
+    Closes: #481213, #376350
   * run-parts support removed.  Closes: #594931, #690247, #695536, #731432
-  * Fix cross-compilation.  Closes #693968
+  * Fix cross-compilation.  Closes: #693968
   * Load paper sizes at run-time, allowing the user to change the configuration.
   * Remove the library: the programs and data sources can be used instead.
   * Reduce the range of supported units to those actually needed.
-  * Use the first entry in paperspecs as the "default default".  Closes #493722
-  * Remove paperconfig.  Closes #486341
+  * Use the first entry in paperspecs as the "default default".  Closes: #493722
+  * Remove paperconfig.  Closes: #486341
   * Debconf translations removed.
     - Polish.  Closes: #658159
     - Turkish.  Closes: #688293
-  * FIXME: Bugs remaining: #413722, #574750
+  * Install README.  Closes: #413722
+  * No longer use ucf.  Closes: #574750
+  * Update Standards-Version to 3.9.4, use cdbs and placate lintian.
 
  -- Reuben Thomas <rrt@sc3d.org>  Sat, 07 Dec 2013 00:01:00 +0000
 

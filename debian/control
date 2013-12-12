@@ -2,22 +2,22 @@ Source: paper
 Section: libs
 Priority: optional
 Maintainer: Giuseppe Sacco <eppesuig@debian.org>
-Standards-Version: 3.6.2
-Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 8.1.3~), dh-exec(>= 0.3), dh-autoreconf
+Standards-Version: 3.9.4
+Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), cdbs (>=0.4.93~)
 
 Package: paper
 Architecture: all
 Depends: ${misc:Depends}, paper-bin
-Description: paper sizes catalogue and utility
+Description: Paper sizes catalogue and utility
  The paper utility automates recognition of many different paper types
  and sizes for programs that need to deal with printed output.
 
 Package: paper-bin
 Section: utils
 Architecture: any
-Multi-Arch: foreign
-Depends: ${misc:Depends}
-Description: paper sizes catalogue and utility (binaries)
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Paper sizes catalogue and utility (binaries)
  The paper utility automates recognition of many different paper types
  and sizes for programs that need to deal with printed output.
  .

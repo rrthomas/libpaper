@@ -1,0 +1,2 @@
+# False positive
+paper-bin binary: sharedobject-in-library-directory-missing-soname usr/lib/*/localepaper

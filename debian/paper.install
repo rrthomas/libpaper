@@ -1,4 +1,3 @@
-#! /usr/bin/dh-exec  --with-scripts=subst-multiarch
 debian/tmp/etc/paperspecs
 debian/tmp/usr/bin
 debian/tmp/usr/share/doc

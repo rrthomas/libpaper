@@ -7,3 +7,5 @@
 /paper/
 /paper-bin/
 /tmp/
+/stamp-autotools*
+/stamp-makefile*
