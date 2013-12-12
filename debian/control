@@ -1,5 +1,5 @@
 Source: paper
-Section: libs
+Section: utils
 Priority: optional
 Maintainer: Giuseppe Sacco <eppesuig@debian.org>
 Standards-Version: 3.9.4
