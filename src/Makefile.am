@@ -7,6 +7,8 @@ sysconf_DATA	= paperspecs
 
 EXTRA_DIST	= $(sysconf_DATA)
 
+DISTCLEANFILES	= $(bin_SCRIPTS)
+
 edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
 
 paper: $(builddir)/paper.in
