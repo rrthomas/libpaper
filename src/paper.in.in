@@ -1,42 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env perl
 # -*- perl -*-
-
-# Relocatable header (see after for copyright)
-
-@relocatable_sh@
-if test "@RELOCATABLE@" = yes; then
-  exec_prefix="@exec_prefix@"
-  bindir="@bindir@"
-  orig_installdir="$bindir" # see Makefile.am's *_SCRIPTS variables
-  func_find_curr_installdir # determine curr_installdir
-  func_find_prefixes
-  # Relocate the directory variables that we use.
-  libexecdir=`
-    echo "@libexecdir@/" \
-    | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
-    | sed -e 's,/$,,'`
-  sysconfdir=`
-    echo "@sysconfdir@/" \
-    | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
-    | sed -e 's,/$,,'`
-else
-  libexecdir="@libexecdir@"
-  sysconfdir="@sysconfdir@"
-fi
-
-#!perl
-eval 'exec perl -x -wS $0 "$libexecdir" "$sysconfdir" ${1+"$@"}'
-    if 0;
-
-my $libexecdir = shift;
-my $sysconfdir = shift;
-
-# End of relocatable header; "real" Perl starts here.
-
 
 use 5.10.1;
 use strict;
 use warnings;
+
+# Relocatable header (see after for copyright)
+
+@relocatable_pl@
+if ("@RELOCATABLE@" eq "yes") {
+  my $exec_prefix = "@exec_prefix@";
+  my $orig_installdir = "@bindir@"; # see Makefile.am's *_SCRIPTS variables
+  my ($orig_installprefix, $curr_installprefix) = find_prefixes($orig_installdir, find_curr_installdir());
+  sub relocate { # the subroutine is defined whether or not the enclosing block is executed
+    my ($dir) = @_;
+    if ("@RELOCATABLE@" eq "yes") {
+      $dir =~ s%^$orig_installprefix/%$curr_installprefix/%;
+      $dir =~ s,/$,,;
+    }
+    return $dir;
+  }
+}
+
+# Relocate the directory variables that we use.
+my $libexecdir = &relocate("@libexecdir@");
+my $sysconfdir = &relocate("@sysconfdir@");
+
+# End of relocatable header; "real" Perl starts here.
+
 
 use Scalar::Util qw(looks_like_number);
 use File::Basename;

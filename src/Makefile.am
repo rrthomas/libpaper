@@ -9,7 +9,7 @@ EXTRA_DIST	= $(sysconf_DATA)
 
 DISTCLEANFILES	= $(bin_SCRIPTS)
 
-edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g'
+edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g' -e 's|$$[{]exec_prefix[}]|$(exec_prefix)|g'
 
 paper: $(builddir)/paper.in
 	$(edit) $(builddir)/$@.in >$@
