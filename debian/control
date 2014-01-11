@@ -13,7 +13,6 @@ Description: Paper sizes catalogue and utility
  and sizes for programs that need to deal with printed output.
 
 Package: paper-bin
-Section: utils
 Architecture: any
 Multi-Arch: same
 Depends: ${shlibs:Depends}, ${misc:Depends}
