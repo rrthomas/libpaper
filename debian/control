@@ -10,7 +10,7 @@ Architecture: all
 Depends: ${misc:Depends}, paper-bin
 Description: Paper sizes catalogue and utility
  The paper utility automates recognition of many different paper types
- and sizes for programs that need to deal with printed output.
+ and sizes for programs that need to print.
 
 Package: paper-bin
 Architecture: any

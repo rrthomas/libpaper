@@ -1,2 +1,4 @@
 # Our package name also happens to be a common noun
 paper binary: description-starts-with-package-name
+# Our package description is short
+paper binary: extended-description-is-probably-too-short
