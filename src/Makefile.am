@@ -13,3 +13,8 @@ edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g' -e 's|$$[{]exec_prefix[}]|$(exec_pr
 
 paper: $(builddir)/paper.in
 	$(edit) $(builddir)/$@.in >$@
+
+install-exec-hook:
+	if test "x$(EXEEXT)" != "x"; then \
+	  mv $(DESTDIR)$(bindir)/paper $(DESTDIR)$(bindir)/paper$(PERL_EXEEXT); \
+	fi

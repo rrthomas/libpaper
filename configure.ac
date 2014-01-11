@@ -15,6 +15,10 @@ PAPERSPECS="paperspecs"
 AC_SUBST(PAPERSPECS)
 AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
 
+PERL_EXEEXT=.pl
+AC_SUBST(PERL_EXEEXT)
+AH_TEMPLATE(PERL_EXEEXT, [File extension for Perl scripts on systems that use EXEEXT])
+
 dnl Create files
 AC_CONFIG_HEADER([config.h])
 AC_OUTPUT([
