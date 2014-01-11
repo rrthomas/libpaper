@@ -1,4 +1,4 @@
-.TH PAPER 1 "5 December 2013"
+.TH PAPER 1 "11 January 2014"
 .SH NAME
 .B paper
 \- print paper configuration information
@@ -14,13 +14,16 @@ If neither a paper size nor the \fB\-a\fR option is given, the current
 paper size is used.
 .PP
 The current paper size is obtained by looking in order at the following
-values until a valid paper size is found:
+values until the name of a paper size in the configured list is found.
+If no paper sizes are configured, paper exits with an error.
 .IP \[bu]
 The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
 .IP \[bu]
-The first paper size in the configured list (see paperspecs(5)).
+The first paper size in the system list
+.IP \[bu]
+The first paper size in the user's list
 .SH OPTIONS
 .TP
 .B \-\-all
