@@ -1,4 +1,4 @@
-.TH PAPERSPECS 5 "1 December 2013"
+.TH PAPERSPECS 5 "11 January 2014"
 .SH NAME
 .B paperspecs
 \- paper size specifications
@@ -29,7 +29,8 @@ User's list of paper sizes. This is prepended to the system list.
 The CSV format is restricted: quotes are not allowed; hence, fields
 cannot be escaped.
 .SH CREDITS
-The original paper names came from Ghostscript 3.68's gs_stadt.ps.
+The original list of paper names came from Ghostscript 3.68's
+gs_stadt.ps.
 .SH AUTHOR
 Reuben Thomas <rrt@sc3d.org>
 .SH SEE ALSO
