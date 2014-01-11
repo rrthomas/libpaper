@@ -3,7 +3,7 @@
 .B paperspecs
 \- paper size specifications
 .SH DESCRIPTION
-A CSV format list of the paper size specifications used by libpaper.
+A CSV format list of the paper size specifications used by paper.
 Each line contains the following fields:
 .TP
 NAME,WIDTH,HEIGHT,UNIT
