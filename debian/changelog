@@ -1,6 +1,5 @@
-paper (2.0+nmu1) unstable; urgency=low
+paper (2.0) unstable; urgency=low
 
-  * Non-maintainer upload.
   * Redesign and rewrite of libpaper.  Closes: #727656, #729004
   * No config files in Multi-Arch package.  Closes: #682420, #695271
   * Remove /etc/papersize.  Closes: #731430
@@ -23,7 +22,7 @@ paper (2.0+nmu1) unstable; urgency=low
   * No longer use ucf.  Closes: #574750
   * Update Standards-Version to 3.9.4, use cdbs and placate lintian.
 
- -- Reuben Thomas <rrt@sc3d.org>  Sat, 07 Dec 2013 00:01:00 +0000
+ -- Reuben Thomas <rrt@sc3d.org>  Sat, 31 Dec 2015 00:01:00 +0000
 
 libpaper (1.1.24+nmu2) unstable; urgency=low
 
