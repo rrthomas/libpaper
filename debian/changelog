@@ -20,7 +20,7 @@ paper (2.0) unstable; urgency=low
     - Turkish.  Closes: #688293
   * Install README.  Closes: #413722
   * No longer use ucf.  Closes: #574750
-  * Update Standards-Version to 3.9.4, use cdbs and placate lintian.
+  * Update Standards-Version to 3.9.6, use cdbs and placate lintian.
 
  -- Reuben Thomas <rrt@sc3d.org>  Sat, 31 Dec 2015 00:01:00 +0000
 
