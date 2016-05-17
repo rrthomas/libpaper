@@ -54,8 +54,8 @@ static char *pgetline(const char *cmd)
   char *l = NULL;
   FILE *fp = popen(cmd, "r");
   if (fp) {
-    size_t n, len;
-    len = getline(&l, &n, fp);
+    size_t n;
+    ssize_t len = getline(&l, &n, fp);
     if (l && l[len - 1] == '\n')
       l[len - 1] = '\0';
     pclose(fp);
