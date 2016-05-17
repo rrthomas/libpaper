@@ -38,29 +38,29 @@ Use from C
 ----------
 
 Maintainers of C programs that used to use libpaper may find the
-following example code eases the transition to paper. Most languages
-have easily-available features or libraries to parse CSV files and the
-output of other programs. It's not so easy in C, but with modern POSIX
-APIs it's not too hard. The code is taken from the psutils package. It
-uses the POSIX 2008 API getline, which is available in gnulib[0] for
-systems that have not (yet) implemented it.
+following example code eases the transition to paper. The non-standard
+xasprintf API comes from gnulib[0], which also provides getline (POSIX
+2008) for systems that don’t yet have it; the gnulib modules required
+are respectively xvasprintf and getline.
 
 
 #include <stdio.h>
+#include "xvasprintf.h"
 
 /* Read a line from a pipe and return it without any trailing newline. */
 static char *pgetline(const char *cmd)
 {
   char *l = NULL;
   FILE *fp = popen(cmd, "r");
+  ssize_t len;
   if (fp) {
     size_t n;
-    ssize_t len = getline(&l, &n, fp);
-    if (l && l[len - 1] == '\n')
+    len = getline(&l, &n, fp);
+    if (len != -1 && l[len - 1] == '\n')
       l[len - 1] = '\0';
     pclose(fp);
   }
-  return l;
+  return len == -1 ? NULL : l;
 }
 
 /* Return the default paper name. */
