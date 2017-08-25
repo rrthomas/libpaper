@@ -1,13 +1,13 @@
-dnl Process this file with autoconf to produce a configure script.
+dnl Process this file with autoconf to produce a configure script
 
 AC_INIT([paper], [2.0])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([-Wall])
 
 dnl Check for standard build environment
-gl_EARLY
-AC_PROG_CC
 AC_GNU_SOURCE
+AC_PROG_CC
+gl_EARLY
 gl_INIT
 
 dnl set up some substitutions
