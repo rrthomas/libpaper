@@ -48,7 +48,10 @@ END
 
 setlocale(LC_ALL, "");
 
-sub Die { die "$program_name: $_[0]\n"; }
+sub Die {
+  say "$program_name: $_[0]";
+  exit(1);
+}
 
 my %units = (
   "pt" => 1,
