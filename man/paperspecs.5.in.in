@@ -23,7 +23,8 @@ match the definition in inches.
 .TP
 .B @sysconfdir@/@PAPERSPECS@
 System list of paper sizes.
-.B ~/.@PAPERSPECS@
+.TP
+.B $XDG_CONFIG_HOME/@PAPERSPECS@
 User's list of paper sizes. This is prepended to the system list.
 .SH BUGS
 The CSV format is restricted: quotes are not allowed; hence, fields
