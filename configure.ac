@@ -9,6 +9,7 @@ AC_GNU_SOURCE
 AC_PROG_CC
 gl_EARLY
 gl_INIT
+AC_PATH_PROG(PERL, perl)
 
 dnl set up some substitutions
 PAPERCONF="papersize"

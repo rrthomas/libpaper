@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!@PERL@
 # -*- perl -*-
 
 use 5.10.1;
