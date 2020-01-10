@@ -14,8 +14,8 @@ If neither a paper size nor the \fB\-a\fR option is given, the current
 paper size is used.
 .PP
 The current paper size is obtained by looking in order at the following
-values until the name of a paper size in the configured list is found.
-If no paper sizes are configured, paper exits with an error.
+values until a non-empty value is found.
+If no paper size is configured, paper exits with an error.
 .IP \[bu]
 The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
