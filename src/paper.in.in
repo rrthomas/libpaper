@@ -4,7 +4,6 @@
 use 5.10.1;
 use strict;
 use warnings;
-no if $] >= 5.018, warnings => "experimental::smartmatch";
 
 # Relocatable header (see after for copyright)
 
@@ -131,6 +130,19 @@ usage(1) if $opt_all && $#ARGV >= 0;
 # Get paper type from the locale
 sub mm_to_pt { int(($_[0] * 72 / 2.54 / 10) + 0.5); }
 
+sub trim {
+  my ($s) = @_;
+  $s =~ s/^\s+|\s+$//g;
+  return $s;
+}
+
+sub papernamefile {
+  my ($file) = @_;
+  open(PAPERSIZE, $file) or return;
+  my $output = do {local $/, <PAPERSIZE>} or return;
+  return trim($output);
+}
+
 sub localepapername {
   my $localepaper = catfile($libexecdir, "localepaper");
   my $dims = `$localepaper@EXEEXT@` or return;
@@ -145,21 +157,28 @@ sub localepapername {
 }
 
 # Work out user's current paper size
-sub currentpapername {
-  $ENV{PAPERSIZE} || localepapername() || $default_paper->{name};
+sub currentpaper {
+  return $ENV{PAPERSIZE} ||
+    papernamefile(catfile($xdg_config_home, "@PAPERCONF@")) ||
+    localepapername() ||
+    papernamefile(catfile($sysconfdir, "@PAPERCONF@")) ||
+    $default_paper->{name};
 }
 
 sub paperinfo {
   my ($paper) = @_;
   foreach my $p (@papers) {
-    return $p if $p->{name} ~~ /^$paper$/i;
+    return $p if $p->{name} =~ /^$paper$/i;
   }
 }
 
 # Output requested information
 map { push @ARGV, $_->{name} } @papers if $opt_all;
 $opt_name = 1 if $#ARGV > 0;
-push @ARGV, currentpapername() if $#ARGV == -1;
+if ($#ARGV == -1) {
+  my $paper = currentpaper() or Die("no default paper size is set");
+  push @ARGV, $paper;
+}
 foreach my $name (@ARGV) {
   my $p = paperinfo($name) or Die("unknown paper `$name'");
   my @out;

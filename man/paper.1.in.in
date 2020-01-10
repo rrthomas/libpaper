@@ -1,4 +1,4 @@
-.TH PAPER 1 "11 January 2014"
+.TH PAPER 1 "8 January 2020"
 .SH NAME
 .B paper
 \- print paper configuration information
@@ -19,7 +19,13 @@ If no paper sizes are configured, paper exits with an error.
 .IP \[bu]
 The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
+The user's default paper size in
+.B $XDG_CONFIG_HOME/@PAPERCONF@
+.IP \[bu]
 The \fBLC_PAPER\fR environment variable (if supported by the system)
+.IP \[bu]
+The system default paper size in
+.B @sysconfdir@/@PAPERCONF@
 .IP \[bu]
 The first paper size in the system list
 .IP \[bu]
@@ -40,6 +46,13 @@ Print the size (width followed by height) of the paper.
 Specify the units in which to print dimensions.
 Valid units are listed in paperspecs(5).
 By default, dimensions are printed in PostScript points.
+.SH FILES
+.TP
+.B @sysconfdir@/@PAPERCONF@
+System default paper size.
+.TP
+.B $XDG_CONFIG_HOME/@PAPERCONF@
+User's default paper size.
 .SH ENVIRONMENT VARIABLES
 .TP
 .B PAPERSIZE

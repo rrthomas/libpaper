@@ -11,9 +11,13 @@ gl_EARLY
 gl_INIT
 
 dnl set up some substitutions
+PAPERCONF="papersize"
+AC_SUBST(PAPERCONF)
+AH_TEMPLATE(PAPERCONF, [Default paper size configuration file name])
+
 PAPERSPECS="paperspecs"
 AC_SUBST(PAPERSPECS)
-AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file location])
+AH_TEMPLATE(PAPERSPECS, [Paper specifications configuration file name])
 
 PERL_EXEEXT=.pl
 AC_SUBST(PERL_EXEEXT)
