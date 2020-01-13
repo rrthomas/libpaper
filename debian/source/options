@@ -1,0 +1,4 @@
+extend-diff-ignore = "gnulib"
+extend-diff-ignore = "bootstrap"
+extend-diff-ignore = "bootstrap.conf"
+extend-diff-ignore = "doc"

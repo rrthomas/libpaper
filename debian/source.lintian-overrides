@@ -1,2 +1,4 @@
-# This is from downloaded gnulib, which doensn't apply to us
-paper source: license-problem-gfdl-invariants
+# We don’t (yet) have a test suite
+paper source: testsuite-autopkgtest-missing
+# We used to be a native package
+paper source: odd-historical-debian-changelog-version

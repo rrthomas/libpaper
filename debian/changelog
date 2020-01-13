@@ -1,3 +1,20 @@
+paper (2.1-1) unstable; urgency=low
+
+  * Support configuration files again, but make /etc/papersize optional.
+  * Fix documentation in paper(1) of behaviour of paper when an invalid paper
+    size is configured: the incorrect value is used and an error will therefore
+    be given.
+  * Hardwire perl interpreter in hash-bang line.
+  * On error, paper now exits with code 1, not 255.
+  * Fix example code for using paper from C.
+  * Stop using experimental Perl smartmatch feature.
+  * Minor updates to build system.
+  * Make package non-native again.
+  * Switch to dpkg-source 3.0 (quilt) format
+  * Update Standards-Version to 4.4.1, use dh and placate lintian.
+
+ -- Reuben Thomas <rrt@sc3d.org>  Fri, 10 Jan 2020 21:16:05 +0000
+
 paper (2.0) unstable; urgency=low
 
   * Redesign and rewrite of libpaper.  Closes: #727656, #729004
