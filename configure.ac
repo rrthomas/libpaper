@@ -11,6 +11,10 @@ gl_EARLY
 gl_INIT
 AC_PATH_PROG(PERL, perl)
 
+dnl help2man
+dnl Set a value even if not found, so that an invocation via build-aux/missing works
+AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
+
 dnl set up some substitutions
 PAPERCONF="papersize"
 AC_SUBST(PAPERCONF)
@@ -32,6 +36,6 @@ AC_OUTPUT([
 	src/Makefile
 	src/paper.in
 	man/Makefile
-	man/paper.1
+	man/paper-include.man
 	man/paperspecs.5
 ])

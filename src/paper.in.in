@@ -41,7 +41,7 @@ $program_name =~ s/\Q@PERL_EXEEXT@\E$//;
 my $version_banner = <<END;
 $program_name @VERSION@
 
-Copyright (c) 2013-2020 Reuben Thomas <rrt\@sc3d.org>
+Copyright (c) 2013-2020 Reuben Thomas <rrt\@sc3d.org>.
 Released under the GPL version 3, or (at your option) any later version.
 END
 
@@ -62,13 +62,15 @@ my $unit_err = "bad unit (valid units: " . join(", ", keys %units) . ")";
 sub usage {
   my ($exit_code) = @_;
   print STDERR <<END;
-Usage: $program_name [OPTION...] [-a|PAPER...]
-Query paper information.
+Usage: $program_name [OPTION...] [PAPER...|--all]
+Print paper size information.
 
   --all                print information about all known paper sizes
-  --name               print paper names
-  --size               print paper sizes
+  --name               print paper names (by default, the name is not
+                       printed when only one paper argument is given)
+  --size               print paper sizes (width followed by height)
   --unit=UNIT          print dimensions in the given unit
+                       [default: PostScript points]
   --help               display this help and exit
   --version            display version information and exit
 END
