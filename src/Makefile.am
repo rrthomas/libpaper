@@ -13,6 +13,7 @@ edit = sed -e 's|$$[{]prefix[}]|$(prefix)|g' -e 's|$$[{]exec_prefix[}]|$(exec_pr
 
 paper: $(builddir)/paper.in
 	$(edit) $(builddir)/$@.in >$@
+	chmod +x $@
 
 install-exec-hook:
 	if test "x$(EXEEXT)" != "x"; then \
