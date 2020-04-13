@@ -4,6 +4,7 @@
 use 5.10.1;
 use strict;
 use warnings;
+use locale;
 
 # Relocatable header (see after for copyright)
 
@@ -32,7 +33,6 @@ my $sysconfdir = &relocate("@sysconfdir@");
 use Scalar::Util qw(looks_like_number);
 use File::Basename;
 use File::Spec::Functions;
-use POSIX qw(locale_h);
 use Getopt::Long;
 
 
@@ -44,8 +44,6 @@ $program_name @VERSION@
 Copyright (c) 2013-2020 Reuben Thomas <rrt\@sc3d.org>.
 Released under the GPL version 3, or (at your option) any later version.
 END
-
-setlocale(LC_ALL, "");
 
 sub Die {
   say "$program_name: $_[0]";
@@ -186,5 +184,5 @@ foreach my $name (@ARGV) {
   my @out;
   push @out, $p->{name} if $opt_name || $opt_all || !$opt_size;
   push @out, $p->{width} / $dim, $p->{height} / $dim if $opt_size;
-  print join(' ', @out) . "\n";
+  say join(' ', @out);
 }
