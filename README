@@ -43,6 +43,9 @@ xasprintf API comes from gnulib[0], which also provides getline (POSIX
 2008) for systems that don’t yet have it; the gnulib modules required
 are respectively xvasprintf and getline.
 
+Note that paper’s output is locale-dependent (specifically, the decimal
+separator), so setlocale(3) should be used appropriately.
+
 
 #include <stdio.h>
 #include "xvasprintf.h"
