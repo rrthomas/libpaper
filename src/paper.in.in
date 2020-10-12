@@ -79,7 +79,7 @@ END
 sub readspecs {
   my ($file) = @_;
   my @papers;
-  open(PAPERSPECS, $file) or Die("could not read `$file'");
+  return unless open(PAPERSPECS, $file);
   while (<PAPERSPECS>) {
     chomp $_;
     my ($name, $w, $h, $unit) = split /,/;
@@ -102,8 +102,7 @@ unless ($xdg_config_home) {
   my $home = $ENV{HOME};
   $xdg_config_home = catfile($home, ".config") if $home;
 }
-my $userspecs = catfile($xdg_config_home, "@PAPERSPECS@");
-@user_papers = readspecs($userspecs) if -e $userspecs;
+@user_papers = readspecs(catfile($xdg_config_home, "@PAPERSPECS@"));
 @system_papers = readspecs(catfile($sysconfdir, "@PAPERSPECS@"));
 $default_paper = $system_papers[0] || $user_papers[0] || Die("no paper sizes configured");
 push @papers, @user_papers, @system_papers;
