@@ -75,6 +75,25 @@ END
   exit $exit_code;
 }
 
+# Parse command-line options
+my ($opt_all, $opt_name, $opt_size, $opt_help, $opt_version);
+my $unit = "pt";
+my $opts = GetOptions(
+  "all" => \$opt_all,
+  "name" => \$opt_name,
+  "size" => \$opt_size,
+  "unit=s" => \$unit,
+  "help" => \$opt_help,
+  "version" => \$opt_version,
+ ) or usage(1);
+if ($opt_version) {
+  print STDERR $version_banner;
+  exit 0;
+}
+usage(0) if $opt_help;
+my $dim = $units{$unit} or Die($unit_err);
+usage(1) if $opt_all && $#ARGV >= 0;
+
 # Initialise papers list
 sub readspecs {
   my ($file) = @_;
@@ -106,25 +125,6 @@ unless ($xdg_config_home) {
 @system_papers = readspecs(catfile($sysconfdir, "@PAPERSPECS@"));
 $default_paper = $system_papers[0] || $user_papers[0] || Die("no paper sizes configured");
 push @papers, @user_papers, @system_papers;
-
-# Parse command-line options
-my ($opt_all, $opt_name, $opt_size, $opt_help, $opt_version);
-my $unit = "pt";
-my $opts = GetOptions(
-  "all" => \$opt_all,
-  "name" => \$opt_name,
-  "size" => \$opt_size,
-  "unit=s" => \$unit,
-  "help" => \$opt_help,
-  "version" => \$opt_version,
- ) or usage(1);
-if ($opt_version) {
-  print STDERR $version_banner;
-  exit 0;
-}
-usage(0) if $opt_help;
-my $dim = $units{$unit} or Die($unit_err);
-usage(1) if $opt_all && $#ARGV >= 0;
 
 # Get paper type from the locale
 sub mm_to_pt { int(($_[0] * 72 / 2.54 / 10) + 0.5); }
