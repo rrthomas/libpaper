@@ -46,7 +46,7 @@ Released under the GPL version 3, or (at your option) any later version.
 END
 
 sub Die {
-  say "$program_name: $_[0]";
+  say STDERR "$program_name: $_[0]";
   exit(1);
 }
 
