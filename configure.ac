@@ -36,6 +36,5 @@ AC_OUTPUT([
 	src/Makefile
 	src/paper.in
 	man/Makefile
-	man/paper-include.man
 	man/paperspecs.5
 ])
