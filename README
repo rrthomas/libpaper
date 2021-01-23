@@ -1,7 +1,7 @@
                                 paper
                                 =====
 
-             (c) Reuben Thomas <rrt@sc3d.org>, 2014-2020
+             (c) Reuben Thomas <rrt@sc3d.org>, 2013-2020
                   https://github.com/rrthomas/paper
 
 
@@ -11,7 +11,16 @@ default paper size and give information about known sizes, and
 specifies system-wide and per-user paper size catalogues, which can be
 can also be used directly (see paperspecs(5)).
 
-Paper is based on libpaper: see AUTHORS for more information.
+Paper is distributed under the GNU General Public License version 3,
+or, at your option, any later version; see the file COPYING.
+
+The C library libpaper is distributed under the GNU Lesser General
+Public License version 3, or, at your option, any later version; see
+the file COPYING-LGPL. The file ‘paperspecs’ is in the public domain.
+
+Paper was developed by Reuben Thomas <rrt@sc3d.org>, based on the
+design of libpaper by Yves Arrouye <yves@debian.org>, improved by
+Adrian Bunk <bunk@fs.tum.de>.
 
 
 Installation

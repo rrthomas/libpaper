@@ -1,3 +1,19 @@
+.\" Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+.\"
+.\" This file is part of Paper.
+.\"
+.\" This program is free software; you can redistribute it and/or modify it
+.\" under the terms of the GNU General Public License as published by the Free
+.\" Software Foundation; either version 3, or (at your option) any later
+.\" version.
+.\"
+.\" This program is distributed in the hope that it will be useful, but
+.\" WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+.\" or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+.\" for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License along
+.\" with this program; if not, see <https://www.gnu.org/licenses/>.
 .TH PAPERSPECS 5 "11 January 2014"
 .SH NAME
 .B paperspecs
@@ -21,10 +37,10 @@ which results in a definition for Letter size that does not exactly
 match the definition in inches.
 .SH FILES
 .TP
-.B @sysconfdir@/@PAPERSPECS@
+.B @sysconfdir@/paperspecs
 System list of paper sizes.
 .TP
-.B $XDG_CONFIG_HOME/@PAPERSPECS@
+.B $XDG_CONFIG_HOME/paperspecs
 User's list of paper sizes. This is prepended to the system list.
 .SH BUGS
 The CSV format is restricted: quotes are not allowed; hence, fields

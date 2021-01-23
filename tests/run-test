@@ -1,6 +1,7 @@
-# Top-level Makefile.am
+#!/bin/bash
+# Run a paper test
 #
-# Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of Paper.
 #
@@ -17,16 +18,28 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-ACLOCAL_AMFLAGS=-I m4
+set -e
 
-SUBDIRS = lib src man tests
+test_file="$1"
+name="${1%.sh}"
+basename=$(basename $name)
+test_dir="$(pwd)/$basename.$$"
 
-dist_doc_DATA = README
+# Test runners.
+# Arguments are command to run.
+function no_output_test() {
+    eval "$@" > "tests/$basename-output.txt"
+}
 
-EXTRA_DIST = m4/gnulib-cache.m4
+function test() {
+    no_output_test "$@"
+    diff -u "$srcdir/$basename-expected.txt" "tests/$basename-output.txt"
+}
 
-release: distcheck
-	git diff --exit-code && \
-	git tag -a -m "Release tag" "v$(VERSION)" && \
-	git push && git push --tags && \
-	woger github package=$(PACKAGE) version=$(VERSION) dist_type=tar.gz
+# Make a test installation of paper
+cd ..
+make install DESTDIR="$test_dir"
+cd "$test_dir"
+
+# Run the test script.
+source $test_file

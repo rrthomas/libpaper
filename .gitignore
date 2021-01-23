@@ -19,9 +19,8 @@ Makefile.in
 /config.log
 /config.status
 /config.sub
+/libtool
 /configure
 /doc
-/gnulib
-/lib
 /paper*.tar.gz
 /stamp-h1

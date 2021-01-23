@@ -1,6 +1,6 @@
-# Top-level Makefile.am
+# Tests Makefile.am
 #
-# Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of Paper.
 #
@@ -17,16 +17,28 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-ACLOCAL_AMFLAGS=-I m4
+TEST_EXTENSIONS = .sh
+SH_LOG_COMPILER = $(srcdir)/tests/run-test
 
-SUBDIRS = lib src man tests
+EMPTY =
 
-dist_doc_DATA = README
+TESTS = \
+	$(EMPTY)
 
-EXTRA_DIST = m4/gnulib-cache.m4
+XFAIL_TESTS = \
+	$(EMPTY)
 
-release: distcheck
-	git diff --exit-code && \
-	git tag -a -m "Release tag" "v$(VERSION)" && \
-	git push && git push --tags && \
-	woger github package=$(PACKAGE) version=$(VERSION) dist_type=tar.gz
+INPUTS = \
+	$(EMPTY)
+
+RESULTS = \
+	$(EMPTY)
+
+EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS)
+
+AM_TESTS_ENVIRONMENT = \
+	srcdir=$(srcdir); \
+	export LSAN_OPTIONS=suppressions=$(srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0;
+
+clean-local:
+	rm -f $(builddir)/tests/*-output.log

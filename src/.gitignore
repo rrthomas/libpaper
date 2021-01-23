@@ -1,3 +1,5 @@
+/lib.c
+/lib.c.in
+/libpaper.la
 /paper
-/paper.in
-/localepaper
+/paper.c
