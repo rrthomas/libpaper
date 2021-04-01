@@ -18,7 +18,7 @@
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
 LDADD = $(top_builddir)/lib/libgnu.a
-AM_CPPFLAGS = -I$(top_srcdir)/lib
+AM_CPPFLAGS = -I$(top_srcdir)/lib -I$(top_builddir)/lib
 AM_CFLAGS = $(WARN_CFLAGS)
 
 sysconf_DATA = paperspecs
