@@ -39,7 +39,7 @@ User's default paper size.
 
 [ENVIRONMENT VARIABLES]
 .TP
-.B PAPER
+.B PAPERSIZE
 Paper size to use.
 
 [AUTHOR]

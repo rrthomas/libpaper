@@ -90,6 +90,13 @@ static void paper_die(const char *msg)
     die("%s in line %zu of %s", msg, paper_lineno, paper_specsfile);
 }
 
+static void printpaper(const char *name, double dim, bool print_name, bool opt_size) {
+    const struct paper *paper = paperinfo(name);
+    if (paper == NULL)
+        die("unknown paper `%s'", name);
+    printinfo(paper, dim, print_name, opt_size);
+}
+
 int main(int argc, char **argv)
 {
 #ifdef ENABLE_RELOCATABLE
@@ -181,10 +188,9 @@ int main(int argc, char **argv)
         paper_die("unknown error");
         break;
     }
-    if (defaultpaper() == NULL)
-        die("no paper sizes configured");
-
-    int ret_code = EXIT_SUCCESS;
+    const char *defaultname = defaultpapername();
+    if (defaultname == NULL)
+        die("no default paper size is set");
 
     if (opt_all) {
         for (const struct paper *p = paperfirst(); p; p = papernext(p))
@@ -193,22 +199,12 @@ int main(int argc, char **argv)
         bool print_name = opt_name || !opt_size;
         if (argc > 1)
             opt_name = true;
-        else if (argc == 0) {
-            const struct paper *paper = defaultpaper();
-            if (paper == NULL)
-                die("no default paper size is set");
-            printinfo(paper, dim, print_name, opt_size);
-        }
-        for (int i = 0; i < argc; i++) {
-            const struct paper *paper = paperinfo(argv[i]);
-            if (paper != NULL)
-                printinfo(paper, dim, print_name, opt_size);
-            else {
-                printf("unknown paper `%s'\n", argv[i]);
-                ret_code = EXIT_FAILURE;
-            }
-        }
+        else if (argc == 0)
+            printpaper(defaultname, dim, print_name, opt_size);
+        else
+            for (int i = 0; i < argc; i++)
+                printpaper(argv[i], dim, print_name, opt_size);
     }
 
-    exit(ret_code);
+    exit(EXIT_SUCCESS);
 }

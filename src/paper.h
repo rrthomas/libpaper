@@ -92,8 +92,8 @@ const struct paper *paperwithsize(double pswidth, double psheight);
 const struct paper *defaultpaper(void);
 
 /*
- * Deprecated, only for backwards compatibility. Returns the value of
- * papername(defaultpaper()), or NULL if defaultpaper returns NULL.
+ * Deprecated, only for backwards compatibility. Returns the default
+ * configured paper name.
  */
 const char *defaultpapername(void);
 
@@ -101,7 +101,7 @@ const char *defaultpapername(void);
  * Deprecated, only for backwards compatibility; an alias for
  * defaultpapername().
  */
-const char *systempapername(void);
+#define systempapername defaultpapername
 
 /*
  * Return the first paper in the list of known paper sizes.

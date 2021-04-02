@@ -249,9 +249,9 @@ static const char *papernamefile(const char *file)
     return papername;
 }
 
-/* Get the default paper size, as per paper(1). */
-const struct paper *defaultpaper(void) {
-    const char *paperstr = getenv("PAPER");
+/* Return the default configured paper name, as per paper(1). */
+const char *defaultpapername(void) {
+    const char *paperstr = getenv("PAPERSIZE");
     if (paperstr == NULL && xdg_config_home != NULL) {
         char *papersize = mfile_name_concat(xdg_config_home, PAPERCONF_FILENAME, NULL);
         if (papersize != NULL) {
@@ -271,7 +271,13 @@ const struct paper *defaultpaper(void) {
     if (paperstr == NULL)
         paperstr = papername(default_paper);
 
-    return paperinfo(paperstr);
+    return paperstr;
+}
+
+/* Get the default paper size. */
+const struct paper *defaultpaper(void)
+{
+    return paperinfo(defaultpapername());
 }
 
 
