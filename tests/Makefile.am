@@ -18,11 +18,18 @@
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
 TEST_EXTENSIONS = .sh
-SH_LOG_COMPILER = $(srcdir)/tests/run-test
+SH_LOG_COMPILER = $(srcdir)/run-test
 
 EMPTY =
 
 TESTS = \
+	default-size-environment.sh \
+	default-size-user.sh \
+	default-size-lc_paper.sh \
+	default-size-system-papersize.sh \
+	default-size-system-paperspecs.sh \
+	default-size-user-paperspecs.sh \
+	default-size-no-default-paper.sh \
 	$(EMPTY)
 
 XFAIL_TESTS = \
@@ -37,8 +44,11 @@ RESULTS = \
 EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS)
 
 AM_TESTS_ENVIRONMENT = \
-	srcdir=$(srcdir); \
-	export LSAN_OPTIONS=suppressions=$(srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0;
+	export prefix=$(prefix); \
+	export sysconfdir=$(sysconfdir); \
+	export bindir=$(bindir); \
+	export abs_srcdir=$(abs_srcdir); \
+	export LSAN_OPTIONS=suppressions=$(abs_srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0;
 
 clean-local:
-	rm -f $(builddir)/tests/*-output.log
+	rm -f $(builddir)/*-output.log

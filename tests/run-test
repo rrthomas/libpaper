@@ -20,26 +20,46 @@
 
 set -e
 
-test_file="$1"
+expected_exit=0
+curr_dir="$(pwd)"
+test_file="$abs_srcdir/$1"
 name="${1%.sh}"
 basename=$(basename $name)
-test_dir="$(pwd)/$basename.$$"
+test_dir="$curr_dir/$basename.$$"
 
-# Test runners.
+# Test runner.
 # Arguments are command to run.
-function no_output_test() {
-    eval "$@" > "tests/$basename-output.txt"
-}
-
-function test() {
-    no_output_test "$@"
-    diff -u "$srcdir/$basename-expected.txt" "tests/$basename-output.txt"
+function paper_test() {
+    exit_code=0
+    eval "$@" > "$basename-output.txt" 2>&1 || exit_code=$?
+    if [[ $exit_code != $expected_exit ]]; then
+        echo "Expected exit code $expected_exit but was $exit_code"
+        exit 1
+    fi
+    diff -u "$abs_srcdir/$basename-expected.txt" "$basename-output.txt"
 }
 
 # Make a test installation of paper
 cd ..
-make install DESTDIR="$test_dir"
+make install DESTDIR="$test_dir" >/dev/null 2>&1
+export PATH="$test_dir/$bindir:$PATH"
 cd "$test_dir"
+
+# Set up paper configuration
+export PAPERSIZE=environment
+export LC_PAPER=C
+# LC_PAPER in C locale is A4 in glibc, and we rely on glibc to read the
+# paper size, so the expected value when the locale is used is "A4".
+export XDG_CONFIG_HOME="$test_dir/config"
+mkdir "$XDG_CONFIG_HOME"
+echo user_papersize > "$XDG_CONFIG_HOME/papersize"
+TEST_PAPERSPECS=$abs_srcdir/test-paperspecs
+cp "$TEST_PAPERSPECS" "$XDG_CONFIG_HOME/paperspecs"
+echo system_papersize > "./$sysconfdir/papersize"
+printf "first_system_paperspecs,55,550,mm\nA4,210,297,mm" > "./$sysconfdir/paperspecs"
 
 # Run the test script.
 source $test_file
+
+# Remove the test directory
+rm -rf "$test_dir"
