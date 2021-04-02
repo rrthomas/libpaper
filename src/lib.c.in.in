@@ -134,7 +134,10 @@ const struct paper *papernext(const struct paper *paper)
 static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char *specsfile, struct paper **last) {
     paper_lineno = 0;
     paper_specsfile = specsfile;
-    char *old_locale = setlocale(LC_ALL, "C");
+    char *old_locale = setlocale(LC_ALL, NULL);
+    if (old_locale != NULL)
+        old_locale = strdup(old_locale);
+    setlocale(LC_ALL, "C");
     int ret = PAPER_OK;
     FILE *ps = fopen(specsfile, "r");
     if (ps != NULL) {
@@ -194,7 +197,10 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
         free(l);
     }
 
-    setlocale(LC_ALL, old_locale);
+    if (old_locale != NULL) {
+        setlocale(LC_ALL, old_locale);
+        free(old_locale);
+    }
     return ret;
 }
 
@@ -211,19 +217,19 @@ _GL_ATTRIBUTE_PURE const struct paper *paperinfo(const char *name)
 
 /* Get locale default paper size. */
 static const char *localepapername(void) {
-    char *old_locale = setlocale(LC_ALL, "");
 #if defined LC_PAPER && defined _GNU_SOURCE
-#define NL_PAPER_GET(x)         \
-  ((union { char *string; unsigned word; })nl_langinfo(x)).word
+    if (setlocale(LC_PAPER, "") != NULL) {
+#define NL_PAPER_GET(x)                                                 \
+        ((union { char *string; unsigned word; })nl_langinfo(x)).word
 #define MM_TO_PT(v) (unsigned)((v * 72 / 2.54 / 10) + 0.5)
-    unsigned w = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_WIDTH));
-    unsigned h = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_HEIGHT));
-    for (const struct paper *p = paperfirst(); p != NULL; p = papernext(p))
-        if ((unsigned)(paperpswidth(p) + 0.5) == w && (unsigned)(paperpsheight(p) + 0.5) == h)
-            return papername(p);
+        unsigned w = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_WIDTH));
+        unsigned h = MM_TO_PT(NL_PAPER_GET(_NL_PAPER_HEIGHT));
+        for (const struct paper *p = paperfirst(); p != NULL; p = papernext(p))
+            if ((unsigned)(paperpswidth(p) + 0.5) == w && (unsigned)(paperpsheight(p) + 0.5) == h)
+                return papername(p);
+    }
 #endif
 
-    setlocale(LC_ALL, old_locale);
     return NULL;
 }
 
