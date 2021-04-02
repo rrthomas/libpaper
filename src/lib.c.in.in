@@ -38,7 +38,7 @@
 
 /* Public variables to help with error messages. */
 size_t paper_lineno;
-const char *paper_specsfile;
+char *paper_specsfile;
 
 
 static const char *PAPERCONF_FILENAME = "papersize";
@@ -133,7 +133,8 @@ const struct paper *papernext(const struct paper *paper)
 /* Constructor. */
 static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char *specsfile, struct paper **last) {
     paper_lineno = 0;
-    paper_specsfile = specsfile;
+    free(paper_specsfile);
+    paper_specsfile = strdup(specsfile);
     char *old_locale = setlocale(LC_ALL, NULL);
     if (old_locale != NULL)
         old_locale = strdup(old_locale);

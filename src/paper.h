@@ -41,7 +41,7 @@ enum paper_error {
 };
 
 extern size_t paper_lineno;
-extern const char *paper_specsfile;
+extern char *paper_specsfile;
 
 /*
  * Initialize the library, and read configured paper sizes.
