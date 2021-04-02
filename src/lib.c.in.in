@@ -234,8 +234,8 @@ static const char *papernamefile(const char *file)
     FILE *fp = fopen(file, "r");
     if (fp == NULL)
         return NULL;
-    size_t n;
-    char *l;
+    size_t n = 0;
+    char *l = NULL;
     if (getline(&l, &n, fp) > 0) {
         char *saveptr, *s;
         s = gettok(l, &saveptr);
@@ -243,6 +243,7 @@ static const char *papernamefile(const char *file)
             strncpy(papername, s, MAX_PAPERNAME_LEN);
         papername[MAX_PAPERNAME_LEN] = '\0';
         free(s);
+        free(l);
     }
     fclose(fp);
     return papername;
