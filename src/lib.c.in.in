@@ -275,7 +275,7 @@ const char *defaultpapername(void) {
             free(papersize);
         }
     }
-    if (paperstr == NULL)
+    if (paperstr == NULL && default_paper != NULL)
         paperstr = papername(default_paper);
 
     return paperstr;
@@ -284,7 +284,10 @@ const char *defaultpapername(void) {
 /* Get the default paper size. */
 const struct paper *defaultpaper(void)
 {
-    return paperinfo(defaultpapername());
+    const char *papername = defaultpapername();
+    if (papername == NULL)
+        return NULL;
+    return paperinfo(papername);
 }
 
 
