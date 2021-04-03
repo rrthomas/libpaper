@@ -35,6 +35,8 @@ TESTS = \
 	unit-mm.sh \
 	unit-in.sh \
 	unit-invalid.sh \
+	all-sizes.sh \
+	no-name-one-argument.sh \
 	$(EMPTY)
 
 XFAIL_TESTS = \

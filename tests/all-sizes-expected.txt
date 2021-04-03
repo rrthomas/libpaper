@@ -1,0 +1,8 @@
+first_user_paperspecs
+first_system_paperspecs
+system_papersize
+lc_paper
+user_papersize
+environment
+first_system_paperspecs
+A4
