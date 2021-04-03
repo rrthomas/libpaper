@@ -30,6 +30,11 @@ TESTS = \
 	default-size-system-paperspecs.sh \
 	default-size-user-paperspecs.sh \
 	default-size-no-default-paper.sh \
+	unit-pt.sh \
+	unit-pt-equals.sh \
+	unit-mm.sh \
+	unit-in.sh \
+	unit-invalid.sh \
 	$(EMPTY)
 
 XFAIL_TESTS = \
@@ -49,6 +54,3 @@ AM_TESTS_ENVIRONMENT = \
 	export bindir=$(bindir); \
 	export abs_srcdir=$(abs_srcdir); \
 	export LSAN_OPTIONS=suppressions=$(abs_srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0;
-
-clean-local:
-	rm -f $(builddir)/*-output.log

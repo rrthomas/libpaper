@@ -1,1 +1,1 @@
-paper_test paper
+paper_test
