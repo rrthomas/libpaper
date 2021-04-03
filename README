@@ -1,7 +1,7 @@
                                 paper
                                 =====
 
-             (c) Reuben Thomas <rrt@sc3d.org>, 2013-2020
+             (c) Reuben Thomas <rrt@sc3d.org>, 2013-2021
                   https://github.com/rrthomas/paper
 
 
@@ -41,59 +41,3 @@ anywhere once built and installed. To use this feature, use the
 
 For installation options, see ./configure --help; see INSTALL for more
 information.
-
-
-Use from C
-----------
-
-Maintainers of C programs that used to use libpaper may find the
-following example code eases the transition to paper. The non-standard
-xasprintf API comes from gnulib[0], which also provides getline (POSIX
-2008) for systems that don’t yet have it; the gnulib modules required
-are respectively xvasprintf and getline.
-
-Note that paper’s output is locale-dependent (specifically, the decimal
-separator), so setlocale(3) should be used appropriately.
-
-
-#include <stdio.h>
-#include "xvasprintf.h"
-
-/* Read a line from a pipe and return it without any trailing newline. */
-static char *pgetline(const char *cmd)
-{
-  char *l = NULL;
-  FILE *fp = popen(cmd, "r");
-  ssize_t len;
-  if (fp) {
-    size_t n;
-    len = getline(&l, &n, fp);
-    if (len != -1 && l[len - 1] == '\n')
-      l[len - 1] = '\0';
-    pclose(fp);
-  }
-  return len == -1 ? NULL : l;
-}
-
-/* Return the default paper name. */
-char *default_paper_name(void)
-{
-  return pgetline(PAPER);
-}
-
-/* Get the size of the given paper, or the default paper if paper_name == NULL. */
-int paper_size(const char *paper_name, double *width, double *height)
-{
-  char *cmd = NULL, *l = NULL;
-  int res = 0;
-  if (paper_name == NULL)
-    paper_name = default_paper_name();
-  if (paper_name && (cmd = xasprintf(PAPER " --unit=mm --size %s", paper_name)) && (l = pgetline(cmd)))
-    res = sscanf(l, "%lg %lg", width, height);
-  free(l);
-  free(cmd);
-  return res == 2;
-}
-
-
-[0] http://www.gnu.org/software/gnulib/
