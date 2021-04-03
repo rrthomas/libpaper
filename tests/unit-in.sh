@@ -1,1 +1,1 @@
-paper_test --size --unit in
+paper_test --unit in

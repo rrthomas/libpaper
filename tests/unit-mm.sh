@@ -1,1 +1,1 @@
-paper_test --size --unit mm
+paper_test --unit mm

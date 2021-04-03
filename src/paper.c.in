@@ -107,7 +107,7 @@ int main(int argc, char **argv)
     setlocale(LC_ALL, "");
 
     /* Parse command-line options. */
-    bool opt_all = false, opt_name = false, opt_size = false;
+    bool opt_all = false, opt_name = false, opt_size = true;
     double dim = unitfactor("pt");
 
     opterr = 0; /* Don't display errors for unknown options. */
@@ -132,7 +132,7 @@ int main(int argc, char **argv)
             opt_name = true;
             break;
         case 2:
-            opt_size = true;
+            opt_size = false;
             break;
         case 3:
             dim = unitfactor(optarg);

@@ -1,1 +1,1 @@
-paper_test --all
+paper_test --all --no-size

@@ -1,1 +1,1 @@
-paper_test --size
+paper_test

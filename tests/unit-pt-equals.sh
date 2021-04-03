@@ -1,1 +1,1 @@
-paper_test --size --unit=pt
+paper_test --unit=pt

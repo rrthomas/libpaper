@@ -1,1 +1,1 @@
-paper_test A4
+paper_test --no-size A4
