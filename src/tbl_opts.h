@@ -23,9 +23,9 @@
  * O(long name, short name ('\0' for none), argument, argument docstring, docstring)
  */
 
-O("all", '\0', no_argument, "", "print information about all known paper sizes")
-O("name", '\0', no_argument, "", "print paper names even if only one paper argument given")
-O("size", '\0', no_argument, "", "print paper sizes (width followed by height)")
-O("unit", '\0', required_argument, "UNIT", "print dimensions in the given unit [default: PostScript points]")
+O("all", '\0', no_argument, "", "show information about all known paper sizes")
+O("name", '\0', no_argument, "", "show paper names even if only one paper argument given")
+O("size", '\0', no_argument, "", "show paper sizes (width followed by height)")
+O("unit", '\0', required_argument, "UNIT", "unit in which to show sizes [pt, mm or in; default: pt]")
 O("help", '\0', no_argument, "", "display this help message and exit")
 O("version", '\0', no_argument, "", "display version information and exit")
