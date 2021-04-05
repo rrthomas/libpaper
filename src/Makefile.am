@@ -36,7 +36,8 @@ lib.c: $(builddir)/lib.c.in
 	chmod +x $@
 
 bin_PROGRAMS = paper
-paper_SOURCES = paper.c tbl_opts.h
+include_HEADERS = paper.h
+paper_SOURCES = paper.c tbl_opts.h paper.h
 paper_CPPFLAGS  = -DINSTALLDIR=\"$(bindir)\" $(AM_CPPFLAGS)
 if RELOCATABLE_VIA_LD
 paper_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(bindir)` $(AM_LDFLAGS)
