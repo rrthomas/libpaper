@@ -50,7 +50,7 @@ INPUTS = \
 RESULTS = \
 	$(EMPTY)
 
-EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS)
+EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS) test-paperspecs
 
 AM_TESTS_ENVIRONMENT = \
 	export prefix=$(prefix); \
