@@ -85,7 +85,7 @@ static void printinfo(const struct paper *paper)
     putchar('\n');
 }
 
-_GL_ATTRIBUTE_FORMAT_PRINTF(1, 2) static void die(const char *fmt, ...)
+_GL_ATTRIBUTE_FORMAT_PRINTF_STANDARD(1, 2) static void die(const char *fmt, ...)
 {
     va_list ap;
     va_start(ap, fmt);

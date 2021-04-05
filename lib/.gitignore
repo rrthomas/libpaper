@@ -202,3 +202,15 @@
 /unistd.h
 /wchar.h
 /Makefile.gnulib
+/attribute.h
+/basename-lgpl.h
+/cdefs.h
+/eloop-threshold.h
+/free.c
+/idx.h
+/inttypes.in.h
+/libc-config.h
+/minmax.h
+/rawmemchr.c
+/rawmemchr.valgrind
+/scratch_buffer.h

@@ -125,3 +125,11 @@
 /unistd-safer.m4
 /xgetcwd.m4
 /xstrndup.m4
+/__inline.m4
+/free.m4
+/inttypes.m4
+/minmax.m4
+/pid_t.m4
+/rawmemchr.m4
+/std-gnu11.m4
+/zzgnulib.m4
