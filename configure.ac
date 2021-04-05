@@ -98,3 +98,7 @@ AC_OUTPUT([
 	man/paperspecs.5
 	tests/Makefile
 ])
+
+if test $RELOCATABLE != yes; then
+  AC_MSG_WARN([Building without --enable-relocatable: the tests will not work!])
+fi
