@@ -94,7 +94,6 @@ AC_OUTPUT([
 	lib/Makefile
 	src/Makefile
         src/lib.c.in
-	src/paper.c
 	man/Makefile
 	man/paperspecs.5
 	tests/Makefile
