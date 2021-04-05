@@ -1,0 +1,2 @@
+A4: 210x297 mm
+lc_paper: 33x330 mm

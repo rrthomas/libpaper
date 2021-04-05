@@ -19,6 +19,7 @@
 
 #include "config.h"
 
+#include <assert.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -32,6 +33,8 @@
 
 #include "paper.h"
 
+
+char *unit_list, *unit_msg;
 
 /* Options table. */
 static struct option longopts[] = {
@@ -61,16 +64,23 @@ static void usage(int exit_code)
     exit(exit_code);
 }
 
-static void printinfo(const struct paper *paper, double dim, bool print_name, bool opt_size)
-{
-    if (print_name)
-        printf("%s", papername(paper));
+enum paper_unit explicit_unit = PAPER_UNIT_INVALID;
+bool opt_size;
 
-    if (opt_size) {
-        if (print_name)
-            putchar(' ');
-        printf("%g %g", paperpswidth(paper) / dim, paperpsheight(paper) / dim);
+static void printinfo(const struct paper *paper)
+{
+    enum paper_unit unit = paperunit(paper);
+    double dim = 1.0;
+    const char *unitname = paperunitname(unit);
+    if (explicit_unit != PAPER_UNIT_INVALID) {
+        dim = paperunitfactor(explicit_unit) / paperunitfactor(unit);
+        assert(dim != 0.0);
+        unitname = paperunitname(explicit_unit);
     }
+
+    printf("%s", papername(paper));
+    if (opt_size)
+        printf(": %gx%g %s", paperwidth(paper) / dim, paperheight(paper) / dim, unitname);
 
     putchar('\n');
 }
@@ -90,11 +100,11 @@ static void paper_die(const char *msg)
     die("%s in line %zu of %s", msg, paper_lineno, paper_specsfile);
 }
 
-static void printpaper(const char *name, double dim, bool print_name, bool opt_size) {
+static void printpaper(const char *name) {
     const struct paper *paper = paperinfo(name);
     if (paper == NULL)
         die("unknown paper `%s'", name);
-    printinfo(paper, dim, print_name, opt_size);
+    printinfo(paper);
 }
 
 int main(int argc, char **argv)
@@ -107,8 +117,10 @@ int main(int argc, char **argv)
     setlocale(LC_ALL, "");
 
     /* Parse command-line options. */
-    bool opt_all = false, opt_name = false, opt_size = true;
-    double dim = unitfactor("pt");
+    bool opt_all = false;
+    opt_size = true;
+    unit_list = "pt, mm, in"; // FIXME: generate this list
+    unit_msg = xasprintf("unit in which to show sizes [%s; default: natural units]", unit_list);
 
     opterr = 0; /* Don't display errors for unknown options. */
     for (;;) {
@@ -129,20 +141,17 @@ int main(int argc, char **argv)
             opt_all = true;
             break;
         case 1:
-            opt_name = true;
-            break;
-        case 2:
             opt_size = false;
             break;
-        case 3:
-            dim = unitfactor(optarg);
-            if (dim == 0.0)
-                die("%s", "bad unit (valid units: pt, mm, in)");
+        case 2:
+            explicit_unit = paperunitfromname(optarg);
+            if (explicit_unit == PAPER_UNIT_INVALID)
+                die("bad unit (valid units: %s)", unit_list);
             break;
-        case 4:
+        case 3:
             usage(EXIT_SUCCESS);
             break;
-        case 5:
+        case 4:
             printf(PACKAGE_NAME " " VERSION "\n"
                    "Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>.\n"
                    PACKAGE_NAME " comes with ABSOLUTELY NO WARRANTY.\n"
@@ -194,14 +203,13 @@ int main(int argc, char **argv)
 
     if (opt_all) {
         for (const struct paper *p = paperfirst(); p; p = papernext(p))
-            printinfo(p, dim, true, opt_size);
+            printinfo(p);
     } else {
-        bool print_name = opt_name || !opt_size || argc > 1;
         if (argc == 0)
-            printpaper(defaultname, dim, print_name, opt_size);
+            printpaper(defaultname);
         else
             for (int i = 0; i < argc; i++)
-                printpaper(argv[i], dim, print_name, opt_size);
+                printpaper(argv[i]);
     }
 
     exit(EXIT_SUCCESS);

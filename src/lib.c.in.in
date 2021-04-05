@@ -52,21 +52,35 @@ static char *xdg_config_home, *sysconfdir;
 
 /* Paper size units. */
 static struct {
+    enum paper_unit unit;
     const char *name;
     double factor;
 } units[] = {
-    { "pt",	1. },
-    { "mm",	72. * .1 / 2.54 },
-    { "in",	72. },
-    { 0 }
+    { PAPER_UNIT_PT, "pt", 1. },
+    { PAPER_UNIT_MM, "mm", 72. * .1 / 2.54 },
+    { PAPER_UNIT_IN, "in", 72. },
 };
 
-double unitfactor(const char *unit)
+enum paper_unit paperunitfromname(const char *unit)
 {
-    for (int i = 0; units[i].name; ++i)
+    for (enum paper_unit i = PAPER_UNIT_PT; i < PAPER_NUM_UNITS; i++)
         if (strcasecmp(units[i].name, unit) == 0)
-            return units[i].factor;
+            return i;
 
+    return PAPER_UNIT_INVALID;
+}
+
+const char *paperunitname(enum paper_unit n)
+{
+    if (n >= PAPER_UNIT_PT && n < PAPER_NUM_UNITS)
+        return units[n].name;
+    return NULL;
+}
+
+double paperunitfactor(enum paper_unit n)
+{
+    if (n >= PAPER_UNIT_PT && n < PAPER_NUM_UNITS)
+        return units[n].factor;
     return 0.0;
 }
 
@@ -100,7 +114,8 @@ static char *gettok(char *p, char **saveptr) {
 /* Paper list type. */
 struct paper {
     const char *name;
-    double pswidth, psheight;
+    enum paper_unit unit;
+    double width, height;
     struct paper *next;
 };
 
@@ -110,14 +125,29 @@ const char *papername(const struct paper *paper)
     return paper->name;
 }
 
+double paperwidth(const struct paper *paper)
+{
+    return paper->width;
+}
+
+double paperheight(const struct paper *paper)
+{
+    return paper->height;
+}
+
+enum paper_unit paperunit(const struct paper *paper)
+{
+    return paper->unit;
+}
+
 double paperpswidth(const struct paper *paper)
 {
-    return paper->pswidth;
+    return paper->width * paperunitfactor(paper->unit);
 }
 
 double paperpsheight(const struct paper *paper)
 {
-    return paper->psheight;
+    return paper->height * paperunitfactor(paper->unit);
 }
 
 const struct paper *paperfirst(void)
@@ -149,8 +179,8 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
             char *saveptr;
             char *name = gettok(l, &saveptr);
             char *wstr = gettok(NULL, &saveptr), *hstr = gettok(NULL, &saveptr);
-            char *unit = gettok(NULL, &saveptr);
-            if (name != NULL && wstr != NULL && hstr != NULL && unit != NULL) {
+            char *ustr = gettok(NULL, &saveptr);
+            if (name != NULL && wstr != NULL && hstr != NULL && ustr != NULL) {
                 errno = 0;
                 double w = strtod(wstr, NULL);
                 if (errno != 0) {
@@ -162,13 +192,11 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
                     ret = PAPER_BAD_HEIGHT;
                     goto err;
                 }
-                double dim;
-                if ((dim = unitfactor(unit)) == 0) {
+                enum paper_unit u;
+                if ((u = paperunitfromname(ustr)) == PAPER_UNIT_INVALID) {
                     ret = PAPER_BAD_UNIT;
                     goto err;
                 }
-                w *= dim;
-                h *= dim;
                 p = calloc(1, sizeof(struct paper));
                 if (last != NULL)
                     *last = p;
@@ -176,7 +204,7 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
                     ret = PAPER_ERROR;
                     goto err;
                 }
-                *p = (struct paper){name, w, h, NULL};
+                *p = (struct paper){name, u, w, h, NULL};
                 if (prev != NULL) /* Add to end of list. */
                     prev->next = p;
                 else /* This is the first item. */
@@ -186,7 +214,7 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
         err:
             free(wstr);
             free(hstr);
-            free(unit);
+            free(ustr);
             if (ret != PAPER_OK) {
                 free(name);
                 break;

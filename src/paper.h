@@ -31,6 +31,14 @@ extern "C" {
 /* Opaque struct. */
 struct paper;
 
+enum paper_unit {
+    PAPER_UNIT_PT,
+    PAPER_UNIT_MM,
+    PAPER_UNIT_IN,
+    PAPER_NUM_UNITS,
+    PAPER_UNIT_INVALID = -1
+};
+
 enum paper_error {
     PAPER_OK,
     PAPER_BAD_WIDTH,
@@ -62,6 +70,21 @@ int paperdone(void);
  * Return the name of the given paper.
  */
 const char *papername(const struct paper *paper);
+
+/*
+ * Return the width of the given paper in its natural units.
+ */
+double paperwidth(const struct paper *paper);
+
+/*
+ * Return the height of the given paper in its natural units.
+ */
+double paperheight(const struct paper *paper);
+
+/*
+ * Return the natural unit of the given paper.
+ */
+enum paper_unit paperunit(const struct paper *paper);
 
 /*
  * Return the width of the given paper in PostScript points.
@@ -113,7 +136,20 @@ const struct paper *paperfirst(void);
  */
 const struct paper *papernext(const struct paper *paper);
 
-double unitfactor(const char *unit);
+/*
+ * Return the name of the given unit.
+ */
+const char *paperunitname(enum paper_unit n);
+
+/*
+ * Return the conversion factor from pts to the given unit.
+ */
+double paperunitfactor(enum paper_unit n);
+
+/*
+ * Return the unit with the given name.
+ */
+enum paper_unit paperunitfromname(const char *name);
 
 #ifdef __cplusplus
 }
