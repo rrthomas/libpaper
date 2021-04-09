@@ -151,6 +151,11 @@ double paperunitfactor(enum paper_unit n);
  */
 enum paper_unit paperunitfromname(const char *name);
 
+/*
+ * Set prefix dir for the library for systems that can't auto-detect it.
+ */
+void papersetprefixdir(const char *new_prefix);
+
 #ifdef __cplusplus
 }
 #endif

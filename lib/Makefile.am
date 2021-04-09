@@ -1,27 +1,32 @@
-# FIXME: combine next line with configure.ac?
-AUTOMAKE_OPTIONS = -Wall
-SUBDIRS =
-noinst_HEADERS =
-noinst_LIBRARIES =
-noinst_LTLIBRARIES =
-pkgdata_DATA =
-EXTRA_DIST =
-BUILT_SOURCES =
-SUFFIXES =
-MOSTLYCLEANFILES =
-MOSTLYCLEANDIRS =
-CLEANFILES =
-DISTCLEANFILES =
-MAINTAINERCLEANFILES =
-AM_CPPFLAGS =
-AM_CFLAGS =
+# libpaper Makefile.am
+#
+# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
+#
+# This file is part of Paper.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the Free
+# Software Foundation; either version 3, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, see <https://www.gnu.org/licenses/>.
 
-include Makefile.gnulib
+AM_CPPFLAGS = -I$(top_srcdir)/libgnu -I$(top_builddir)/libgnu
 
-AM_CPPFLAGS += -DIN_LIBRARY -DENABLE_COSTLY_RELOCATABLE
+sysconf_DATA = paperspecs
+EXTRA_DIST = $(sysconf_DATA)
 
-if SHLIBS_IN_BINDIR
-AM_CPPFLAGS += -DINSTALLDIR=\"$(bindir)\"
-else
-AM_CPPFLAGS += -DINSTALLDIR=\"$(libdir)\"
-endif
+include_HEADERS = paper.h
+lib_LTLIBRARIES = libpaper.la
+libpaper_la_SOURCES = libpaper.c
+libpaper_la_LIBADD = $(top_builddir)/libgnu/libgnu.la $(LTLIBOBJS)
+
+libpaper.c: $(builddir)/libpaper.c.in
+	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
+	chmod +x $@

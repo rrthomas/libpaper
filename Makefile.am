@@ -17,9 +17,9 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-ACLOCAL_AMFLAGS=-I m4
+ACLOCAL_AMFLAGS=-I m4 -I src/m4
 
-SUBDIRS = lib src man tests
+SUBDIRS = libgnu lib src man tests
 
 dist_doc_DATA = README
 

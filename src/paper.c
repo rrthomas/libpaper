@@ -109,11 +109,7 @@ static void printpaper(const char *name) {
 
 int main(int argc, char **argv)
 {
-#ifdef ENABLE_RELOCATABLE
-    set_program_name_and_installdir(argv[0], INSTALLPREFIX, INSTALLDIR);
-#else
     set_program_name(argv[0]);
-#endif
     setlocale(LC_ALL, "");
 
     /* Parse command-line options. */

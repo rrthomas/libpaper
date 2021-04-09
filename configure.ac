@@ -22,16 +22,18 @@ AC_PREREQ([2.64])
 dnl Initialise autoconf and automake
 AC_INIT([paper], [2.4], [rrt@sc3d.org],, [https://github.com/rrthomas/paper])
 AC_CONFIG_AUX_DIR([build-aux])
-AM_INIT_AUTOMAKE([-Wall])
+AM_INIT_AUTOMAKE([-Wall subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 dnl Check for standard build environment
 AC_PROG_CC_C99
 gl_EARLY
+gl_paper_EARLY
 AM_PROG_AR
 LT_INIT
 AC_GNU_SOURCE
 gl_INIT
+gl_paper_INIT
 
 dnl Relocation support
 AM_CONDITIONAL([SHLIBS_IN_BINDIR],
@@ -92,8 +94,10 @@ AC_CONFIG_HEADER([config.h])
 AC_OUTPUT([
 	Makefile
 	lib/Makefile
+        lib/libpaper.c.in
+        libgnu/Makefile
 	src/Makefile
-        src/lib.c.in
+        src/libgnu/Makefile
 	man/Makefile
 	man/paperspecs.5
 	tests/Makefile

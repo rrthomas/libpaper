@@ -57,4 +57,4 @@ AM_TESTS_ENVIRONMENT = \
 	export sysconfdir=$(sysconfdir); \
 	export bindir=$(bindir); \
 	export abs_srcdir=$(abs_srcdir); \
-	export LSAN_OPTIONS=suppressions=$(abs_srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0;
+	export LSAN_OPTIONS=suppressions=$(abs_srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0:print_suppressions=0;

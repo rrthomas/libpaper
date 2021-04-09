@@ -391,3 +391,13 @@ int paperdone(void)
     free(xdg_config_home);
     return PAPER_OK;
 }
+
+/* Set the prefix directory for relocation. */
+void papersetprefixdir(const char *new_prefix)
+{
+#ifdef ENABLE_RELOCATABLE
+    set_relocation_prefix (INSTALLPREFIX, new_prefix);
+#else
+    (void)new_prefix;
+#endif
+}
