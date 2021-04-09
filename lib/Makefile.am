@@ -30,3 +30,5 @@ libpaper_la_LIBADD = $(top_builddir)/libgnu/libgnu.la $(LTLIBOBJS)
 libpaper.c: $(builddir)/libpaper.c.in
 	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
 	chmod +x $@
+
+DISTCLEANFILES = libpaper.c

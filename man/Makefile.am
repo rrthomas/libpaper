@@ -25,7 +25,7 @@ EXTRA_DIST = \
 	paper-include.man.in \
 	paperspecs.5.in
 
-DISTCLEANFILES = $(man_MANS)
+DISTCLEANFILES = $(man_MANS) paper-include.man
 
 do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g \
 	    -e 's|@PAPERCONF[@]|$(PAPERCONF)|'g

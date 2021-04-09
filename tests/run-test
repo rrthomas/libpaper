@@ -22,7 +22,7 @@ set -e
 
 expected_exit=0
 curr_dir="$(pwd)"
-test_file="$abs_srcdir/$1"
+test_file="$curr_dir/$1"
 name="${1%.sh}"
 basename=$(basename $name)
 test_dir="$curr_dir/$basename.$$"

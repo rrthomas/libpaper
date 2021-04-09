@@ -41,13 +41,23 @@ TESTS = \
 	two-arguments.sh \
 	$(EMPTY)
 
-XFAIL_TESTS = \
-	$(EMPTY)
-
-INPUTS = \
-	$(EMPTY)
-
 RESULTS = \
+	default-size-environment-expected.txt \
+	default-size-user-expected.txt \
+	default-size-lc_paper-expected.txt \
+	default-size-system-papersize-expected.txt \
+	default-size-system-paperspecs-expected.txt \
+	default-size-user-paperspecs-expected.txt \
+	default-size-no-default-paper-expected.txt \
+	unit-pt-expected.txt \
+	unit-pt-equals-expected.txt \
+	unit-mm-expected.txt \
+	unit-in-expected.txt \
+	unit-invalid-expected.txt \
+	all-sizes-expected.txt \
+	zero-arguments-expected.txt \
+	one-argument-expected.txt \
+	two-arguments-expected.txt \
 	$(EMPTY)
 
 EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS) test-paperspecs
