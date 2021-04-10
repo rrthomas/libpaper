@@ -119,12 +119,6 @@ dftpaper=`paperconf`
 if [ $choose -eq 1 ]; then
     echo
 
-    if [ -x /usr/bin/sensible-pager ]; then
-      : ${pager:=/usr/bin/sensible-pager}
-    else
-      : ${pager:=more}
-    fi
-
     LESS="-X -E $LESS"
     export LESS
 
@@ -136,7 +130,7 @@ currently recognized:
 EOF
 	echo "$knownpapers" | sed 's/^/    /'
 	echo
-    ) | ${pager}
+    ) | /usr/bin/sensible-pager
 
     : ${paper:=$dftpaper}
 
