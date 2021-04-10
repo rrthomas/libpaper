@@ -1,1 +1,1 @@
-paper: unknown option `--foo'
+paper: unknown option '--foo'

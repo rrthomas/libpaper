@@ -87,3 +87,17 @@
 /xsize.m4
 /xvasprintf.m4
 /zzgnulib.m4
+/codeset.m4
+/localcharset.m4
+/locale-fr.m4
+/locale-ja.m4
+/locale-zh.m4
+/mbrtowc.m4
+/mbsinit.m4
+/mbstate_t.m4
+/quote.m4
+/quotearg.m4
+/setlocale_null.m4
+/threadlib.m4
+/visibility.m4
+/wctype_h.m4

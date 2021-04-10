@@ -28,6 +28,7 @@
 #include <locale.h>
 
 #include "progname.h"
+#include "quote.h"
 #include "relocatable.h"
 #include "xvasprintf.h"
 
@@ -103,7 +104,7 @@ static void paper_die(const char *msg)
 static void printpaper(const char *name) {
     const struct paper *paper = paperinfo(name);
     if (paper == NULL)
-        die("unknown paper `%s'", name);
+        die("unknown paper %s", quote(name));
     printinfo(paper);
 }
 
@@ -122,15 +123,15 @@ int main(int argc, char **argv)
     for (;;) {
         int this_optind = optind ? optind : 1, longindex = -1, c;
 
-        /* Leading `:' so as to return ':' for a missing arg, not '?'. */
+        /* Leading `:' so as to return `:' for a missing arg, not `?'. */
         c = getopt_long(argc, argv, ":", longopts, &longindex);
 
         if (c == -1) /* No more options. */
             break;
         else if (c == '?') /* Unknown option. */
-            die("unknown option `%s'", argv[this_optind]);
+            die("unknown option %s", quote(argv[this_optind]));
         else if (c == ':') /* Missing argument. */
-            die("option `%s' requires an argument", argv[this_optind]);
+            die("option %s requires an argument", quote(argv[this_optind]));
 
         switch (longindex) {
         case 0:

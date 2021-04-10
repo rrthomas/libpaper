@@ -40,6 +40,7 @@
 #  --macro-prefix=gl_paper \
 #  locale \
 #  progname \
+#  quote \
 #  relocatable-prog \
 #  stdbool \
 #  xvasprintf
@@ -49,6 +50,7 @@ gl_LOCAL_DIR([])
 gl_MODULES([
   locale
   progname
+  quote
   relocatable-prog
   stdbool
   xvasprintf

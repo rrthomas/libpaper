@@ -1,1 +1,1 @@
-paper: option `--unit' requires an argument
+paper: option '--unit' requires an argument

@@ -133,3 +133,14 @@
 /rawmemchr.m4
 /std-gnu11.m4
 /zzgnulib.m4
+/flexmember.m4
+/intl-thread-locale.m4
+/intlmacosx.m4
+/lcmessage.m4
+/localename.m4
+/lock.m4
+/pthread_rwlock_rdlock.m4
+/setlocale.m4
+/setlocale_null.m4
+/threadlib.m4
+/visibility.m4
