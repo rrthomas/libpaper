@@ -1,45 +1,94 @@
-paper (2.1-1) unstable; urgency=low
+libpaper (1.2.0-1+nmu1) unstable; urgency=low
 
-  * Support configuration files again, but make /etc/papersize optional.
-  * Fix documentation in paper(1) of behaviour of paper when an invalid paper
-    size is configured: the incorrect value is used and an error will therefore
-    be given.
-  * Hardwire perl interpreter in hash-bang line.
-  * On error, paper now exits with code 1, not 255.
-  * Fix example code for using paper from C.
-  * Stop using experimental Perl smartmatch feature.
-  * Minor updates to build system.
+  * Non-maintainer upload.
+  * Make the program and library relocatable.
+  * Add a test suite.
+  * Make /etc/papersize optional.  Closes: #690247
   * Make package non-native again.
-  * Switch to dpkg-source 3.0 (quilt) format
-  * Update Standards-Version to 4.4.1, use dh and placate lintian.
-
- -- Reuben Thomas <rrt@sc3d.org>  Fri, 10 Jan 2020 21:16:05 +0000
-
-paper (2.0) unstable; urgency=low
-
+  * Switch to dpkg-source 3.0 (quilt) format.
   * Redesign and rewrite of libpaper.  Closes: #727656, #729004
-  * No config files in Multi-Arch package.  Closes: #682420, #695271
   * Remove /etc/papersize.  Closes: #731430
-  * Remove papersize(5).  Closes: #486338
+  * Remove papersize(5).  Closes: #486338, #731432
   * Update build system for recent autotools.  Closes: #496126, #700358
   * Add JIS B series paper sizes (patch from TeXLive).  Closes: #403365
   * Try LC_PAPER before falling back to default PAPERSIZE.
     Closes: #481213, #376350
-  * run-parts support removed.  Closes: #594931, #690247, #695536, #731432
+  * Document need to follow run-parts syntax removed.  Closes: #594931
   * Fix cross-compilation.  Closes: #693968
   * Load paper sizes at run-time, allowing the user to change the configuration.
   * Remove the library: the programs and data sources can be used instead.
   * Reduce the range of supported units to those actually needed.
   * Use the first entry in paperspecs as the "default default".  Closes: #493722
-  * Remove paperconfig.  Closes: #486341
-  * Debconf translations removed.
-    - Polish.  Closes: #658159
-    - Turkish.  Closes: #688293
+  * Improve paperconfig command-line interface.  Closes: #486341
   * Install README.  Closes: #413722
   * No longer use ucf.  Closes: #574750
-  * Update Standards-Version to 3.9.6, use cdbs and placate lintian.
+  * Update Standards-Version to 4.4.1, use dh and placate lintian.
 
- -- Reuben Thomas <rrt@sc3d.org>  Sat, 31 Dec 2015 00:01:00 +0000
+ -- Reuben Thomas <rrt@sc3d.org>  Sat, 10 Apr 2021 19:14:16 +0100
+
+libpaper (1.1.28) unstable; urgency=medium
+
+  * Completely fixed #927226.
+
+ -- Giuseppe Sacco <eppesuig@debian.org>  Wed, 26 Jun 2019 00:04:32 +0200
+
+libpaper (1.1.27) unstable; urgency=medium
+
+  * Fixed a circular dependency in debian/rules that left libpaper1.config
+    not built. See #927226.
+
+ -- Giuseppe Sacco <eppesuig@debian.org>  Sun, 23 Jun 2019 21:27:03 +0200
+
+libpaper (1.1.26) unstable; urgency=medium
+
+  * Check for ucf presence in the postrm script. See #916197 and #916198.
+
+ -- Giuseppe Sacco <eppesuig@debian.org>  Tue, 11 Dec 2018 11:50:45 +0100
+
+libpaper (1.1.25) unstable; urgency=medium
+
+  * Fixed C4 dimension, closes: #829203
+  * Added debian/source/format file.
+  * Updated debian/copyright in order to refer to GPL-2 instead of
+    GPL, closes: #729004
+  * Fixed several lintian warnings about debian/* files.
+  * Update to debian standard version 3.9.8 without any fix.
+  * Correctly free() memory, closes: #914815
+  * Updated paperconfig man page for run-parts, closes: #594931
+  * Changed rules in order to cross build, closes: #693968
+
+ -- Giuseppe Sacco <eppesuig@debian.org>  Sun, 09 Dec 2018 10:28:40 +0100
+
+libpaper (1.1.24+nmu5) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * Non-maintainer upload.
+  * Fix /tmp file vulnerability in debian/rules clean target
+    (Closes: #841722)
+
+ -- Jonathan Wiltshire <jmw@debian.org>  Fri, 11 Nov 2016 11:28:37 +0000
+
+libpaper (1.1.24+nmu4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Fix ""Multi-Arch: same" but postrm removes arch-independent
+    configuration":
+    Guard removal of /etc/papersize in libpaper1.postrm with check for
+    DPKG_MAINTSCRIPT_PACKAGE_REFCOUNT; depend on dpkg (>= 1.17.2).
+    Thanks to Ivo De Decker for the proposal.
+    (Closes: #682420)
+  * Debconf template translations:
+    - new: Polish, thanks Michał Kułach, closes: #658159
+    - updated: Turkish, thanks Atila KOÇ, closes: #688293
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 01 Nov 2014 14:35:13 +0100
+
+libpaper (1.1.24+nmu3) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Use dh_autoreconf to update configury for new architectures. (Closes: #700358)
+
+ -- Wookey <wookey@debian.org>  Fri, 04 Apr 2014 00:48:01 +0000
 
 libpaper (1.1.24+nmu2) unstable; urgency=low
 

@@ -1,0 +1,6 @@
+#!/usr/bin/dh-exec --with-scripts=subst-multiarch
+debian/tmp/etc/paperspecs
+debian/tmp/usr/lib/${DEB_HOST_MULTIARCH}/libpaper.so.*
+debian/tmp/usr/share/doc
+debian/tmp/usr/share/man/man5
+debian/tmp/usr/share/man/man8

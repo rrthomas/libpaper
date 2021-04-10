@@ -1,4 +1,2 @@
-# We don’t (yet) have a test suite
-paper source: testsuite-autopkgtest-missing
 # We used to be a native package
-paper source: odd-historical-debian-changelog-version
+libpaper source: odd-historical-debian-changelog-version
