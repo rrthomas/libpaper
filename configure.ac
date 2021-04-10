@@ -22,6 +22,7 @@ AC_PREREQ([2.64])
 dnl Initialise autoconf and automake
 AC_INIT([paper], [2.4], [rrt@sc3d.org],, [https://github.com/rrthomas/paper])
 AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
