@@ -11,6 +11,10 @@ default paper size and give information about known sizes, and
 specifies system-wide and per-user paper size catalogues, which can be
 can also be used directly (see paperspecs(5)).
 
+The paperconfig(1) utility is provided to allow other systems that have
+their own paper size configuration systems paper sizes, such as TeXLive, to
+interoperate with paper(1).
+
 Paper is distributed under the GNU General Public License version 3,
 or, at your option, any later version; see the file COPYING.
 

@@ -41,7 +41,7 @@ size_t paper_lineno;
 char *paper_specsfile;
 
 
-static const char *PAPERCONF_FILENAME = "papersize";
+static const char *PAPERSIZE_FILENAME = "@PAPERSIZE@";
 static const char *PAPERSPECS_FILENAME = "paperspecs";
 static struct paper *papers = NULL;
 static struct paper *default_paper = NULL;
@@ -288,7 +288,7 @@ static const char *papernamefile(const char *file)
 const char *defaultpapername(void) {
     const char *paperstr = getenv("PAPERSIZE");
     if (paperstr == NULL && xdg_config_home != NULL) {
-        char *papersize = mfile_name_concat(xdg_config_home, PAPERCONF_FILENAME, NULL);
+        char *papersize = mfile_name_concat(xdg_config_home, PAPERSIZE_FILENAME, NULL);
         if (papersize != NULL) {
             paperstr = papernamefile(papersize);
             free(papersize);
@@ -297,7 +297,7 @@ const char *defaultpapername(void) {
     if (paperstr == NULL)
         paperstr = localepapername();
     if (paperstr == NULL) {
-        char *papersize = mfile_name_concat(sysconfdir, PAPERCONF_FILENAME, NULL);
+        char *papersize = mfile_name_concat(sysconfdir, PAPERSIZE_FILENAME, NULL);
         if (papersize != NULL) {
             paperstr = papernamefile(papersize);
             free(papersize);

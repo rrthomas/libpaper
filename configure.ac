@@ -35,6 +35,11 @@ AC_GNU_SOURCE
 gl_INIT
 gl_paper_INIT
 
+dnl set up some substitutions
+PAPERSIZE="papersize"
+AC_SUBST(PAPERSIZE)
+AH_TEMPLATE(PAPERSIZE, [Default paper size configuration file name])
+
 dnl Relocation support
 AM_CONDITIONAL([SHLIBS_IN_BINDIR],
                [case "$host_os" in mingw* | cygwin*) true;; *) false;; esac])
@@ -91,17 +96,19 @@ AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
 
 dnl Create files
 AC_CONFIG_HEADER([config.h])
-AC_OUTPUT([
+AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
-        lib/libpaper.c.in
-        libgnu/Makefile
+	lib/libpaper.c.in
+	libgnu/Makefile
 	src/Makefile
-        src/libgnu/Makefile
+	src/libgnu/Makefile
 	man/Makefile
 	man/paperspecs.5
 	tests/Makefile
 ])
+AC_CONFIG_FILES([src/paperconfig], [chmod +x src/paperconfig])
+AC_OUTPUT
 
 if test $RELOCATABLE != yes; then
   AC_MSG_WARN([Building without --enable-relocatable: the tests will not work!])
