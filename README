@@ -33,11 +33,11 @@ standard POSIX environment and C compiler:
 
 Then run:
 
-  ./bootstrap && ./configure && make && [sudo] make install
+  ./bootstrap && ./configure --enable-relocatable && make && [sudo] make install
 
-Paper can be built as a relocatable package that can be copied
-anywhere once built and installed. To use this feature, use the
---enable-relocatable option to configure.
+The --enable-relocatable option builds paper as a relocatable package that
+can be copied anywhere once built and installed. Note that if you do not use
+it, the tests (“make check”) will not work.
 
 For installation options, see ./configure --help; see INSTALL for more
 information.
