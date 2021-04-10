@@ -45,7 +45,7 @@ enum paper_error {
     PAPER_BAD_HEIGHT,
     PAPER_BAD_UNIT,
     PAPER_MISSING_FIELD,
-    PAPER_ERROR = -1
+    PAPER_NOMEM = -1
 };
 
 extern size_t paper_lineno;

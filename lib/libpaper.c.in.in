@@ -201,7 +201,7 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
                 if (last != NULL)
                     *last = p;
                 if (p == NULL) {
-                    ret = PAPER_ERROR;
+                    ret = PAPER_NOMEM;
                     goto err;
                 }
                 *p = (struct paper){name, u, w, h, NULL};
@@ -337,7 +337,7 @@ int paperinit(void)
     if (sysconfdir != NULL) {
         char *system_paperspecs = mfile_name_concat(sysconfdir, PAPERSPECS_FILENAME, NULL);
         if (system_paperspecs == NULL)
-            return PAPER_ERROR;
+            return PAPER_NOMEM;
         int ret = readspecs(&system_papers, system_paperspecs, NULL);
         free(system_paperspecs);
         if (ret != PAPER_OK) {
@@ -356,7 +356,7 @@ int paperinit(void)
         char *home = getenv("HOME");
         xdg_config_home = mfile_name_concat(home, ".config", NULL);
         if (xdg_config_home == NULL)
-            return PAPER_ERROR;
+            return PAPER_NOMEM;
     }
     char *user_paperspecs = mfile_name_concat(xdg_config_home, PAPERSPECS_FILENAME, NULL);
     struct paper *last_paper = NULL;

@@ -183,11 +183,11 @@ int main(int argc, char **argv)
     case PAPER_BAD_UNIT:
         paper_die("bad unit");
         break;
-    case PAPER_ERROR:
-        paper_die("out of memory");
-        break;
     case PAPER_MISSING_FIELD:
         paper_die("missing field");
+        break;
+    case PAPER_NOMEM:
+        paper_die("out of memory");
         break;
     default:
         paper_die("unknown error");
