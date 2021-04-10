@@ -20,6 +20,13 @@
 
 set -e
 
+# Skip test if sysconfdir does not start prefix, as then relocation won't
+# work. Typical example: prefix=/usr, sysconfdir=/etc
+if [[ "$sysconfdir" != "$prefix/"* ]]; then
+    echo "sysconfdir does not start with prefix, cannot run test!"
+    exit 0
+fi
+
 curr_dir="$(pwd)"
 test_file="$curr_dir/$1"
 name="${1%.sh}"
