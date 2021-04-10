@@ -183,12 +183,12 @@ static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char 
             if (name != NULL && wstr != NULL && hstr != NULL && ustr != NULL) {
                 errno = 0;
                 double w = strtod(wstr, NULL);
-                if (errno != 0) {
+                if (w == 0 || errno != 0) {
                     ret = PAPER_BAD_WIDTH;
                     goto err;
                 }
                 double h = strtod(hstr, NULL);
-                if (errno != 0) {
+                if (h == 0 || errno != 0) {
                     ret = PAPER_BAD_HEIGHT;
                     goto err;
                 }

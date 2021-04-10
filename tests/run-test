@@ -20,12 +20,13 @@
 
 set -e
 
-expected_exit=0
 curr_dir="$(pwd)"
 test_file="$curr_dir/$1"
 name="${1%.sh}"
 basename=$(basename $name)
 test_dir="$curr_dir/$basename.$$"
+expected_exit=0
+expected_file="$abs_srcdir/$basename-expected.txt"
 
 # Test runner.
 # Arguments are command to run.
@@ -36,7 +37,7 @@ function paper_test() {
         echo "Expected exit code $expected_exit but was $exit_code"
         exit 1
     fi
-    diff -u "$abs_srcdir/$basename-expected.txt" "$basename-output.txt"
+    diff -u "$expected_file" "$basename-output.txt"
 }
 
 # Make a test installation of paper

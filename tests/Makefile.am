@@ -39,6 +39,12 @@ TESTS = \
 	zero-arguments.sh \
 	one-argument.sh \
 	two-arguments.sh \
+	paperspecs-invalid.sh \
+	paper-unknown.sh \
+	bad-width.sh \
+	bad-height.sh \
+	unknown-option.sh \
+	option-requires-argument.sh \
 	$(EMPTY)
 
 RESULTS = \
@@ -58,6 +64,9 @@ RESULTS = \
 	zero-arguments-expected.txt \
 	one-argument-expected.txt \
 	two-arguments-expected.txt \
+	paper-unknown-expected.txt \
+	unknown-option-expected.txt \
+	option-requires-argument-expected.txt \
 	$(EMPTY)
 
 EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS) test-paperspecs
