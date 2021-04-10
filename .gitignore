@@ -22,5 +22,5 @@ Makefile.in
 /libtool
 /configure
 /doc
-/paper*.tar.gz
+/libpaper*.tar.gz
 /stamp-h1
