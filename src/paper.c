@@ -35,6 +35,7 @@
 #include "paper.h"
 
 
+#define PROGRAM_NAME "paper"
 char *unit_list, *unit_msg;
 
 /* Options table. */
@@ -149,10 +150,10 @@ int main(int argc, char **argv)
             usage(EXIT_SUCCESS);
             break;
         case 4:
-            printf(PACKAGE_NAME " " VERSION "\n"
+            printf(PROGRAM_NAME " " VERSION "\n"
                    "Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>.\n"
-                   PACKAGE_NAME " comes with ABSOLUTELY NO WARRANTY.\n"
-                   "You may redistribute copies of " PACKAGE_NAME "\n"
+                   PROGRAM_NAME " comes with ABSOLUTELY NO WARRANTY.\n"
+                   "You may redistribute copies of " PROGRAM_NAME "\n"
                    "under the terms of the GNU General Public License.\n"
                    "For more information about these matters, see the file named COPYING.\n");
             exit(EXIT_SUCCESS);
