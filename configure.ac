@@ -26,6 +26,36 @@ AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall subdir-objects])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
+dnl Release number rules:
+dnl This is derived from "Versioning" chapter of info libtool documentation.
+dnl Format is MAJOR:MINOR:MICRO
+dnl     4a) Increment major when removing or changing interfaces.
+dnl     4a) 5) Increment minor when adding interfaces.
+dnl     6) Set minor to zero when removing or changing interfaces.
+dnl     3) Increment micro when interfaces not changed at all,
+dnl               only bug fixes or internal changes made.
+dnl     4b) Set micro to zero when adding, removing or changing interfaces.
+
+dnl First extract pieces from the version number string
+PAPER_MAJOR_VERSION=`echo $VERSION | awk -F. '{print $1}'`
+PAPER_MINOR_VERSION=`echo $VERSION | awk -F. '{print $2}'`
+PAPER_MICRO_VERSION=`echo $VERSION | awk -F. '{print $3}'`
+PAPER_VERSION=$PAPER_MAJOR_VERSION.$PAPER_MINOR_VERSION.$PAPER_MICRO_VERSION$PAPER_MICRO_VERSION_SUFFIX
+PAPER_VERSION_NUMBER=`expr $PAPER_MAJOR_VERSION \* 1000000 + $PAPER_MINOR_VERSION \* 1000 + $PAPER_MICRO_VERSION`
+
+PAPER_SONUM=$PAPER_MAJOR_VERSION
+AGE=$PAPER_MINOR_VERSION
+REVISION=$PAPER_MICRO_VERSION
+CURRENT=`expr $PAPER_SONUM + $AGE`
+
+dnl Version info for libraries = CURRENT:REVISION:AGE
+VERSION_INFO=$CURRENT:$REVISION:$AGE
+
+AC_SUBST(VERSION_INFO)
+AC_SUBST(PAPER_MAJOR_VERSION)
+AC_SUBST(PAPER_MINOR_VERSION)
+AC_SUBST(PAPER_MICRO_VERSION)
+
 dnl Check for standard build environment
 AC_PROG_CC_C99
 gl_EARLY

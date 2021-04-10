@@ -26,6 +26,7 @@ include_HEADERS = paper.h
 lib_LTLIBRARIES = libpaper.la
 libpaper_la_SOURCES = libpaper.c
 libpaper_la_LIBADD = $(top_builddir)/libgnu/libgnu.la $(LTLIBOBJS)
+libpaper_la_LDFLAGS = -version-info $(VERSION_INFO)
 
 libpaper.c: $(builddir)/libpaper.c.in
 	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
