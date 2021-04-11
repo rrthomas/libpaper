@@ -5,7 +5,8 @@ paper - print paper size information
 .PP
 .B paper
 prints information about the given paper sizes, which can include the
-standard form of its name, its width and height.
+standard form of its name, its width and height. The output is designed
+to be both human- and machine-readable.
 The name is matched case-insensitively, and ignoring spaces.
 .PP
 If neither a paper size nor the \fB\-\-all\fR option is given, the current
