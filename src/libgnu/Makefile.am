@@ -1,4 +1,3 @@
-# FIXME: combine next line with configure.ac?
 AUTOMAKE_OPTIONS = -Wall
 SUBDIRS =
 noinst_HEADERS =
