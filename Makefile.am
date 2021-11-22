@@ -18,6 +18,7 @@
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
 ACLOCAL_AMFLAGS = -I m4 -I src/m4
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-relocatable
 
 SUBDIRS = libgnu lib src man tests
 

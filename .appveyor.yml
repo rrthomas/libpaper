@@ -1,0 +1,46 @@
+version: "{build}"
+
+environment:
+  global:
+    # Only need one flavour of dictionary
+    VERBOSE: 1 # Get test logs in output
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
+      ASAN: 'yes'
+    - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
+    - APPVEYOR_BUILD_WORKER_IMAGE: macos
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      MSYSTEM: MSYS
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      MSYSTEM: MINGW64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      MSYSTEM: MINGW32
+
+for:
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Ubuntu2004
+  init:
+    - sudo apt-get -y install help2man
+  build_script:
+    - export ASAN
+    - ./build-aux/appveyor-build.sh
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: macos
+  init:
+    - brew install help2man
+  build_script:
+    # Prepend optional brew binary directories to PATH
+    - export PATH="/usr/local/opt/m4/bin:$PATH"
+    - ./build-aux/appveyor-build.sh
+-
+  matrix:
+    only:
+      - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+  init:
+    - git config --global core.autocrlf input
+  build_script:
+    - C:\msys64\usr\bin\bash.exe -lc "cd c:/projects/libpaper && ./bootstrap && ./configure --enable-relocatable && make && make distcheck"
