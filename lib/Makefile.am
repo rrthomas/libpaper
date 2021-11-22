@@ -24,9 +24,19 @@ EXTRA_DIST = $(sysconf_DATA)
 
 include_HEADERS = paper.h
 lib_LTLIBRARIES = libpaper.la
-libpaper_la_SOURCES = libpaper.c
 libpaper_la_LIBADD = $(top_builddir)/libgnu/libgnu.la $(LTLIBOBJS)
-libpaper_la_LDFLAGS = -version-info $(VERSION_INFO)
+libpaper_la_LDFLAGS = -no-undefined -export-symbols-regex '^(default|system|)paper.*'
+
+if OS_WIN32
+libpaper_la_LDFLAGS += -avoid-version
+else
+libpaper_la_LDFLAGS += -version-info $(VERSION_INFO)
+endif
+
+libpaper_la_SOURCES = libpaper.c
+if OS_WIN32
+libpaper_la_SOURCES += libpaper.rc
+endif
 
 libpaper.c: $(builddir)/libpaper.c.in
 	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
