@@ -101,3 +101,12 @@
 /threadlib.m4
 /visibility.m4
 /wctype_h.m4
+/flexmember.m4
+/intl-thread-locale.m4
+/intlmacosx.m4
+/langinfo_h.m4
+/lcmessage.m4
+/localename.m4
+/lock.m4
+/pthread_rwlock_rdlock.m4
+/setlocale.m4

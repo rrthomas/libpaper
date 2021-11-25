@@ -146,3 +146,6 @@
 /windows-recmutex.h
 /windows-rwlock.c
 /windows-rwlock.h
+/realloc.c
+/strndup.c
+/strnlen.c

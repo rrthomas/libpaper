@@ -42,6 +42,7 @@
 #  progname \
 #  quote \
 #  relocatable-prog \
+#  setlocale \
 #  stdbool \
 #  xvasprintf
 
@@ -52,6 +53,7 @@ gl_MODULES([
   progname
   quote
   relocatable-prog
+  setlocale
   stdbool
   xvasprintf
 ])
