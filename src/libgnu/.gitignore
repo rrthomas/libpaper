@@ -87,6 +87,7 @@
 /stdbool.in.h
 /stddef.in.h
 /stdint.in.h
+/stdint.h
 /stdio.in.h
 /stdlib.in.h
 /strerror-override.c

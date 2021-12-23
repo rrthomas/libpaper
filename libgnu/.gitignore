@@ -33,12 +33,14 @@
 /getdtablesize.c
 /getline.c
 /getopt-cdefs.in.h
+/getopt-cdefs.h
 /getopt-core.h
 /getopt-ext.h
 /getopt-pfx-core.h
 /getopt-pfx-ext.h
 /getopt.c
 /getopt.in.h
+/getopt.h
 /getopt1.c
 /getopt_int.h
 /getprogname.c
@@ -83,6 +85,7 @@
 /stdbool.in.h
 /stddef.in.h
 /stdint.in.h
+/stdint.h
 /stdio.in.h
 /stdlib.in.h
 /strcasecmp.c
