@@ -163,7 +163,7 @@ const struct paper *papernext(const struct paper *paper)
 }
 
 /* Constructor. */
-static _GL_ATTRIBUTE_CONST int readspecs(struct paper **papers_list, const char *specsfile, struct paper **last) {
+static int readspecs(struct paper **papers_list, const char *specsfile, struct paper **last) {
     paper_lineno = 0;
     free(paper_specsfile);
     paper_specsfile = strdup(specsfile);
