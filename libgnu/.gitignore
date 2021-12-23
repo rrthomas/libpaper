@@ -13,6 +13,7 @@
 /close.c
 /dup2.c
 /errno.in.h
+/errno.h
 /error.c
 /error.h
 /exitfail.c

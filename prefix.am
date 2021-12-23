@@ -1,0 +1,5 @@
+if OS_WIN32
+REAL_INSTALLPREFIX=`cygpath -m @prefix@`
+else
+REAL_INSTALLPREFIX=@prefix@
+endif

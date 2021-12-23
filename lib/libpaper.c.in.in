@@ -400,7 +400,7 @@ int paperdone(void)
 void papersetprefixdir(const char *new_prefix)
 {
 #ifdef ENABLE_RELOCATABLE
-    set_relocation_prefix (INSTALLPREFIX, new_prefix);
+    set_relocation_prefix(REAL_INSTALLPREFIX, new_prefix);
 #else
     (void)new_prefix;
 #endif

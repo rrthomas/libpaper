@@ -19,7 +19,9 @@
 
 SUBDIRS = libgnu
 
-AM_CPPFLAGS = -I$(top_srcdir)/src/libgnu -I$(top_builddir)/src/libgnu -I$(top_srcdir)/lib -I$(top_builddir)/lib
+include $(top_srcdir)/prefix.am
+
+AM_CPPFLAGS = -I$(top_srcdir)/src/libgnu -I$(top_builddir)/src/libgnu -I$(top_srcdir)/lib -I$(top_builddir)/lib -DREAL_INSTALLPREFIX="\"$(REAL_INSTALLPREFIX)\""
 AM_CFLAGS = $(WARN_CFLAGS)
 RELOCATABLE_LIBRARY_PATH = $(libdir)
 

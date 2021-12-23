@@ -17,7 +17,9 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-AM_CPPFLAGS = -I$(top_srcdir)/libgnu -I$(top_builddir)/libgnu -DIN_LIBRARY -DENABLE_COSTLY_RELOCATABLE
+include $(top_srcdir)/prefix.am
+
+AM_CPPFLAGS = -I$(top_srcdir)/libgnu -I$(top_builddir)/libgnu -DIN_LIBRARY -DENABLE_COSTLY_RELOCATABLE -DREAL_INSTALLPREFIX="\"$(REAL_INSTALLPREFIX)\""
 
 sysconf_DATA = paperspecs
 EXTRA_DIST = $(sysconf_DATA)

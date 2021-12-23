@@ -23,6 +23,7 @@
 /dup2.c
 /eloop-threshold.h
 /errno.in.h
+/errno.h
 /error.c
 /error.h
 /exitfail.c

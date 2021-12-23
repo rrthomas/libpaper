@@ -1,2 +1,1 @@
-rm "./$sysconfdir/paperspecs"
-source $abs_srcdir/default-size-system-paperspecs.sh
+no_system_paperspecs

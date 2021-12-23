@@ -1,2 +1,3 @@
-rm "$XDG_CONFIG_HOME/papersize"
-source $abs_srcdir/default-size-user.sh
+# Skip this test if we're not using glibc
+( ldd --version | grep "GLIBC" ) || exit 77
+no_user_papersize

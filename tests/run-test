@@ -32,6 +32,7 @@ test_file="$curr_dir/$1"
 name="${1%.sh}"
 basename=$(basename $name)
 test_dir="$curr_dir/$basename.$$"
+echo test_dir: $test_dir
 expected_exit=0
 expected_file="$abs_srcdir/$basename-expected.txt"
 
@@ -44,12 +45,50 @@ function paper_test() {
         echo "Expected exit code $expected_exit but was $exit_code"
         exit 1
     fi
-    diff -u "$expected_file" "$basename-output.txt"
+    sed -e 's|\\|/|g' < "$expected_file" > "expected-fixed.txt"
+    sed -e 's|\\|/|g' < "$basename-output.txt" > "$basename-output-fixed.txt"
+    $DIFF -u "expected-fixed.txt" "$basename-output-fixed.txt"
+}
+
+# Test functions.
+function no_size() {
+    paper_test --no-size
+}
+
+function no_PAPERSIZE () {
+    unset PAPERSIZE
+    no_size
+}
+
+function no_user_papersize() {
+    rm -f "$XDG_CONFIG_HOME/papersize"
+    no_PAPERSIZE
+}
+
+function no_locale() {
+    export LC_ALL=invalid_locale
+    no_user_papersize
+}
+
+function no_system_papersize() {
+    rm -f "./$sysconfdir/papersize"
+    no_locale
+}
+
+function no_system_paperspecs() {
+    rm -f "./$sysconfdir/paperspecs"
+    no_system_papersize
+}
+
+function no_user_paperspecs() {
+    expected_exit=1
+    rm -f "$XDG_CONFIG_HOME/paperspecs"
+    no_system_paperspecs
 }
 
 # Make a test installation of paper
 cd ..
-make install DESTDIR="$test_dir" >/dev/null 2>&1
+make install DESTDIR="$test_dir"
 export PATH="$test_dir/$bindir:$PATH"
 cd "$test_dir"
 
@@ -66,8 +105,8 @@ cp "$TEST_PAPERSPECS" "$XDG_CONFIG_HOME/paperspecs"
 echo system_papersize > "./$sysconfdir/papersize"
 printf "first_system_paperspecs,55,550,mm\nA4,210,297,mm" > "./$sysconfdir/paperspecs"
 
+# Remove the test directory on exit
+trap 'rm -rf "$test_dir"' EXIT
+
 # Run the test script.
 source $test_file
-
-# Remove the test directory
-rm -rf "$test_dir"

@@ -20,6 +20,14 @@
 TEST_EXTENSIONS = .sh
 SH_LOG_COMPILER = $(srcdir)/run-test
 
+if OS_WIN32
+DIFF="diff --strip-trailing-cr"
+PATH_CONVERT="cygpath --mixed"
+else
+DIFF=diff
+PATH_CONVERT=echo
+endif
+
 EMPTY =
 
 TESTS = \
@@ -77,4 +85,6 @@ AM_TESTS_ENVIRONMENT = \
 	export sysconfdir=$(sysconfdir); \
 	export bindir=$(bindir); \
 	export abs_srcdir=$(abs_srcdir); \
+	export DIFF=$(DIFF); \
+	export PATH_CONVERT=$(PATH_CONVERT); \
 	export LSAN_OPTIONS=suppressions=$(abs_srcdir)/asan-suppressions.txt:fast_unwind_on_malloc=0:print_suppressions=0;
