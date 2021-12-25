@@ -42,6 +42,5 @@ endif
 
 libpaper.c: $(builddir)/libpaper.c.in
 	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
-	chmod +x $@
 
 DISTCLEANFILES = libpaper.c
