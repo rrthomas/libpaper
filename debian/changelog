@@ -24,7 +24,7 @@ libpaper (1.2.0-1+nmu1) unstable; urgency=low
   * No longer use ucf.  Closes: #574750
   * Update Standards-Version to 4.4.1, use dh and placate lintian.
 
- -- Reuben Thomas <rrt@sc3d.org>  Sat, 10 Apr 2021 19:14:16 +0100
+ -- Reuben Thomas <rrt@sc3d.org>  Sat, 25 Dec 2021 17:32:00 +0000
 
 libpaper (1.1.28) unstable; urgency=medium
 

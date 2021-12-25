@@ -3,7 +3,7 @@ Section: libs
 Priority: optional
 Maintainer: Giuseppe Sacco <eppesuig@debian.org>
 Standards-Version: 4.4.1
-Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 12), dh-exec, po-debconf, autoconf
+Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 12), dh-autoreconf | debhelper-compat, dh-exec, po-debconf, autoconf, help2man
 Homepage: https://github.com/rrthomas/paper
 Vcs-Browser: https://github.com/rrthomas/paper
 Vcs-Git: https://github.com/rrthomas/paper.git
