@@ -124,7 +124,7 @@ const char *defaultpapername(void);
  * Deprecated, only for backwards compatibility; an alias for
  * defaultpapername().
  */
-#define systempapername defaultpapername
+const char *systempapername(void);
 
 /*
  * Return the first paper in the list of known paper sizes.

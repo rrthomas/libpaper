@@ -312,6 +312,11 @@ const char *defaultpapername(void) {
     return paperstr;
 }
 
+/* Alias for defaultpapername. */
+const char *systempapername(void) {
+    return defaultpapername();
+}
+
 /* Get the default paper size. */
 const struct paper *defaultpaper(void)
 {
