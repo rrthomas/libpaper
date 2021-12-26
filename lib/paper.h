@@ -23,6 +23,8 @@
 #ifndef PAPER_H
 #define PAPER_H
 
+#include <stddef.h>
+
 /* Allow the include file to be used directly from C++. */
 #ifdef __cplusplus
 extern "C" {
