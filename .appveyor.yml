@@ -43,5 +43,7 @@ for:
   init:
     - git config --global core.autocrlf input
     # - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  install:
+    - C:\msys64\usr\bin\bash.exe -lc "pacman --noconfirm -S libtool autoconf automake help2man"
   build_script:
     - C:\msys64\usr\bin\bash.exe -lc "cd c:/projects/libpaper && ./bootstrap && ./configure --enable-relocatable && make && make distcheck"
