@@ -1,7 +1,7 @@
 /*
   Paper sizes library.
 
-  Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>.
+  Copyright (c) 2021-2022 Reuben Thomas <rrt@sc3d.org>.
 
   This program is free software: you can redistribute it and/or modify it
   under the terms of the GNU General Public License as published by
@@ -154,6 +154,7 @@ double paperpsheight(const struct paper *paper)
 
 const struct paper *paperfirst(void)
 {
+    paperinit();
     return papers;
 }
 
@@ -238,6 +239,8 @@ static int readspecs(struct paper **papers_list, const char *specsfile, struct p
 /* Find paper by name. */
 _GL_ATTRIBUTE_PURE const struct paper *paperinfo(const char *name)
 {
+    paperinit();
+
     for (const struct paper *p = paperfirst(); p != NULL; p = papernext(p))
         if (strcasecmp(name, papername(p)) == 0)
             return p;
@@ -288,6 +291,8 @@ static const char *papernamefile(const char *file)
 
 /* Return the default configured paper name, as per paper(1). */
 const char *defaultpapername(void) {
+    paperinit();
+
     const char *paperstr = getenv("PAPERSIZE");
     if (paperstr == NULL && xdg_config_home != NULL) {
         free_xdg_config_home = true;
@@ -337,8 +342,15 @@ static char *alloc_relocate(const char *path)
 }
 
 /* Initialize the library. */
+/* Although the documentation requires callers to call paperinit(), this was
+   not historically necessary, and many don't, so we take care of it. */
+static int initialized = false;
 int paperinit(void)
 {
+    if (initialized)
+        return PAPER_OK;
+    initialized = true;
+
     /* Read system paperspecs. */
     struct paper *system_papers = NULL;
     sysconfdir = alloc_relocate("@sysconfdir@");
@@ -395,9 +407,12 @@ int paperinit(void)
 /* Shut down the library. */
 int paperdone(void)
 {
-    free(sysconfdir);
-    if (free_xdg_config_home)
-        free(xdg_config_home);
+    if (initialized) {
+        free(sysconfdir);
+        if (free_xdg_config_home)
+            free(xdg_config_home);
+        initialized = false;
+    }
     return PAPER_OK;
 }
 
