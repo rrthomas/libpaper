@@ -38,23 +38,17 @@
 #  --no-conditional-dependencies \
 #  --libtool \
 #  --macro-prefix=gl_paper \
-#  locale \
 #  progname \
 #  quote \
 #  relocatable-prog \
-#  setlocale \
-#  stdbool \
 #  xvasprintf
 
 # Specification in the form of a few gnulib-tool.m4 macro invocations:
 gl_LOCAL_DIR([])
 gl_MODULES([
-  locale
   progname
   quote
   relocatable-prog
-  setlocale
-  stdbool
   xvasprintf
 ])
 gl_AVOID([])

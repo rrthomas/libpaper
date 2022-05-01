@@ -27,7 +27,7 @@ EXTRA_DIST = $(sysconf_DATA)
 include_HEADERS = paper.h
 lib_LTLIBRARIES = libpaper.la
 libpaper_la_LIBADD = $(top_builddir)/libgnu/libgnu.la $(LTLIBOBJS)
-libpaper_la_LDFLAGS = $(LIBTHREAD) $(LIB_SETLOCALE) $(LIB_SETLOCALE_NULL) $(LTLIBINTL) @INTL_MACOSX_LIBS@ -no-undefined -export-symbols-regex '^paper.*|^defaultpapername$$|^systempapername$$'
+libpaper_la_LDFLAGS = $(LTLIBINTL) -no-undefined -export-symbols-regex '^paper.*|^defaultpapername$$|^systempapername$$'
 
 if OS_WIN32
 libpaper_la_LDFLAGS += -avoid-version
