@@ -419,7 +419,7 @@ int paperdone(void)
 /* Set the prefix directory for relocation. */
 void papersetprefixdir(const char *new_prefix)
 {
-#ifdef ENABLE_RELOCATABLE
+#if ENABLE_RELOCATABLE
     set_relocation_prefix(REAL_INSTALLPREFIX, new_prefix);
 #else
     (void)new_prefix;

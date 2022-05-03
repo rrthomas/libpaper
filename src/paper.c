@@ -111,6 +111,7 @@ static void printpaper(const char *name) {
 
 int main(int argc, char **argv)
 {
+#if ENABLE_RELOCATABLE
     /* Set up libpaper relocation. */
     set_program_name_and_installdir(
 #ifndef _WIN32
@@ -122,6 +123,7 @@ int main(int argc, char **argv)
     char *full_progname = get_full_program_name();
     char *curr_prefix = compute_curr_prefix(REAL_INSTALLPREFIX, INSTALLDIR, full_progname);
     papersetprefixdir(curr_prefix);
+#endif
 
     setlocale(LC_ALL, "");
 
