@@ -22,9 +22,12 @@ libpaper (1.2.0-1+nmu1) unstable; urgency=low
   * Improve paperconfig command-line interface.  Closes: #486341
   * Install README.  Closes: #413722
   * No longer use ucf.  Closes: #574750
-  * Update Standards-Version to 4.4.1, use dh and placate lintian.
+  * Update Standards-Version to 4.6.0, use dh and placate lintian.  Add
+    help2man and dh-related build deps.  Add Vcs-Browser and Vcs-Git fields
+    to control file.
+  * Bump debhelper compat level to 13.
 
- -- Reuben Thomas <rrt@sc3d.org>  Sat, 25 Dec 2021 17:32:00 +0000
+ -- Reuben Thomas <rrt@sc3d.org>  Thu, 05 May 2022 19:10:12 +0100
 
 libpaper (1.1.28) unstable; urgency=medium
 
