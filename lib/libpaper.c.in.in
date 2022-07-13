@@ -295,7 +295,6 @@ const char *defaultpapername(void) {
 
     const char *paperstr = getenv("PAPERSIZE");
     if (paperstr == NULL && xdg_config_home != NULL) {
-        free_xdg_config_home = true;
         char *papersize = mfile_name_concat(xdg_config_home, PAPERSIZE_FILENAME, NULL);
         if (papersize != NULL) {
             paperstr = papernamefile(papersize);
@@ -374,6 +373,7 @@ int paperinit(void)
     xdg_config_home = getenv("XDG_CONFIG_HOME");
     if (xdg_config_home == NULL) {
         char *home = getenv("HOME");
+        free_xdg_config_home = true;
         xdg_config_home = mfile_name_concat(home, ".config", NULL);
         if (xdg_config_home == NULL)
             return PAPER_NOMEM;
@@ -409,8 +409,10 @@ int paperdone(void)
 {
     if (initialized) {
         free(sysconfdir);
+        sysconfdir = NULL;
         if (free_xdg_config_home)
             free(xdg_config_home);
+        xdg_config_home = NULL;
         initialized = false;
     }
     return PAPER_OK;
