@@ -316,9 +316,9 @@ const char *defaultpapername(void) {
     return paperstr;
 }
 
-/* Alias for defaultpapername. */
+/* Alias for defaultpapername; its return value must be freed! */
 const char *systempapername(void) {
-    return defaultpapername();
+    return strdup(defaultpapername());
 }
 
 /* Get the default paper size. */

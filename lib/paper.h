@@ -123,8 +123,8 @@ const struct paper *defaultpaper(void);
 const char *defaultpapername(void);
 
 /*
- * Deprecated, only for backwards compatibility; an alias for
- * defaultpapername().
+ * Deprecated, only for backwards compatibility; does the same as
+ * defaultpapername(), but returns a value that must be freed.
  */
 const char *systempapername(void);
 
