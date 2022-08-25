@@ -36,7 +36,8 @@
 
 
 #define PROGRAM_NAME "paper"
-char *unit_list, *unit_msg;
+const char *unit_list;
+char *unit_msg;
 
 /* Options table. */
 static struct option longopts[] = {
