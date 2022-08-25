@@ -86,6 +86,12 @@ function no_user_paperspecs() {
     no_system_paperspecs
 }
 
+function no_home() {
+    unset XDG_CONFIG_HOME
+    unset HOME
+    no_user_paperspecs
+}
+
 # Make a test installation of paper
 cd ..
 make install DESTDIR="$test_dir"

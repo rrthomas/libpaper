@@ -1,6 +1,6 @@
 # Tests Makefile.am
 #
-# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021-2022 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -48,6 +48,7 @@ TESTS = \
 	one-argument.sh \
 	two-arguments.sh \
 	paperspecs-invalid.sh \
+	no-home.sh \
 	paper-unknown.sh \
 	bad-width.sh \
 	bad-height.sh \
