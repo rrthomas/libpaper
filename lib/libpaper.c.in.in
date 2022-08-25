@@ -387,7 +387,8 @@ int paperinit(void)
             free(paper_specsfile);
             paper_specsfile = user_paperspecs;
             paper_lineno = user_lineno;
-        }
+        } else
+            free(user_paperspecs);
     }
 
     if (papers != NULL) {
