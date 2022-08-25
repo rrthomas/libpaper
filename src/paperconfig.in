@@ -23,10 +23,15 @@ if test "@RELOCATABLE@" = yes; then
         echo "$bindir/" \
         | sed -e "s%^${orig_installprefix}/%${curr_installprefix}/%" \
         | sed -e 's,/$,,'`
-    PAPERSIZE="$sysconfdir/@PAPERSIZE@"
-    PAPERRUNPARTSDIR="$sysconfdir/paper.d"
-    PAPER_PROGRAM="$bindir/paper"
+else
+    prefix="@prefix@"
+    exec_prefix="@exec_prefix@"
+    bindir="@bindir@"
+    sysconfdir="@sysconfdir@"
 fi
+PAPERSIZE="$sysconfdir/@PAPERSIZE@"
+PAPERRUNPARTSDIR="$sysconfdir/paper.d"
+PAPER_PROGRAM="$bindir/paper"
 
 usage() {
     echo "Usage: `basename $0` [--version|--help|--paper NAME|--choose]"
