@@ -73,6 +73,7 @@ RESULTS = \
 	zero-arguments-expected.txt \
 	one-argument-expected.txt \
 	two-arguments-expected.txt \
+	no-home-expected.txt \
 	paper-unknown-expected.txt \
 	unknown-option-expected.txt \
 	option-requires-argument-expected.txt \
