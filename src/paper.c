@@ -224,5 +224,9 @@ int main(int argc, char **argv)
                 printpaper(argv[i]);
     }
 
+#if ENABLE_RELOCATABLE
+    free(curr_prefix);
+#endif
+
     exit(EXIT_SUCCESS);
 }
