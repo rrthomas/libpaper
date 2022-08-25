@@ -19,12 +19,14 @@
 
 #include "config.h"
 
+#include <pwd.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
 #include <strings.h>
+#include <unistd.h>
 #include <ctype.h>
 #include <locale.h>
 #if defined LC_PAPER && defined _GNU_SOURCE
@@ -316,7 +318,10 @@ const char *defaultpapername(void) {
 
 /* Alias for defaultpapername; its return value must be freed! */
 const char *systempapername(void) {
-    return strdup(defaultpapername());
+    const char *papername = defaultpapername();
+    if (papername == NULL)
+        return NULL;
+    return strdup(papername);
 }
 
 /* Get the default paper size. */
@@ -351,6 +356,7 @@ int paperinit(void)
     int ret = PAPER_OK;
 
     /* Read system paperspecs. */
+    struct paper *last_paper = NULL;
     struct paper *system_papers = NULL;
     sysconfdir = alloc_relocate("@sysconfdir@");
     if (sysconfdir != NULL) {
@@ -370,23 +376,32 @@ int paperinit(void)
     xdg_config_home = getenv("XDG_CONFIG_HOME");
     if (xdg_config_home == NULL) {
         char *home = getenv("HOME");
-        free_xdg_config_home = true;
-        xdg_config_home = mfile_name_concat(home, ".config", NULL);
-        if (xdg_config_home == NULL)
-            return PAPER_NOMEM;
+        if (home == NULL) {
+            struct passwd *pwd = getpwuid(getuid());
+            if (pwd && pwd->pw_dir && *(pwd->pw_dir))
+                home = pwd->pw_dir;
+        }
+        if (home) {
+            free_xdg_config_home = true;
+            xdg_config_home = mfile_name_concat(home, ".config", NULL);
+            if (xdg_config_home == NULL)
+                return PAPER_NOMEM;
+        }
     }
-    char *user_paperspecs = mfile_name_concat(xdg_config_home, PAPERSPECS_FILENAME, NULL);
-    struct paper *last_paper = NULL;
-    if (user_paperspecs != NULL) {
-        size_t user_lineno;
-        int user_ret = readspecs(&papers, user_paperspecs, &last_paper, &user_lineno);
-        if (ret == PAPER_OK) {
-            ret = user_ret;
-            free(user_paperspecs);
-        } else if (paper_lineno == 0) {
-            free(paper_specsfile);
-            paper_specsfile = user_paperspecs;
-            paper_lineno = user_lineno;
+
+    if (xdg_config_home) {
+        char *user_paperspecs = mfile_name_concat(xdg_config_home, PAPERSPECS_FILENAME, NULL);
+        if (user_paperspecs != NULL) {
+            size_t user_lineno;
+            int user_ret = readspecs(&papers, user_paperspecs, &last_paper, &user_lineno);
+            if (ret == PAPER_OK) {
+                ret = user_ret;
+                free(user_paperspecs);
+            } else if (paper_lineno == 0) {
+                free(paper_specsfile);
+                paper_specsfile = user_paperspecs;
+                paper_lineno = user_lineno;
+            }
         }
     }
 
