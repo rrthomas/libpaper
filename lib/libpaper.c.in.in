@@ -246,6 +246,18 @@ _GL_ATTRIBUTE_PURE const struct paper *paperinfo(const char *name)
     return NULL;
 }
 
+/* Find paper by size. */
+_GL_ATTRIBUTE_PURE const struct paper *paperwithsize(double pswidth, double psheight)
+{
+    paperinit();
+
+    for (const struct paper* p = paperfirst(); p != NULL; p = papernext(p))
+        if (paperpswidth(p) == pswidth && paperpsheight(p) == psheight)
+            return p;
+
+    return NULL;
+}
+
 
 /* Get locale default paper size. */
 static const char *localepapername(void) {
