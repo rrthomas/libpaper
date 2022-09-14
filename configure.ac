@@ -17,10 +17,10 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-AC_PREREQ([2.64])
+AC_PREREQ([2.71])
 
 dnl Initialise autoconf and automake
-AC_INIT([libpaper], [2.0.0], [rrt@sc3d.org],, [https://github.com/rrthomas/paper])
+AC_INIT([libpaper],[2.0.0],[rrt@sc3d.org],[],[https://github.com/rrthomas/paper])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall subdir-objects])
@@ -57,12 +57,12 @@ AC_SUBST(LIBPAPER_MINOR_VERSION)
 AC_SUBST(LIBPAPER_MICRO_VERSION)
 
 dnl Check for standard build environment
-AC_PROG_CC_C99
+AC_PROG_CC
 gl_EARLY
 gl_paper_EARLY
 AM_PROG_AR
 LT_INIT
-AC_GNU_SOURCE
+AC_USE_SYSTEM_EXTENSIONS
 gl_INIT
 gl_paper_INIT
 
@@ -139,7 +139,7 @@ dnl Set a value even if not found, so that an invocation via build-aux/missing w
 AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
 
 dnl Create files
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
