@@ -1,6 +1,6 @@
 # Man pages Makefile.am
 #
-# Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2013-2022 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -24,22 +24,18 @@ dist_man_MANS = \
 	paperspecs.5
 
 EXTRA_DIST = \
-	paper-include.man.in \
+	paper-include.man \
 	paperspecs.5.in \
 	paperconfig.8.in
 
-DISTCLEANFILES = $(man_MANS) paper-include.man
+DISTCLEANFILES = $(man_MANS)
 
-do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g \
-	    -e 's|@PAPERSIZE[@]|$(PAPERSIZE)|'g
-
-paper-include.man: paper-include.man.in Makefile
-	$(do_subst) < $(srcdir)/$@.in > $@
+do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
 
 paperconfig.8: paperconfig.8.in Makefile
 	$(do_subst) < $(srcdir)/$@.in >$@
 
-paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(srcdir)/paper-include.man.in
+paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(srcdir)/paper-include.man
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
 	$(AM_V_GEN)if ( touch $@.w && rm -f $@.w; ) >/dev/null 2>&1; then \
 	  $(top_srcdir)/build-aux/missing --run $(HELP2MAN) --no-info \

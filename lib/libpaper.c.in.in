@@ -45,7 +45,7 @@ size_t paper_lineno;
 char *paper_specsfile;
 
 
-static const char *PAPERSIZE_FILENAME = "@PAPERSIZE@";
+static const char *PAPERSIZE_FILENAME = "papersize";
 static const char *PAPERSPECS_FILENAME = "paperspecs";
 static struct paper *papers = NULL;
 static struct paper *default_paper = NULL;

@@ -45,7 +45,7 @@ else
     bindir="@bindir@"
     sysconfdir="@sysconfdir@"
 fi
-PAPERSIZE="$sysconfdir/@PAPERSIZE@"
+PAPERSIZE="$sysconfdir/papersize"
 PAPERRUNPARTSDIR="$sysconfdir/paper.d"
 PAPER_PROGRAM="$bindir/paper"
 
