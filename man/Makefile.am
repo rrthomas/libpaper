@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License along
 # with this program; if not, see <https://www.gnu.org/licenses/>.
 
-man_MANS = \
+dist_man_MANS = \
 	paper.1 \
 	paperconfig.8 \
 	paperspecs.5
@@ -38,7 +38,7 @@ paper-include.man: paper-include.man.in Makefile
 paperconfig.8: paperconfig.8.in Makefile
 	$(do_subst) < $(srcdir)/$@.in >$@
 
-paper.1: $(abs_top_builddir)/src/paper $(builddir)/paper-include.man
+paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(srcdir)/paper-include.man.in
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
 	$(AM_V_GEN)if ( touch $@.w && rm -f $@.w; ) >/dev/null 2>&1; then \
 	  $(top_srcdir)/build-aux/missing --run $(HELP2MAN) --no-info \
