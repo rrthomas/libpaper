@@ -27,6 +27,12 @@ dist_doc_DATA = README
 
 EXTRA_DIST = m4/gnulib-cache.m4
 
+# Ignore built files that are part of the distribution (specifically,
+# man/paperconfig.8)
+distcleancheck_listfiles = \
+       find . -type f -exec sh -c 'test -f $(srcdir)/$$1 || echo $$1' \
+	    sh '{}' ';'
+
 release: distcheck
 	git diff --exit-code && \
 	git tag -a -m "Release tag" "v$(VERSION)" && \
