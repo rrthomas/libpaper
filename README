@@ -20,6 +20,9 @@ License, version 2.1, or, at your option, any later version, with the
 exception of the files listed below; see the file COPYING.
 
   * The file ‘paperspecs’ is in the public domain.
+  * The ‘paper’ program is distributed under the GNU General Public Licence
+    version 3, or, at your option, any later version. See the file
+    COPYING-GPL-3.
   * The ‘paperconfig’ program and its documentation (source files
     src/paperconfig.in and man/paperconfig.8.in) are distributed under
     the GNU General Public License version 2. See the file

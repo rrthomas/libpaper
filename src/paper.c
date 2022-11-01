@@ -6,16 +6,16 @@
   This file is part of libpaper.
 
   This program is free software: you can redistribute it and/or modify it
-  under the terms of the GNU Lesser General Public License as published by
-  the Free Software Foundation; either version 2.1 of the License, or (at
+  under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
   your option) any later version.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU Lesser General Public License for more details.
+  GNU General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public License
+  You should have received a copy of the GNU General Public License
   along with this program.  If not, see
   <https://www.gnu.org/licenses/lgpl-2.1.html>.
 */
@@ -171,8 +171,9 @@ int main(int argc, char **argv)
                    "Copyright (c) 2013-2022 Reuben Thomas <rrt@sc3d.org>.\n"
                    PROGRAM_NAME " comes with ABSOLUTELY NO WARRANTY.\n"
                    "You may redistribute copies of " PROGRAM_NAME "\n"
-                   "under the terms of the GNU Lesser General Public License.\n"
-                   "See <https://www.gnu.org/licenses/lgpl-2.1.html>.\n");
+                   "under the terms of the GNU General Public License\n"
+                   "version 2, or, at your option, any later version."
+                   "See <https://www.gnu.org/licenses/gpl-2.html>.\n");
             exit(EXIT_SUCCESS);
         default:
             break;
