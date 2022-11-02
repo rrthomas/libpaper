@@ -174,3 +174,13 @@
 /xsize.h
 /xvasprintf.c
 /xvasprintf.h
+/assert.in.h
+/calloc.c
+/ialloc.c
+/ialloc.h
+/intprops-internal.h
+/reallocarray.c
+/stdalign.in.h
+/stdckdint.in.h
+/stdio-read.c
+/stdio-write.c

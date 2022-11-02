@@ -153,3 +153,5 @@
 /realloc.c
 /strndup.c
 /strnlen.c
+/stdio-read.c
+/stdio-write.c
