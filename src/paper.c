@@ -172,8 +172,8 @@ int main(int argc, char **argv)
                    PROGRAM_NAME " comes with ABSOLUTELY NO WARRANTY.\n"
                    "You may redistribute copies of " PROGRAM_NAME "\n"
                    "under the terms of the GNU General Public License\n"
-                   "version 2, or, at your option, any later version."
-                   "See <https://www.gnu.org/licenses/gpl-2.html>.\n");
+                   "version 3, or, at your option, any later version."
+                   "See <https://www.gnu.org/licenses/gpl-3.0.html>.\n");
             exit(EXIT_SUCCESS);
         default:
             break;
