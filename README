@@ -11,10 +11,6 @@ default paper size and give information about known sizes, and
 specifies system-wide and per-user paper size catalogues, which can
 also be used directly (see paperspecs(5)).
 
-The paperconfig(1) utility is provided to allow other systems that
-have their own paper size configuration systems paper sizes, such as
-TeXLive, to interoperate with paper(1).
-
 The libpaper package is distributed under the GNU Lesser General Public
 License, version 2.1, or, at your option, any later version, with the
 exception of the files listed below; see the file COPYING.
@@ -23,10 +19,6 @@ exception of the files listed below; see the file COPYING.
   * The ‘paper’ program is distributed under the GNU General Public Licence
     version 3, or, at your option, any later version. See the file
     COPYING-GPL-3.
-  * The ‘paperconfig’ program and its documentation (source files
-    src/paperconfig.in and man/paperconfig.8.in) are distributed under
-    the GNU General Public License version 2. See the file
-    COPYING-GPL-2.
 
 Libpaper was developed by Reuben Thomas <rrt@sc3d.org>, based on the
 design of libpaper by Yves Arrouye <yves@debian.org>, improved by

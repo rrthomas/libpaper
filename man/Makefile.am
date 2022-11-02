@@ -20,20 +20,15 @@
 
 dist_man_MANS = \
 	paper.1 \
-	paperconfig.8 \
 	paperspecs.5
 
 EXTRA_DIST = \
 	paper-include.man \
-	paperspecs.5.in \
-	paperconfig.8.in
+	paperspecs.5.in
 
 DISTCLEANFILES = $(man_MANS)
 
 do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
-
-paperconfig.8: paperconfig.8.in Makefile
-	$(do_subst) < $(srcdir)/$@.in >$@
 
 paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(srcdir)/paper-include.man
 ## Exit gracefully if $@ is not writeable, such as during distcheck!

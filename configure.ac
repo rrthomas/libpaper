@@ -148,7 +148,6 @@ AC_CONFIG_FILES([
 	man/paperspecs.5
 	tests/Makefile
 ])
-AC_CONFIG_FILES([src/paperconfig], [chmod +x src/paperconfig])
 AC_OUTPUT
 
 if test $RELOCATABLE != yes; then

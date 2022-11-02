@@ -33,8 +33,3 @@ if RELOCATABLE_VIA_LD
 paper_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(bindir)`
 endif
 paper_LDADD = $(top_builddir)/lib/libpaper.la $(top_builddir)/src/libgnu/libgnupaper.la
-
-sbin_SCRIPTS = paperconfig
-
-EXTRA_DIST = paperconfig.in
-DISTCLEANFILES = $(bin_SCRIPTS)
