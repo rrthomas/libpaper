@@ -181,5 +181,6 @@
 /reallocarray.c
 /stdalign.in.h
 /stdckdint.in.h
+/stdckdint.h
 /stdio-read.c
 /stdio-write.c
