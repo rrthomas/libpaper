@@ -122,7 +122,6 @@
 /stat-w32.c
 /stat-w32.h
 /stdarg.in.h
-/stdbool.in.h
 /stddef.in.h
 /stdint.in.h
 /stdio.h
