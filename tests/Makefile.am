@@ -83,6 +83,7 @@ RESULTS = \
 EXTRA_DIST = $(SH_LOG_COMPILER) $(TESTS) $(INPUTS) $(RESULTS) test-paperspecs
 
 AM_TESTS_ENVIRONMENT = \
+	export MAKE=$(MAKE); \
 	export LC_ALL=C; \
 	export prefix=$(prefix); \
 	export sysconfdir=$(sysconfdir); \
