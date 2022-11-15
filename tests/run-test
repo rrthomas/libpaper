@@ -95,7 +95,7 @@ function no_home() {
 
 # Make a test installation of paper
 cd ..
-make install DESTDIR="$test_dir"
+${MAKE} install DESTDIR="$test_dir"
 export PATH="$test_dir/$bindir:$PATH"
 cd "$test_dir"
 
