@@ -78,8 +78,6 @@ esac
 AC_MSG_RESULT([$native_win32])
 AM_CONDITIONAL(OS_WIN32, test "x$native_win32" = "xyes")
 
-AM_CONDITIONAL([SHLIBS_IN_BINDIR], [case "$host_os" in mingw* | cygwin*) true;; *) false;; esac])
-
 dnl Relocation support
 AM_CONDITIONAL([SHLIBS_IN_BINDIR],
                [case "$host_os" in mingw* | cygwin*) true;; *) false;; esac])
