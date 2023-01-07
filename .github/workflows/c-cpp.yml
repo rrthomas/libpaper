@@ -1,0 +1,57 @@
+name: C/C++ CI
+
+on: [ push, pull_request ]
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-latest
+    env:
+      ASAN: "yes"
+    steps:
+    - uses: actions/checkout@v3
+      with: { submodules: true }
+    - name: Install dependencies
+      run: sudo apt-get -y install help2man
+    - name: Build
+      run: ./build-aux/build.sh
+
+  build-macos:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+      with: { submodules: true }
+    - name: Install dependencies
+      run: brew install help2man automake
+    - name: Build
+      run: |
+        # Prepend optional brew binary directories to PATH
+        export PATH="/usr/local/opt/m4/bin:$PATH"
+        ./build-aux/build.sh
+      
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    strategy:
+      matrix:
+        include:
+        - { sys: mingw64, env: x86_64 }
+        - { sys: mingw32, env: i686 }
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        release: false
+        msystem: ${{matrix.sys}}
+        install: >-
+          patch git groff help2man
+          mingw-w64-${{matrix.env}}-autotools
+          mingw-w64-${{matrix.env}}-gcc
+    - uses: actions/checkout@v3
+      with: { submodules: true }
+    - name: Set up git
+      run: |
+        git config --global core.autocrlf input
+        # ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    - name: Build
+      run: ./bootstrap && ./configure --enable-relocatable && make && make distcheck
