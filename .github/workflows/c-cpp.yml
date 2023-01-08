@@ -3,43 +3,32 @@ name: C/C++ CI
 on: [ push, pull_request ]
 
 jobs:
-  build-ubuntu:
-    runs-on: ubuntu-latest
-    env:
-      ASAN: "yes"
-    steps:
-    - uses: actions/checkout@v3
-      with: { submodules: true }
-    - name: Install dependencies
-      run: sudo apt-get -y install help2man
-    - name: Build
-      run: ./build-aux/build.sh
-
-  build-macos:
-    runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v3
-      with: { submodules: true }
-    - name: Install dependencies
-      run: brew install help2man automake
-    - name: Build
-      run: |
-        # Prepend optional brew binary directories to PATH
-        export PATH="/usr/local/opt/m4/bin:$PATH"
-        ./build-aux/build.sh
-      
-  build-windows:
-    runs-on: windows-latest
-    defaults:
-      run:
-        shell: msys2 {0}
+  build:
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         include:
-        - { sys: mingw64, env: x86_64 }
-        - { sys: mingw32, env: i686 }
+          - os: ubuntu-latest
+            env:
+              ASAN: "yes"
+            shell: bash
+          - os: macos-latest
+            shell: bash
+          - os: windows-latest
+            sys: mingw64
+            env: x86_64
+            shell: msys2
+          - os: windows-latest
+            sys: mingw32
+            env: i686
+            shell: msys2
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: ${{ matrix.shell }} {0}
     steps:
     - uses: msys2/setup-msys2@v2
+      if: ${{ matrix.os == 'windows-latest' }}
       with:
         release: false
         msystem: ${{matrix.sys}}
@@ -49,9 +38,18 @@ jobs:
           mingw-w64-${{matrix.env}}-gcc
     - uses: actions/checkout@v3
       with: { submodules: true }
-    - name: Set up git
-      run: |
-        git config --global core.autocrlf input
-        # ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+    - name: Install dependencies (Ubuntu)
+      if: ${{ matrix.os == 'ubuntu-latest' }}
+      run: sudo apt-get -y install help2man
+    - name: Install dependencies (macOS)
+      if: ${{ matrix.os == 'macos-latest' }}
+      run: brew install help2man automake
+    - name: Set up environment (macOS)
+      if: ${{ matrix.os == 'macos-latest' }}
+      # Prepend optional brew binary directories to PATH
+      run: echo "/usr/local/opt/m4/bin" >> $GITHUB_PATH
+    - name: Set up git (Windows)
+      if: ${{ matrix.os == 'windows-latest' }}
+      run: git config --global core.autocrlf input
     - name: Build
-      run: ./bootstrap && ./configure --enable-relocatable && make && make distcheck
+      run: ./build-aux/build.sh
