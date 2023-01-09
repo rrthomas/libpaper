@@ -43,11 +43,10 @@ jobs:
       run: sudo apt-get -y install help2man
     - name: Install dependencies (macOS)
       if: ${{ matrix.os == 'macos-latest' }}
-      run: brew install help2man automake
-    - name: Set up environment (macOS)
-      if: ${{ matrix.os == 'macos-latest' }}
-      # Prepend optional brew binary directories to PATH
-      run: echo "/usr/local/opt/m4/bin" >> $GITHUB_PATH
+      run: |
+        brew install help2man automake
+        # Prepend optional brew binary directories to PATH
+        echo "/usr/local/opt/m4/bin" >> $GITHUB_PATH
     - name: Set up git (Windows)
       if: ${{ matrix.os == 'windows-latest' }}
       run: git config --global core.autocrlf input
