@@ -47,8 +47,5 @@ jobs:
         brew install help2man automake
         # Prepend optional brew binary directories to PATH
         echo "/usr/local/opt/m4/bin" >> $GITHUB_PATH
-    - name: Set up git (Windows)
-      if: ${{ matrix.os == 'windows-latest' }}
-      run: git config --global core.autocrlf input
     - name: Build
       run: ./build-aux/build.sh
