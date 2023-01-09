@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build on AppVeyor
+# Build for CI.
 # Written by Reuben Thomas 2021.
 # This file is in the public domain.
 
