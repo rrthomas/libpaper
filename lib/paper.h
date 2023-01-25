@@ -129,7 +129,7 @@ const char *defaultpapername(void);
  * Deprecated, only for backwards compatibility; does the same as
  * defaultpapername(), but returns a value that must be freed.
  */
-const char *systempapername(void);
+char *systempapername(void);
 
 /*
  * Return the first paper in the list of known paper sizes.
