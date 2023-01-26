@@ -1,7 +1,7 @@
 /*
   Paper sizes command-line utility.
 
-  Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>.
+  Copyright (c) 2021-2023 Reuben Thomas <rrt@sc3d.org>.
 
   The API is mostly API/ABI-compatible with that of the original
   libpaper by Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.

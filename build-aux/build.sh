@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build for CI.
-# Written by Reuben Thomas 2021.
+# Written by Reuben Thomas 2021-2023.
 # This file is in the public domain.
 
 set -e

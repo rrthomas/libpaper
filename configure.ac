@@ -1,6 +1,6 @@
 # configure.ac for libpaper
 #
-# Copyright (c) 2013-2022 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2013-2023 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
