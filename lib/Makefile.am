@@ -1,6 +1,6 @@
 # libpaper Makefile.am
 #
-# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021-2023 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -42,6 +42,6 @@ libpaper_la_SOURCES += libpaper.rc
 endif
 
 libpaper.c: $(builddir)/libpaper.c.in
-	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/$@.in >$@
+	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/libpaper.c.in > libpaper.c
 
 DISTCLEANFILES = libpaper.c
