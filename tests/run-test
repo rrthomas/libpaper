@@ -117,8 +117,10 @@ cp "$TEST_PAPERSPECS" "$XDG_CONFIG_HOME/paperspecs"
 echo system_papersize > "./$sysconfdir/papersize"
 printf "first_system_paperspecs,55,550,mm\nA4,210,297,mm" > "./$sysconfdir/paperspecs"
 
-# Remove the test directory on exit
-trap 'rm -rf "$test_dir"' EXIT
+# Remove the test directory on exit.
+# Change directory back to $abs_srcdir first so we don't try to remove a
+# directory above the cwd, which is forbidden on some systems.
+trap 'cd "$abs_srcdir" && rm -rf "$test_dir"' EXIT
 
 # Run the test script.
 . "$test_file"
