@@ -67,7 +67,6 @@
 /float_h.m4
 /math_h.m4
 /exponentd.m4
-/getopt.m4
 /intmax_t.m4
 /inttypes_h.m4
 /memchr.m4
