@@ -42,6 +42,6 @@ libpaper_la_SOURCES += libpaper.rc
 endif
 
 libpaper.c: $(builddir)/libpaper.c.in
-	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/libpaper.c.in > libpaper.c
+	sed -e 's|$$[{]prefix[}]|$(prefix)|g' $(builddir)/libpaper.c.in > $@-t && mv $@-t $@
 
 DISTCLEANFILES = libpaper.c

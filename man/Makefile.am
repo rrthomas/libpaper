@@ -1,6 +1,6 @@
 # Man pages Makefile.am
 #
-# Copyright (c) 2013-2022 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2013-2023 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -30,7 +30,7 @@ DISTCLEANFILES = $(man_MANS) paper-include.man
 do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
 
 paper-include.man: paper-include.man.in Makefile
-	$(do_subst) < $(srcdir)/$@.in > $@
+	$(do_subst) < $(srcdir)/$@.in > $@-t && mv $@-t $@
 
 paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(builddir)/paper-include.man.in
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
