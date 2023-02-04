@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 # Run a paper test
 #
-# Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021-2023 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -21,28 +21,33 @@
 
 set -e
 
-# Skip test if sysconfdir does not start prefix, as then relocation won't
+# Skip test if sysconfdir does not start with prefix, as then relocation won't
 # work. Typical example: prefix=/usr, sysconfdir=/etc
-if [[ "$sysconfdir" != "$prefix/"* ]]; then
-    echo "sysconfdir does not start with prefix, cannot run test!"
-    exit 0
-fi
+case "$sysconfdir" in
+    "$prefix/"*)
+        ;;
+    *)
+        echo prefix: "$prefix", sysconfdir: "$sysconfdir"
+        echo "sysconfdir does not start with prefix, cannot run test!"
+        exit 0
+        ;;
+esac
 
 curr_dir="$(pwd)"
 test_file="$curr_dir/$1"
 name="${1%.sh}"
-basename=$(basename $name)
+basename=$(basename "$name")
 test_dir="$curr_dir/$basename.$$"
-echo test_dir: $test_dir
+echo test_dir: "$test_dir"
 expected_exit=0
 expected_file="$abs_srcdir/$basename-expected.txt"
 
 # Test runner.
 # Arguments are command to run.
-function paper_test() {
+paper_test() {
     exit_code=0
     paper "$@" > "$basename-output.txt" 2>&1 || exit_code=$?
-    if [[ $exit_code != $expected_exit ]]; then
+    if [ $exit_code != $expected_exit ]; then
         echo "Expected exit code $expected_exit but was $exit_code"
         exit 1
     fi
@@ -52,42 +57,42 @@ function paper_test() {
 }
 
 # Test functions.
-function no_size() {
+no_size() {
     paper_test --no-size
 }
 
-function no_PAPERSIZE () {
+no_PAPERSIZE () {
     unset PAPERSIZE
     no_size
 }
 
-function no_user_papersize() {
+no_user_papersize() {
     rm -f "$XDG_CONFIG_HOME/papersize"
     no_PAPERSIZE
 }
 
-function no_locale() {
+no_locale() {
     export LC_ALL=invalid_locale
     no_user_papersize
 }
 
-function no_system_papersize() {
+no_system_papersize() {
     rm -f "./$sysconfdir/papersize"
     no_locale
 }
 
-function no_system_paperspecs() {
+no_system_paperspecs() {
     rm -f "./$sysconfdir/paperspecs"
     no_system_papersize
 }
 
-function no_user_paperspecs() {
+no_user_paperspecs() {
     expected_exit=1
     rm -f "$XDG_CONFIG_HOME/paperspecs"
     no_system_paperspecs
 }
 
-function no_home() {
+no_home() {
     unset XDG_CONFIG_HOME
     unset HOME
     no_user_paperspecs
@@ -116,4 +121,4 @@ printf "first_system_paperspecs,55,550,mm\nA4,210,297,mm" > "./$sysconfdir/paper
 trap 'rm -rf "$test_dir"' EXIT
 
 # Run the test script.
-source $test_file
+. "$test_file"
