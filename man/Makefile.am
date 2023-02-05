@@ -18,10 +18,10 @@
 # along with this program.  If not, see
 # <https://www.gnu.org/licenses/lgpl-2.1.html>.
 
-dist_man_MANS = paper.1 paperspecs.5
+man_MANS = paper.1
+dist_man_MANS = paperspecs.5
 
 EXTRA_DIST = \
-	paper-include.man \
 	paper-include.man.in \
 	paperspecs.5.in
 
@@ -32,7 +32,7 @@ do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
 paper-include.man: paper-include.man.in Makefile
 	$(do_subst) < $(srcdir)/$@.in > $@-t && mv $@-t $@
 
-paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(builddir)/paper-include.man.in
+paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(builddir)/paper-include.man
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
 	$(AM_V_GEN)if ( touch $@.w && rm -f $@.w; ) >/dev/null 2>&1; then \
 	  $(top_srcdir)/build-aux/missing --run $(HELP2MAN) --no-info \
