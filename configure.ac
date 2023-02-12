@@ -129,8 +129,10 @@ fi
 AC_SUBST([ISYSTEM])
 
 dnl help2man
-dnl Set a value even if not found, so that an invocation via build-aux/missing works
+dnl Set a value even if not found, so that x-to-1 gives a better error.
 AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
+CROSS_COMPILING=$cross_compiling
+AC_SUBST([CROSS_COMPILING])
 
 dnl Create files
 AC_CONFIG_HEADERS([config.h])
@@ -146,6 +148,7 @@ AC_CONFIG_FILES([
 	man/paperspecs.5
 	tests/Makefile
 ])
+AC_CONFIG_FILES([build-aux/x-to-1], [chmod +x build-aux/x-to-1])
 AC_OUTPUT
 
 if test $RELOCATABLE != yes; then

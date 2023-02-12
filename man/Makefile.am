@@ -22,21 +22,21 @@ man_MANS = paper.1
 dist_man_MANS = paperspecs.5
 
 EXTRA_DIST = \
-	paper-include.man.in \
+	paper.x \
+	paper.1.in \
 	paperspecs.5.in
 
-DISTCLEANFILES = $(man_MANS) paper-include.man
+DISTCLEANFILES = $(man_MANS) paper.1
 
 do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
 
-paper-include.man: paper-include.man.in Makefile
+paper.1: paper.1.in Makefile
 	$(do_subst) < $(srcdir)/$@.in > $@-t && mv $@-t $@
 
-paper.1: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h $(builddir)/paper-include.man
+paper.1.in: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h paper.x
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
 	$(AM_V_GEN)if ( touch $@.w && rm -f $@.w; ) >/dev/null 2>&1; then \
-	  $(top_srcdir)/build-aux/missing --run $(HELP2MAN) --no-info \
-		--no-discard-stderr \
-		--include=$(builddir)/paper-include.man \
-		--output=$@ $(abs_top_builddir)/src/paper; \
+	  $(top_builddir)/build-aux/x-to-1 \
+		$(PERL) $(HELP2MAN) --no-info --no-discard-stderr \
+		$(abs_top_builddir)/src/paper$(EXEEXT) paper.x $@; \
 	fi

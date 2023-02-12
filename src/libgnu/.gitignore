@@ -28,7 +28,6 @@
 /eloop-threshold.h
 /errno.in.h
 /error.c
-/error.h
 /exitfail.c
 /exitfail.h
 /fcntl.c
@@ -179,7 +178,6 @@
 /ialloc.h
 /intprops-internal.h
 /reallocarray.c
-/stdalign.in.h
 /stdckdint.in.h
 /stdckdint.h
 /stdio-read.c
@@ -195,3 +193,4 @@
 /getopt.h
 /getopt1.c
 /getopt_int.h
+/error.in.h
