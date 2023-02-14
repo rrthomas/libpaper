@@ -49,7 +49,8 @@ static const char *PAPERSIZE_FILENAME = "papersize";
 static const char *PAPERSPECS_FILENAME = "paperspecs";
 static struct paper *papers = NULL;
 static struct paper *default_paper = NULL;
-static char *xdg_config_home, *sysconfdir;
+static char *xdg_config_home, *sysconfdir_alloc;
+static const char *sysconfdir;
 static bool free_xdg_config_home = false;
 
 #define MAX_PAPERNAME_LEN 255
@@ -351,15 +352,6 @@ const struct paper *defaultpaper(void)
 }
 
 
-/* Relocate a path and ensure the result is allocated on the heap */
-static char *alloc_relocate(const char *path)
-{
-    char *newpath = (char *)relocate(path);
-    if (path == newpath)
-        newpath = strdup(newpath);
-    return newpath;
-}
-
 /* Initialize the library. */
 /* Although the documentation requires callers to call paperinit(), this was
    not historically necessary, and many don't, so we take care of it. */
@@ -374,7 +366,7 @@ int paperinit(void)
 
     /* Read system paperspecs. */
     struct paper *system_papers = NULL;
-    sysconfdir = alloc_relocate("@sysconfdir@");
+    sysconfdir = relocate2("@sysconfdir@", &sysconfdir_alloc);
     if (sysconfdir != NULL) {
         char *system_paperspecs = mfile_name_concat(sysconfdir, PAPERSPECS_FILENAME, NULL);
         if (system_paperspecs == NULL)
@@ -442,8 +434,8 @@ int paperinit(void)
 int paperdone(void)
 {
     if (initialized) {
-        free(sysconfdir);
-        sysconfdir = NULL;
+        free(sysconfdir_alloc);
+        sysconfdir = sysconfdir_alloc = NULL;
         if (free_xdg_config_home)
             free(xdg_config_home);
         xdg_config_home = NULL;
