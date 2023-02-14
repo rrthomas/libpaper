@@ -21,7 +21,7 @@ The \fBPAPERSIZE\fR environment variable
 The user's default paper size in
 .B $XDG_CONFIG_HOME/papersize
 .IP \[bu]
-The \fBLC_PAPER\fR environment variable (if supported by the system)
+The current locale's default paper size (if supported by the system)
 .IP \[bu]
 The system default paper size in
 .B @sysconfdir@/papersize
