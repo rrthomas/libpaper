@@ -12,4 +12,4 @@ if [[ "$ASAN" == "yes" ]]; then
 fi
 ./configure "${CONFIGURE_ARGS[@]}"
 make V=1
-make distcheck
+make distcheck || ( cat ./libpaper-*/_build/sub/tests/test-suite.log; exit 1 )
