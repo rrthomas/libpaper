@@ -51,9 +51,8 @@ paper_test() {
         echo "Expected exit code $expected_exit but was $exit_code"
         exit 1
     fi
-    sed -e 's|\\|/|g' < "$expected_file" > "expected-fixed.txt"
-    sed -e 's|\\|/|g' < "$basename-output.txt" > "$basename-output-fixed.txt"
-    $DIFF -u "expected-fixed.txt" "$basename-output-fixed.txt"
+    sed -e 's|\\|/|g' -e 's|^.*/paper:|paper:|g' < "$basename-output.txt" > "$basename-output-fixed.txt"
+    $DIFF -u "$expected_file" "$basename-output-fixed.txt"
 }
 
 # Test functions.
