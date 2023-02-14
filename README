@@ -29,7 +29,8 @@ package developed by Reuben Thomas.
 Installation from source
 ------------------------
 
-To build, you need a standard POSIX environment and C compiler. Run:
+To build, you need a standard POSIX.1-2008 environment and C99 compiler.
+Run:
 
   ./configure --enable-relocatable && make && [sudo] make install
 
