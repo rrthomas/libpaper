@@ -1,6 +1,5 @@
-# Top-level Makefile.am
-#
-# Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# SPDX-FileCopyrightText: 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# SPDX-License-Identifier: LGPL-2.1-or-later
 #
 # This file is part of libpaper.
 #

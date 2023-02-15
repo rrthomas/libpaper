@@ -1,0 +1,10 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: libpaper
+Upstream-Contact: Reuben Thomas <rrt@sc3d.org>
+Source: https://github.com/rrthomas/libpaper
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...

@@ -1,8 +1,8 @@
 /*
+  SPDX-FileCopyrightText: 2021-2023 Reuben Thomas <rrt@sc3d.org>
+  SPDX-License-Identifier: GPL-3.0-or-later
+
   Paper sizes command-line utility.
-
-  Copyright (c) 2021-2022 Reuben Thomas <rrt@sc3d.org>.
-
   This file is part of libpaper.
 
   This program is free software: you can redistribute it and/or modify it

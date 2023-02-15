@@ -1,4 +1,7 @@
 #!/bin/bash
+# SPDX-FileCopyrightText: 2023 Reuben Thomas <rrt@sc3d.org>
+# SPDX-License-Identifier: CC0-1.0
+#
 # Build for CI.
 # Written by Reuben Thomas 2021-2023.
 # This file is in the public domain.

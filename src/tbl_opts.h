@@ -1,8 +1,11 @@
-/*
+/* 
+  SPDX-FileCopyrightText: 2021 Reuben Thomas <rrt@sc3d.org>
+  SPDX-License-Identifier: GPL-3.0-or-later
+
   Table of command-line options
+  This file is part of libpaper.
 
   Copyright (c) 2021 Reuben Thomas <rrt@sc3d.org>
-
   This file is part of libpaper.
 
   This program is free software: you can redistribute it and/or modify it
