@@ -37,6 +37,6 @@ paper.1.in: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h paper
 ## Exit gracefully if $@ is not writeable, such as during distcheck!
 	$(AM_V_GEN)if ( touch $@.w && rm -f $@.w; ) >/dev/null 2>&1; then \
 	  $(top_builddir)/build-aux/x-to-1 \
-		$(PERL) $(HELP2MAN) --no-info --no-discard-stderr \
+		$(PERL) "$(HELP2MAN) --no-info --no-discard-stderr" \
 		$(abs_top_builddir)/src/paper$(EXEEXT) paper.x $@; \
 	fi

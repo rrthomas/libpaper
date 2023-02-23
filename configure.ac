@@ -134,6 +134,9 @@ AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
 CROSS_COMPILING=$cross_compiling
 AC_SUBST([CROSS_COMPILING])
 
+dnl Perl is needed for x-to-1
+AC_PATH_PROG([PERL], [perl], [perl])
+
 dnl Create files
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
