@@ -128,7 +128,9 @@ else
 fi
 AC_SUBST([ISYSTEM])
 
-dnl help2man
+dnl x-to-1
+ac_aux_dir_abs=`cd $ac_aux_dir && pwd`
+AC_PATH_PROG([PERL], [perl], [$ac_aux_dir_abs/missing perl])
 dnl Set a value even if not found, so that x-to-1 gives a better error.
 AC_PATH_PROG([HELP2MAN], [help2man], [help2man])
 CROSS_COMPILING=$cross_compiling
