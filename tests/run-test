@@ -53,9 +53,9 @@ paper_test() {
     fi
     # Fix variation in output:
     # 1. Convert backslashes to forward slashes
-    # 2. Compress multiple slashes (from relocated paths on some systems)
+    # 2. Compress double slashes (from relocated paths on some systems)
     # 3. Remove prefix of name of 'paper' executable
-    sed -e 's|\\|/|g' -e 's|/\+|/|g' -e 's|^.*/paper:|paper:|g' < "$basename-output.txt" > "$basename-output-fixed.txt"
+    sed -e 's|\\|/|g' -e 's|//|/|g' -e 's|^.*/paper:|paper:|g' < "$basename-output.txt" > "$basename-output-fixed.txt"
     $DIFF -u "$expected_file" "$basename-output-fixed.txt"
 }
 
