@@ -1,6 +1,5 @@
-# Tests Makefile.am
-#
-# Copyright (c) 2021-2022 Reuben Thomas <rrt@sc3d.org>
+# SPDX-FileCopyrightText: 2021-2022 Reuben Thomas <rrt@sc3d.org>
+# SPDX-License-Identifier: LGPL-2.1-or-later
 #
 # This file is part of libpaper.
 #

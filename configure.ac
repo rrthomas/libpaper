@@ -1,7 +1,7 @@
+# SPDX-FileCopyrightText: 2013-2023 Reuben Thomas <rrt@sc3d.org>
+# SPDX-License-Identifier: LGPL-2.1-or-later
+#
 # configure.ac for libpaper
-#
-# Copyright (c) 2013-2023 Reuben Thomas <rrt@sc3d.org>
-#
 # This file is part of libpaper.
 #
 # This program is free software: you can redistribute it and/or modify it
