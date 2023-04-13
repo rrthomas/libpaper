@@ -1,6 +1,6 @@
 # Source code Makefile.am
 #
-# Copyright (c) 2013-2021 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2013-2023 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -26,10 +26,11 @@ AM_CPPFLAGS = -I$(top_srcdir)/src/libgnu -I$(top_builddir)/src/libgnu -I$(top_sr
 AM_CFLAGS = $(WARN_CFLAGS)
 RELOCATABLE_LIBRARY_PATH = $(libdir)
 
-bin_PROGRAMS = paper
+bin_PROGRAMS = paper paperconf
 paper_SOURCES = paper.c tbl_opts.h
 paper_CPPFLAGS  = -DINSTALLDIR=\"$(bindir)\" $(AM_CPPFLAGS)
 if RELOCATABLE_VIA_LD
 paper_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(bindir)`
 endif
 paper_LDADD = $(top_builddir)/lib/libpaper.la $(top_builddir)/src/libgnu/libgnupaper.la
+paperconf_LDADD = $(paper_LDADD)
