@@ -32,5 +32,5 @@ paper_CPPFLAGS  = -DINSTALLDIR=\"$(bindir)\" $(AM_CPPFLAGS)
 if RELOCATABLE_VIA_LD
 paper_LDFLAGS = `$(RELOCATABLE_LDFLAGS) $(bindir)`
 endif
-paper_LDADD = $(top_builddir)/lib/libpaper.la $(top_builddir)/src/libgnu/libgnupaper.la
+paper_LDADD = $(top_builddir)/lib/libpaper.la $(top_builddir)/src/libgnu/libgnupaper.la $(HARD_LOCALE_LIB) $(LTLIBINTL) $(MBRTOWC_LIB) $(SETLOCALE_NULL_LIB)
 paperconf_LDADD = $(paper_LDADD)
