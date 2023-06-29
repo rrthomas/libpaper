@@ -60,8 +60,6 @@ static void printinfo(const struct paper* paper, int options)
     } else if (options & OPT_UPPERNAME) {
 	if (islower(*papername(paper)))
 	    printf("%c%s", toupper(*papername(paper)), papername(paper) + 1);
-	else
-	    printf_downcase(papername(paper));
 	pr = 1;
     }
 
