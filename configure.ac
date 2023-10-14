@@ -67,6 +67,10 @@ AC_USE_SYSTEM_EXTENSIONS
 gl_INIT
 gl_paper_INIT
 
+# Check for glibc (for tests)
+AC_CHECK_FUNCS([gnu_get_libc_version])
+AC_SUBST(HAVE_GNU_GET_LIBC_VERSION, [$ac_cv_func_gnu_get_libc_version])
+
 # Windows-specific checks
 AC_MSG_CHECKING([for native Win32])
 native_win32=no
