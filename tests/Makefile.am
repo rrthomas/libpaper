@@ -89,6 +89,7 @@ AM_TESTS_ENVIRONMENT = \
 	export prefix=$(prefix); \
 	export sysconfdir=$(sysconfdir); \
 	export bindir=$(bindir); \
+	export libdir=$(libdir); \
 	export abs_srcdir=$(abs_srcdir); \
 	export DIFF=$(DIFF); \
 	export PATH_CONVERT=$(PATH_CONVERT); \

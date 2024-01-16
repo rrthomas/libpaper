@@ -105,6 +105,7 @@ no_home() {
 cd ..
 ${MAKE} install DESTDIR="$test_dir"
 export PATH="$test_dir/$bindir:$PATH"
+export DYLD_LIBRARY_PATH="$test_dir/$libdir"
 cd "$test_dir"
 
 # Set up paper configuration
