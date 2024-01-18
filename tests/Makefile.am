@@ -1,6 +1,6 @@
 # Tests Makefile.am
 #
-# Copyright (c) 2021-2022 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021-2024 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
