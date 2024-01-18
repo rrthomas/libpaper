@@ -151,7 +151,6 @@ AC_CONFIG_FILES([
 	src/Makefile
 	src/libgnu/Makefile
 	man/Makefile
-	man/paperspecs.5
 	tests/Makefile
 ])
 AC_CONFIG_FILES([build-aux/x-to-1], [chmod +x build-aux/x-to-1])

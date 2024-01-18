@@ -18,19 +18,21 @@
 # along with this program.  If not, see
 # <https://www.gnu.org/licenses/lgpl-2.1.html>.
 
-man_MANS = paper.1
-dist_man_MANS = paperspecs.5
+man_MANS = paper.1 paperspecs.5
 
 EXTRA_DIST = \
 	paper.x \
 	paper.1.in \
 	paperspecs.5.in
 
-DISTCLEANFILES = $(man_MANS) paper.1
+DISTCLEANFILES = $(man_MANS)
 
 do_subst = sed -e 's|@sysconfdir[@]|$(sysconfdir)|'g
 
 paper.1: paper.1.in Makefile
+	$(do_subst) < $(srcdir)/$@.in > $@-t && mv $@-t $@
+
+paperspecs.5: paperspecs.5.in Makefile
 	$(do_subst) < $(srcdir)/$@.in > $@-t && mv $@-t $@
 
 paper.1.in: $(abs_top_srcdir)/src/paper.c $(abs_top_srcdir)/src/tbl_opts.h paper.x
