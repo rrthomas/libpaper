@@ -1,7 +1,7 @@
 /*
   Paper sizes library.
 
-  Copyright (c) 2021-2023 Reuben Thomas <rrt@sc3d.org>.
+  Copyright (c) 2021-2024 Reuben Thomas <rrt@sc3d.org>.
 
   This file is part of libpaper.
 
@@ -34,8 +34,9 @@
 #include <langinfo.h>
 #endif
 
+#if ENABLE_RELOCATABLE
 #include "relocatable.h"
-#include "filenamecat.h"
+#endif
 
 #include "paper.h"
 
@@ -90,6 +91,55 @@ double paperunitfactor(enum paper_unit n)
     return 0.0;
 }
 
+
+#ifndef HAVE_STRNDUP
+char *strndup(const char *s, size_t n) {
+    char *t = malloc(n + 1);
+    if (t == NULL)
+        return NULL;
+    strncpy(t, s, n);
+    t[n] = '\0';
+    return t;
+}
+#endif
+
+/* Get the next line from a stream. */
+char *getln(FILE *fp)
+{
+    size_t len = 1024, n = 0;
+    char *l = malloc(len + 1), *newl;
+    if (l == NULL)
+        return NULL;
+
+    int c;
+    for (c = getc(fp); c != '\n' && c != EOF; c = getc(fp)) {
+        if (n == len) {
+            newl = realloc(l, (len *= 2) + 1);
+            if (newl == NULL) {
+                free(l);
+                return NULL;
+            }
+            l = newl;
+        }
+        l[n++] = c;
+    }
+
+    l[n] = '\0';
+    return l;
+}
+
+/* Join a file name to a directory to make a path. */
+char *file_join(char const *dir, char const *file)
+{
+    size_t dirlen = strlen(dir);
+    char *res = malloc(dirlen + 1 + strlen(file) + 1);
+    if (res == NULL)
+        return NULL;
+    strcpy(res, dir);
+    if ((dir[dirlen - 1]) != '/')
+        strcat(res, "/");
+    return strcat(res, file);
+}
 
 /* Return next comma-separated token from a string.
    On the first call, p points to the string, and saveptr is ignored;
@@ -179,9 +229,8 @@ static int readspecs(struct paper **papers_list, const char *specsfile, struct p
     FILE *ps = fopen(specsfile, "r");
     if (ps != NULL) {
         struct paper *prev = *papers_list, *p;
-        size_t n;
         char *l;
-        for (*lineno = 1, l = NULL; getline(&l, &n, ps) > 0; prev = p, (*lineno)++) {
+        for (*lineno = 1; (l = getln(ps)) != NULL && strlen(l) > 0; prev = p, (*lineno)++) {
             char *saveptr;
             char *name = gettok(l, &saveptr);
             char *wstr = gettok(NULL, &saveptr), *hstr = gettok(NULL, &saveptr);
@@ -291,9 +340,8 @@ static const char *papernamefile(const char *file)
     FILE *fp = fopen(file, "r");
     if (fp == NULL)
         return NULL;
-    size_t n = 0;
-    char *l = NULL;
-    if (getline(&l, &n, fp) > 0) {
+    char *l = getln(fp);
+    if (l != NULL && strlen(l) > 0) {
         char *saveptr, *s;
         s = gettok(l, &saveptr);
         if (s)
@@ -313,7 +361,7 @@ const char *defaultpapername(void) {
 
     const char *paperstr = getenv("PAPERSIZE");
     if (paperstr == NULL && xdg_config_home != NULL) {
-        char *papersize = mfile_name_concat(xdg_config_home, PAPERSIZE_FILENAME, NULL);
+        char *papersize = file_join(xdg_config_home, PAPERSIZE_FILENAME);
         if (papersize != NULL) {
             paperstr = papernamefile(papersize);
             free(papersize);
@@ -322,7 +370,7 @@ const char *defaultpapername(void) {
     if (paperstr == NULL)
         paperstr = localepapername();
     if (paperstr == NULL) {
-        char *papersize = mfile_name_concat(sysconfdir, PAPERSIZE_FILENAME, NULL);
+        char *papersize = file_join(sysconfdir, PAPERSIZE_FILENAME);
         if (papersize != NULL) {
             paperstr = papernamefile(papersize);
             free(papersize);
@@ -368,7 +416,7 @@ int paperinit(void)
     struct paper *system_papers = NULL;
     sysconfdir = relocate2("@sysconfdir@", &sysconfdir_alloc);
     if (sysconfdir != NULL) {
-        char *system_paperspecs = mfile_name_concat(sysconfdir, PAPERSPECS_FILENAME, NULL);
+        char *system_paperspecs = file_join(sysconfdir, PAPERSPECS_FILENAME);
         if (system_paperspecs == NULL)
             return PAPER_NOMEM;
         ret = readspecs(&system_papers, system_paperspecs, NULL, &paper_lineno);
@@ -386,14 +434,14 @@ int paperinit(void)
         char *home = getenv("HOME");
         if (home != NULL) {
             free_xdg_config_home = true;
-            xdg_config_home = mfile_name_concat(home, ".config", NULL);
+            xdg_config_home = file_join(home, ".config");
             if (xdg_config_home == NULL)
                 return PAPER_NOMEM;
         }
     }
     char *user_paperspecs = NULL;
     if (xdg_config_home != NULL) {
-        user_paperspecs = mfile_name_concat(xdg_config_home, PAPERSPECS_FILENAME, NULL);
+        user_paperspecs = file_join(xdg_config_home, PAPERSPECS_FILENAME);
         if (user_paperspecs == NULL)
             return PAPER_NOMEM;
     }

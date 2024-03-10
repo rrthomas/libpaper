@@ -68,7 +68,7 @@ gl_INIT
 gl_paper_INIT
 
 # Check for glibc (for tests)
-AC_CHECK_FUNCS([gnu_get_libc_version])
+AC_CHECK_FUNCS([gnu_get_libc_version strndup])
 AC_SUBST(HAVE_GNU_GET_LIBC_VERSION, [$ac_cv_func_gnu_get_libc_version])
 
 # Windows-specific checks

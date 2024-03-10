@@ -12,9 +12,11 @@ system-wide and per-user paper size catalogues (see “man paperspecs”).
 
 See “man paper” for information about how to set the default paper size.
 
-The libpaper package is distributed under the GNU Lesser General Public
-License, version 2.1, or, at your option, any later version, with the
-exception of the files listed below; see the file COPYING.
+The libpaper package is distributed under the MIT license (if built without
+`--enable-relocatable`; see the file COPYING-MIT), or the GNU Lesser General
+Public License, version 2.1, or, at your option, any later version (if built
+with `--enable-relocatable`; see the file COPYING), with the exception of
+the files listed below.
 
   * The file ‘paperspecs’ is in the public domain.
   * The ‘paper’ program is distributed under the GNU General Public Licence

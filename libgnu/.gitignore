@@ -144,3 +144,4 @@
 /strnlen.c
 /stdio-read.c
 /stdio-write.c
+/dummy.c
