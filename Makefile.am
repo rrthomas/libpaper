@@ -23,7 +23,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS = --enable-relocatable
 
 SUBDIRS = libgnu lib src man tests
 
-dist_doc_DATA = README
+dist_doc_DATA = README.md
 
 EXTRA_DIST = m4/gnulib-cache.m4
 
