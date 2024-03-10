@@ -3,8 +3,9 @@
 
   Copyright (c) 2021-2023 Reuben Thomas <rrt@sc3d.org>.
 
-  The API is mostly API/ABI-compatible with that of the original
-  libpaper by Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996.
+  This library is API/ABI-compatible with that of the original libpaper by
+  Yves Arrouye <Yves.Arrouye@marin.fdn.fr>, 1996, but it lacks the following
+  APIs: defaultpapersizefile, systempapersizefile, paperlast, paperprev.
 
   This file is part of libpaper.
 
