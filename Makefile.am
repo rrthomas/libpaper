@@ -25,7 +25,7 @@ SUBDIRS = libgnu lib src man tests
 
 dist_doc_DATA = README.md
 
-EXTRA_DIST = m4/gnulib-cache.m4
+EXTRA_DIST = COPYING-GPL-3 COPYING-MIT m4/gnulib-cache.m4
 
 release: distcheck
 	git diff --exit-code && \
