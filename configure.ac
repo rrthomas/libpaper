@@ -71,6 +71,33 @@ gl_paper_INIT
 AC_CHECK_FUNCS([gnu_get_libc_version strndup])
 AC_SUBST(HAVE_GNU_GET_LIBC_VERSION, [$ac_cv_func_gnu_get_libc_version])
 
+AC_DEFUN([PAPER_HAVE_NL_PAPER_CONSTANTS],
+  [AC_CACHE_CHECK(
+    [for _NL_PAPER_WIDTH and _NL_PAPER_HEIGHT in langinfo.h],
+    paper_cv_have_nl_paper_constants,
+    [dnl
+      AC_LANG_PUSH([C])
+      AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+        [
+          [#include <langinfo.h>]
+        ],
+        [
+          [int x, y = _NL_PAPER_WIDTH, _NL_PAPER_HEIGHT;]
+        ]
+        )],
+        [paper_cv_have_nl_paper_constants=yes],
+        [paper_cv_have_nl_paper_constants=no]
+      )
+    AC_LANG_POP([C])])
+    if test "$paper_cv_have_nl_paper_constants" = "yes"
+    then
+      AC_DEFINE(HAVE_NL_PAPER_CONSTANTS,
+        1,
+        [Define if langinfo.h defines _NL_PAPER_WIDTH and _NL_PAPER_HEIGHT.])
+    fi
+  ])
+PAPER_HAVE_NL_PAPER_CONSTANTS
+
 # Windows-specific checks
 AC_MSG_CHECKING([for native Win32])
 native_win32=no

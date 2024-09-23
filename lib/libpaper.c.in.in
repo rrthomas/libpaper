@@ -31,7 +31,8 @@
 #include <strings.h>
 #include <ctype.h>
 #include <locale.h>
-#if defined LC_PAPER && defined _GNU_SOURCE
+#if defined _GNU_SOURCE && defined LC_PAPER && defined HAVE_NL_PAPER_CONSTANTS
+#define USE_NL_PAPER
 #include <langinfo.h>
 #endif
 
@@ -316,7 +317,7 @@ _GL_ATTRIBUTE_PURE const struct paper *paperwithsize(double pswidth, double pshe
 
 /* Get locale default paper size. */
 static const char *localepapername(void) {
-#if defined LC_PAPER && defined _GNU_SOURCE
+#ifdef USE_NL_PAPER
     if (setlocale(LC_PAPER, "") != NULL) {
 #define NL_PAPER_GET(x)                                                 \
         ((union { char *string; unsigned word; })nl_langinfo(x)).word
