@@ -25,7 +25,7 @@ AC_INIT([libpaper],[2.2.5],[rrt@sc3d.org],[],[https://github.com/rrthomas/libpap
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall subdir-objects])
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+AM_SILENT_RULES([yes])
 
 dnl Release number rules:
 dnl This is derived from "Versioning" chapter of info libtool documentation.
