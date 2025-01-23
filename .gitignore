@@ -8,6 +8,7 @@
 Makefile
 Makefile.in
 /INSTALL
+/README
 /aclocal.m4
 /autom4te.cache
 /build-stamp
