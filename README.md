@@ -1,6 +1,6 @@
 # libpaper
 
-© Reuben Thomas <rrt@sc3d.org>, 2013-2024  
+© Reuben Thomas <rrt@sc3d.org>, 2013-2025  
 https://github.com/rrthomas/libpaper  
 
 The libpaper package enables users to indicate their preferred paper
