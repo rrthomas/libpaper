@@ -1,7 +1,7 @@
 # libpaper
 
 © Reuben Thomas <rrt@sc3d.org>, 2013-2024  
-https://github.com/rrthomas/libpaper__
+https://github.com/rrthomas/libpaper  
 
 The libpaper package enables users to indicate their preferred paper
 size, provides the paper utility to find the user's preferred default
