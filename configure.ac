@@ -128,15 +128,6 @@ if test "$gl_gcc_warnings" = yes; then
   dnl Set up the list of undesired warnings.
   nw=
   nw="$nw -Wsystem-headers"   # Don’t let system headers trigger warnings
-  nw="$nw -Wundef"            # All compiler preprocessors support #if UNDEF
-  nw="$nw -Wtraditional"      # All compilers nowadays support ANSI C
-  nw="$nw -Wdeclaration-after-statement" # We require C99.
-  nw="$nw -Wtraditional-conversion" # Don't care.
-  nw="$nw -Wpadded"           # Don't care.
-  nw="$nw -Wc++-compat"       # Don't care.
-  nw="$nw -Woverlength-strings" # Don't care.
-  nw="$nw -Wmissing-format-attribute" # Don't care.
-  nw="$nw -Wunreachable-code" # Seems buggy.
 
   gl_MANYWARN_ALL_GCC([warnings])
 
@@ -148,8 +139,6 @@ if test "$gl_gcc_warnings" = yes; then
 
   dnl Add an extra warning
   gl_WARN_ADD([-Wconversion])
-  dnl Remove a warning being promoted to error: we trigger this and can't turn it off with pragmas.
-  gl_WARN_ADD([-Wno-error=format-security])
 
   # When compiling with GCC, prefer -isystem to -I when including system
   # include files, to avoid generating useless diagnostics for the files.
