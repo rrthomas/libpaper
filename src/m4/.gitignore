@@ -6,7 +6,6 @@
 /codeset.m4
 /double-slash-root.m4
 /dup2.m4
-/eealloc.m4
 /environ.m4
 /errno_h.m4
 /error.m4
@@ -99,11 +98,9 @@
 /time_h.m4
 /unistd_h.m4
 /vasnprintf.m4
-/vasprintf.m4
 /visibility.m4
 /warn-on-use.m4
 /wchar_h.m4
-/wchar_t.m4
 /wctype_h.m4
 /wint_t.m4
 /xalloc.m4
@@ -119,3 +116,17 @@
 /vararrays.m4
 /getopt.m4
 /error_h.m4
+/build-to-host.m4
+/c32rtomb.m4
+/extensions-aix.m4
+/gnulib-i18n.m4
+/host-cpu-c-abi.m4
+/libunistring-base.m4
+/locale-en.m4
+/mbrtoc32.m4
+/musl.m4
+/off64_t.m4
+/strerrorname_np.m4
+/sys_cdefs_h.m4
+/uchar_h.m4
+/unictype_h.m4

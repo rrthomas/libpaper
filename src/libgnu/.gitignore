@@ -6,7 +6,6 @@
 /areadlink.h
 /arg-nonnull.h
 /asnprintf.c
-/asprintf.c
 /attribute.h
 /basename-lgpl.c
 /basename-lgpl.h
@@ -28,6 +27,7 @@
 /eloop-threshold.h
 /errno.in.h
 /error.c
+/error.h
 /exitfail.c
 /exitfail.h
 /fcntl.c
@@ -38,6 +38,7 @@
 /filename.h
 /flexmember.h
 /float.c
+/float.h
 /float+.h
 /float.in.h
 /free.c
@@ -144,7 +145,6 @@
 /unistd.in.h
 /vasnprintf.c
 /vasnprintf.h
-/vasprintf.c
 /verify.h
 /warn-on-use.h
 /wchar.h
@@ -194,3 +194,19 @@
 /getopt1.c
 /getopt_int.h
 /error.in.h
+/aszprintf.c
+/c32is-impl.h
+/c32isprint.c
+/mbrtoc32.c
+/mbszero.c
+/setlocale_null-unlocked.c
+/stddef.h
+/stdlib.c
+/uchar.in.h
+/uchar.h
+/unictype/
+/unictype.h
+/unictype.in.h
+/unitypes.h
+/unitypes.in.h
+/vaszprintf.c
