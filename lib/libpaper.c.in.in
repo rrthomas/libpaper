@@ -367,8 +367,6 @@ const char *defaultpapername(void) {
             free(papersize);
         }
     }
-    if (paperstr == NULL)
-        paperstr = localepapername();
     if (paperstr == NULL) {
         char *papersize = file_join(sysconfdir, PAPERSIZE_FILENAME);
         if (papersize != NULL) {
@@ -378,6 +376,8 @@ const char *defaultpapername(void) {
     }
     if (paperstr == NULL && default_paper != NULL)
         paperstr = papername(default_paper);
+    if (paperstr == NULL)
+        paperstr = localepapername();
 
     return paperstr;
 }
