@@ -105,6 +105,7 @@ no_home() {
 cd ..
 ${MAKE} install DESTDIR="$test_dir"
 export PATH="$test_dir/$bindir:$PATH"
+export LD_LIBRARY_PATH="$test_dir/$libdir"
 export DYLD_LIBRARY_PATH="$test_dir/$libdir"
 cd "$test_dir"
 
