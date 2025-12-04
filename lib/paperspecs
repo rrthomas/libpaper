@@ -49,6 +49,13 @@ JIS B7,91,128,mm
 JIS B8,64,91,mm
 JIS B9,45,64,mm
 JIS B10,32,45,mm
+SAC D0,764,1064,mm
+SAC D1,532,760,mm
+SAC D2,380,528,mm
+SAC D3,264,376,mm
+SAC D4,188,260,mm
+SAC D5,130,184,mm
+SAC D6,92,126,mm
 11x17,11,17,in
 Statement,5.5,8.5,in
 Folio,8.5,13,in
@@ -56,6 +63,7 @@ Folio,8.5,13,in
 Ledger,17,11,in
 Tabloid,11,17,in
 DL,110,220,mm
+ZL,120,230,mm
 Comm 10,4.125,9.5,in
 Monarch,3.875,7.5,in
 Arch A,9,12,in
