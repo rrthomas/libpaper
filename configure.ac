@@ -24,7 +24,7 @@ dnl Initialise autoconf and automake
 AC_INIT([libpaper],[2.2.7],[rrt@sc3d.org],[],[https://github.com/rrthomas/libpaper])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
-AM_INIT_AUTOMAKE([-Wall subdir-objects])
+AM_INIT_AUTOMAKE([-Wall subdir-objects foreign])
 AM_SILENT_RULES([yes])
 
 dnl Release number rules:
