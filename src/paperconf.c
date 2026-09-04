@@ -181,14 +181,8 @@ int main(int argc, char** argv)
         if (!paper)
 	    paper = defaultpapername();
 	if (!paper) {
-	    char errmsg[2 * MAXPATHLEN + 64];
-	    sprintf(errmsg, "%s: cannot get system paper size", progname);
-
-	    if (errno)
-		perror(errmsg);
-	    else
-	        fputs(errmsg, stderr);
-
+	    fprintf(stderr, "%s: cannot get system paper size: %s\n", progname,
+	            strerror(errno));
 	    paperdone();
 	    exit(3);
 	}
