@@ -1,1 +1,1 @@
-no_system_papersize
+no_locale

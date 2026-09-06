@@ -18,25 +18,11 @@ If no paper size is configured, paper exits with an error.
 .IP \[bu]
 The \fBPAPERSIZE\fR environment variable
 .IP \[bu]
-The user's default paper size in
-.B $XDG_CONFIG_HOME/papersize
-.IP \[bu]
 The current locale's default paper size (if supported by the system)
-.IP \[bu]
-The system default paper size in
-.B @sysconfdir@/papersize
 .IP \[bu]
 The first paper size in the system list
 .IP \[bu]
 The first paper size in the user's list
-
-[FILES]
-.TP
-.B @sysconfdir@/papersize
-System default paper size.
-.TP
-.B $XDG_CONFIG_HOME/papersize
-User's default paper size.
 
 [ENVIRONMENT VARIABLES]
 .TP

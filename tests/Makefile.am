@@ -1,6 +1,6 @@
 # Tests Makefile.am
 #
-# Copyright (c) 2021-2024 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2021-2026 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -33,9 +33,7 @@ EMPTY =
 
 TESTS = \
 	default-size-environment.sh \
-	default-size-user.sh \
 	default-size-lc_paper.sh \
-	default-size-system-papersize.sh \
 	default-size-system-paperspecs.sh \
 	default-size-user-paperspecs.sh \
 	default-size-no-default-paper.sh \
@@ -59,9 +57,7 @@ TESTS = \
 
 RESULTS = \
 	default-size-environment-expected.txt \
-	default-size-user-expected.txt \
 	default-size-lc_paper-expected.txt \
-	default-size-system-papersize-expected.txt \
 	default-size-system-paperspecs-expected.txt \
 	default-size-user-paperspecs-expected.txt \
 	default-size-no-default-paper-expected.txt \

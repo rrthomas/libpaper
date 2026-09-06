@@ -46,7 +46,6 @@ size_t paper_lineno;
 char *paper_specsfile;
 
 
-static const char *PAPERSIZE_FILENAME = "papersize";
 static const char *PAPERSPECS_FILENAME = "paperspecs";
 static struct paper *papers = NULL;
 static struct paper *default_paper = NULL;
@@ -333,49 +332,14 @@ static const char *localepapername(void) {
     return NULL;
 }
 
-/* Parse a paper size from a paperconf file. */
-static const char *papernamefile(const char *file)
-{
-    static char papername[MAX_PAPERNAME_LEN + 1];
-    FILE *fp = fopen(file, "r");
-    if (fp == NULL)
-        return NULL;
-    char *l = getln(fp);
-    if (l != NULL && strlen(l) > 0) {
-        char *saveptr, *s;
-        s = gettok(l, &saveptr);
-        if (s)
-            strncpy(papername, s, MAX_PAPERNAME_LEN);
-        papername[MAX_PAPERNAME_LEN] = '\0';
-        free(s);
-        free(l);
-    }
-    fclose(fp);
-    return papername;
-}
-
 /* Return the default configured paper name, as per paper(1). */
 const char *defaultpapername(void) {
     if (paperinit() != PAPER_OK)
         return NULL;
 
     const char *paperstr = getenv("PAPERSIZE");
-    if (paperstr == NULL && xdg_config_home != NULL) {
-        char *papersize = file_join(xdg_config_home, PAPERSIZE_FILENAME);
-        if (papersize != NULL) {
-            paperstr = papernamefile(papersize);
-            free(papersize);
-        }
-    }
     if (paperstr == NULL)
         paperstr = localepapername();
-    if (paperstr == NULL) {
-        char *papersize = file_join(sysconfdir, PAPERSIZE_FILENAME);
-        if (papersize != NULL) {
-            paperstr = papernamefile(papersize);
-            free(papersize);
-        }
-    }
     if (paperstr == NULL && default_paper != NULL)
         paperstr = papername(default_paper);
 

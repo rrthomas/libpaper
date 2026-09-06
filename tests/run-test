@@ -69,24 +69,14 @@ no_PAPERSIZE () {
     no_size
 }
 
-no_user_papersize() {
-    rm -f "$XDG_CONFIG_HOME/papersize"
-    no_PAPERSIZE
-}
-
 no_locale() {
     export LC_ALL=invalid_locale
-    no_user_papersize
-}
-
-no_system_papersize() {
-    rm -f "./$sysconfdir/papersize"
-    no_locale
+    no_PAPERSIZE
 }
 
 no_system_paperspecs() {
     rm -f "./$sysconfdir/paperspecs"
-    no_system_papersize
+    no_locale
 }
 
 no_user_paperspecs() {
@@ -116,10 +106,8 @@ export LC_PAPER=C
 # paper size, so the expected value when the locale is used is "A4".
 export XDG_CONFIG_HOME="$test_dir/config"
 mkdir "$XDG_CONFIG_HOME"
-echo user_papersize > "$XDG_CONFIG_HOME/papersize"
 TEST_PAPERSPECS=$abs_srcdir/test-paperspecs
 cp "$TEST_PAPERSPECS" "$XDG_CONFIG_HOME/paperspecs"
-echo system_papersize > "./$sysconfdir/papersize"
 printf "first_system_paperspecs,55,550,mm\nA4,210,297,mm" > "./$sysconfdir/paperspecs"
 
 # Remove the test directory on exit.

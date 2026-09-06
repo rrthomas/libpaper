@@ -20,16 +20,11 @@ the files listed below.
 * The `paper` program is distributed under the GNU General Public Licence
   version 3, or, at your option, any later version. See the file
   COPYING-GPL-3.
-* The `paperconf` program by Yyes Arrouye and Adrian Bunk is distributed
-  under the GNU General Public Licence version 2.
 
 Libpaper was developed by Reuben Thomas <rrt@sc3d.org>, based on the
 design of libpaper by Yves Arrouye <yves@debian.org>, improved by
 Adrian Bunk <bunk@fs.tum.de>. It also supersedes the earlier “paper”
 package developed by Reuben Thomas.
-
-The `paperconf` program is supplied for backwards-compatibility with
-libpaper version 1. It is deprecated, and will be removed in future.
 
 
 # Installation from source
