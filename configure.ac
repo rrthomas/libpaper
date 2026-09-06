@@ -1,6 +1,6 @@
 # configure.ac for libpaper
 #
-# Copyright (c) 2013-2025 Reuben Thomas <rrt@sc3d.org>
+# Copyright (c) 2013-2026 Reuben Thomas <rrt@sc3d.org>
 #
 # This file is part of libpaper.
 #
@@ -21,7 +21,7 @@
 AC_PREREQ([2.71])
 
 dnl Initialise autoconf and automake
-AC_INIT([libpaper],[2.2.8],[rrt@sc3d.org],[],[https://github.com/rrthomas/libpaper])
+AC_INIT([libpaper],[2.3.0],[rrt@sc3d.org],[],[https://github.com/rrthomas/libpaper])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
 AM_INIT_AUTOMAKE([-Wall subdir-objects foreign])
